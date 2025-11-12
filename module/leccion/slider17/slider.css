@@ -1,0 +1,18 @@
+.slide {
+  padding: 20px;
+  background-color: #ea1111;
+}
+
+  .case-btn.active {
+    background-color: #fff;
+    border-color: #0B3D5C;
+    color: #0B3D5C;
+  }
+
+  #caseDisplay {
+    min-height: 400px;
+  }
+
+  .d-none {
+    display: none !important;
+  }

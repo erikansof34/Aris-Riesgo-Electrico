@@ -1,0 +1,32 @@
+.slide {
+  padding: 20px;
+  background-color: #ea1111;
+}
+
+.topic-item {
+  padding: 15px 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.topic-item.active {
+  background-color: #045c84;
+  color: white;
+  border: 2px solid #045c84;
+}
+
+.topic-item.locked {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 2px solid #dee2e6;
+  cursor: not-allowed;
+}
+
+.topic-status {
+  font-size: 0.8em;
+  font-weight: 400;
+  opacity: 0.8;
+}

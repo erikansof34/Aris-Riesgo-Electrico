@@ -1,0 +1,325 @@
+.quiz-container-ppt15 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0rem;
+}
+
+.cards-container-ppt15 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  max-width: 1200px;
+  /* Aumentado de 1200px a 1400px */
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.card-container-ppt15 {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 280px;
+  /* Aumentado de 220px a 280px */
+  transition: background-color 0.3s ease;
+  position: relative;
+  /* Añadido para posicionar el icono de validación */
+}
+
+.card-container-ppt15.correct {
+  background-color: #4caf50;
+}
+
+.card-container-ppt15.incorrect {
+  background-color: #f44336;
+}
+
+.image-audio-select-container-ppt15 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.image-container-ppt15 {
+  position: relative;
+  width: 180px;
+  /* Aumentado de 150px a 180px */
+  height: 180px;
+  /* Aumentado de 150px a 180px */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.circular-image-ppt15 {
+  border-radius: 50%;
+  width: 180px !important;
+  /* Aumentado de 150px a 180px */
+  height: 180px !important;
+  /* Aumentado de 150px a 180px */
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
+
+.validation-icon-container-ppt15 {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+  pointer-events: none;
+  text-align: center;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.validation-icon-ppt15 {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.audio-container-ppt15 {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.audio-container-ppt15 audio {
+  height: 40px;
+  width: 100%;
+  min-width: 250px;
+  /* Aumentado de 200px a 250px */
+}
+
+.select-container-ppt15 {
+  width: 100%;
+  max-width: 250px;
+  /* Aumentado de 200px a 250px */
+  position: relative;
+}
+
+.select-container-ppt15 select {
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border: 2px solid #0f1721;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  color: #333;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: auto;
+  /* Permite que el select crezca en altura */
+  min-height: 40px;
+  /* Altura mínima */
+  white-space: normal;
+  /* Permite el ajuste de línea */
+  word-wrap: break-word;
+  /* Rompe palabras largas */
+}
+
+/* Estilo para las opciones del select */
+.select-container-ppt15 select option {
+  white-space: normal;
+  /* Permite el ajuste de línea */
+  word-wrap: break-word;
+  /* Rompe palabras largas */
+  padding: 8px 4px;
+  /* Espaciado interno para mejor legibilidad */
+  border-bottom: 1px solid #eee;
+  /* Separador visual entre opciones */
+}
+
+.select-container-ppt15::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: #0f1721;
+  z-index: 1;
+}
+
+.reset-button-container-ppt15 button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .cards-container-ppt15 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .cards-container-ppt15 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+    width: 100%;
+  }
+
+  .card-container-ppt15 {
+    width: 100%;
+    max-width: 350px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  .image-audio-select-container-ppt15 {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0;
+  }
+
+  .image-container-ppt15 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .circular-image-ppt15 {
+    width: 180px !important;
+    height: 180px !important;
+  }
+
+  .audio-container-ppt15 {
+    width: 100%;
+  }
+
+  .audio-container-ppt15 audio {
+    width: 100%;
+    height: 40px;
+    min-width: unset;
+  }
+
+  .select-container-ppt15 {
+    max-width: 100%;
+  }
+
+  .select-container-ppt15 select {
+    font-size: 0.9rem;
+    padding: 0.6rem 2rem 0.6rem 0.6rem;
+    min-height: 50px;
+  }
+}
+
+.feedback-container-ppt15 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feedback-container-ppt15 p {
+  font-weight: bold;
+  color: #8f8f8f;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.text-green-personalizado-ppt15 {
+  color: #4caf50;
+}
+
+.text-red-personalizado-ppt15 {
+  color: #f44336;
+}
+
+.text-orange-personalizado-ppt15 {
+  color: #ff9800;
+}
+
+.texto-gray-ppt15 {
+  color: #8f8f8f;
+}
+
+.bold-text-ppt15 {
+  font-weight: bold;
+  color: #8f8f8f;
+  margin-bottom: 0.3rem;
+}
+
+.text-center-ppt15 {
+  text-align: center;
+}
+
+/* Estilos del modal */
+.modal-common {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  animation: fadeIn 0.3s;
+}
+
+.modal-content-common {
+  background-color: #fff;
+  margin: 5% auto;
+  width: 90%;
+  max-width: 80%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content-header {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.close {
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #aaa;
+}
+
+.modal-body {
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

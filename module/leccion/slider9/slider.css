@@ -1,0 +1,26 @@
+.image-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  transition: opacity 0.3s ease;
+}
+
+.audio-image {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: auto;
+}
+
+.img-size {
+  max-width: 70%;
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .img-size {
+    max-width: 100%;
+  }
+}

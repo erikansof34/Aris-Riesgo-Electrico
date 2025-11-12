@@ -1,0 +1,63 @@
+<section class="row h-100">
+  <div class="animate__animated animate__fadeInLeftBig col-lg-5 col-md-12 sf-cl-row sf-bg-dark">
+      <h1 class="sf-txt-xl sf-txt-1xl-lg sf-text-white text-center">Bueno… <span class="sf-text-secondary">Pero qué
+          es</span></h1>
+      <h1 class="sf-txt-xl sf-txt-1xl-lg sf-text-white text-center">La NOM 035</h1>
+      <p class="text-justify sf-text-white">
+        Te invitamos a conocer la norma mexicana que orienta la gestión del riesgo psicosocial en nuestro país.
+      </p>
+      <img src="../../assets/img/avatars/avatar_hombre5.webp" alt="avatar"
+        class="sf-img-80 mx-auto">
+  </div>
+  <div class="animate__animated animate__fadeInRightBig col-lg-7 col-md-12 sf-cr-row">
+    <div class="sf-img-90">
+      <i class="hipt hipt-light">
+        Ordena las letras para identificar el nombre de la Norma Oficial sobre Factores de Riesgo Psicosocial y escucha
+        el mensaje
+        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
+      </i>
+
+      <div id="dragDropContainer" class="container-nom035">
+        <div id="desktopContainer" class="sortable-container-nom035">
+          <!-- Las letras se insertarán aquí dinámicamente -->
+        </div>
+
+        <div id="mobileContainer" class="mobile-container-nom035" style="display: none;">
+          <div class="instruction-mobile-nom035">
+            Arrastra las letras a su posición correcta para formar "NOM 035"
+          </div>
+          <div class="images-container-nom035"></div>
+          <div class="word-container-nom035"></div>
+          <div class="selects-container-nom035"></div>
+        </div>
+
+        <div id="audioContainer" class="audio-container-nom035 audio-center" style="display: none;">
+          <audio id="nomAudio" controls class="audio-con-transcripcion" controls data-transcripcion='[
+              {"end":2.1,"start":0,"text":"México es el primer país en América,"},
+              {"end":8.06,"start":2.58,"text":"en contar con una norma oficial, enfocada en los factores de riesgos y psicosocial en el trabajo."},
+              {"end":13.18,"start":9,"text":"La NOM 035 STPS 2018."},
+              {"end":18.24,"start":13.88,"text":"Esta norma, que entró en vigor de forma obligatoria en 2019,"},
+              {"end":24.08,"start":18.8,"text":"posicionó a México como pionero en la región al establecer una regulación específica"},
+              {"end":27.72,"start":24.08,"text":"para proteger la salud mental de las personas trabajadoras"},
+              {"end":30.72,"start":27.72,"text":"y promover entornos organizacionales saludables."}
+              ]'>>
+            <source src="../../assets/audio/en-mexico-somos-m1-slide-8.mp3" type="audio/mp3">
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+          <i class="transcription-toggle fas fa-closed-captioning audio-estilos"></i>
+        </div>
+
+        <div id="validationMessage" class="validation-message-nom035" style="display: none;"></div>
+
+        <div class="button-container-nom035">
+          <button id="validateBtn" class="btn sf-btn sf-btn-blue" disabled>
+            <i class="fas fa-check"></i> Validar
+          </button>
+          <button id="resetBtn" class="btn sf-btn sf-btn-blue" disabled>
+            <i class="fas fa-repeat"></i> Reiniciar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

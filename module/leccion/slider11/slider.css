@@ -1,0 +1,31 @@
+.slide {
+  padding: 20px;
+  background-color: #ea1111;
+}
+
+/* ESTILOS ACTIVIDAD */
+.activity-option {
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.activity-option:hover {
+  background-color: #e2e6ea;
+}
+
+.activity-option.selected {
+  background-color: #d0e8ff;
+  border: 2px solid #007bff;
+}
+
+.activity-option.correct {
+  background-color: #d4edda;
+  border: 2px solid #28a745;
+}
+
+.activity-option.incorrect {
+  background-color: #f8d7da;
+  border: 2px solid #dc3545;
+}

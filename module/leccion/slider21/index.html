@@ -1,0 +1,85 @@
+<section class="row h-100">
+  <div class="animate__animated animate__fadeInLeftBig col-lg-5 col-md-12 sf-cl-row sf-bg-dark">
+    <div class="my-2 text-center">
+      <h1 class="sf-txt-xl sf-txt-1xl-lg sf-text-white">¡¡ Juguemos !!<br>
+        <span class="sf-text-secondary">Identifiquemos las responsabilidades frente al riesgo psicosocial</span>
+      </h1>
+      <div class="d-flex flex-column align-items-center gap-4 pb-5">
+        <img src="../../assets/img/avatars/avatar_mujer7.webp" alt="Caso actual"
+          class="sf-img-60">
+        <p class="text-justify sf-text-white">Luego de analizar cada caso, y conocer las responsabilidades del patrón y
+          de nosotros como colaboradores, juguemos a identificar a quién corresponde cada responsabilidad dada</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DERECHA -->
+  <div class="animate__animated animate__fadeInRightBig col-lg-7 col-md-12 sf-cr-row">
+    <div class="w-80 mx-auto">
+      <!-- PROGRESO -->
+      <div class="text-center mb-3">
+        <div class="progress-info p-2 bg-light rounded">
+          <span class="fw-bold">Pregunta <span id="progress">1/6</span></span>
+        </div>
+      </div>
+
+      <!-- INSTRUCCIÓN -->
+      <div class="text-center mb-3">
+        <i class="hipt hipt-light">
+          Arrastra a cada caja la responsabilidad correcta
+          <i class="fas fa-arrow-down"></i>
+        </i>
+      </div>
+
+      <!-- TEXTO ARRASTRABLE -->
+      <div class="text-center mb-3">
+        <div id="draggableText" class="draggable-item p-3 bg-light border rounded shadow-sm" draggable="true">
+          <!-- El texto aparecerá aquí dinámicamente -->
+        </div>
+      </div>
+
+      <!-- BOTONES PARA MÓVIL -->
+      <div class="text-center mb-4 d-md-none">
+        <div class="button-group">
+          <button id="colaboradoresBtn" class="btn btn-outline-primary me-2">Colaboradores</button>
+          <button id="patronBtn" class="btn btn-outline-success">Patrón</button>
+        </div>
+      </div>
+
+      <!-- CAJAS DE DESTINO -->
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <div class="drop-zone" data-category="colaboradores">
+            <div class="drop-area p-4 border-2 border-primary rounded text-center">
+              <div class="drop-header bg-primary text-white p-2 rounded mb-2">
+                <i class="fas fa-users me-2"></i>Colaboradores
+              </div>
+              <p class="text-muted mb-0 d-none d-md-block">Suelta aquí</p>
+            </div>
+            <div id="colaboradores-items" class="dropped-items mt-2"></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="drop-zone" data-category="patron">
+            <div class="drop-area p-4 border-2 border-success rounded text-center">
+              <div class="drop-header bg-success text-white p-2 rounded mb-2">
+                <i class="fas fa-building me-2"></i>Patrón
+              </div>
+              <p class="text-muted mb-0 d-none d-md-block">Suelta aquí</p>
+            </div>
+            <div id="patron-items" class="dropped-items mt-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEEDBACK Y CONTROLES -->
+      <div class="text-center">
+        <div id="feedback" class="mb-3 d-none"></div>
+        <div class="mb-3">
+          <span class="badge bg-success fs-6">Correctas: <span id="correctCount">0</span></span>
+        </div>
+        <button id="resetBtn" class="sf-btn sf-btn-blue"><i class="fas fa-repeat"></i> Reiniciar</button>
+      </div>
+    </div>
+  </div>
+</section>

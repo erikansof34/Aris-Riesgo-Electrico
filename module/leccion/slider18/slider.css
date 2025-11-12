@@ -1,0 +1,143 @@
+/* Animación al hacer hover */
+.transition-scale {
+  transition: transform 0.3s ease;
+}
+
+.transition-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Estados de validación por tarjeta */
+.case-card {
+  border: 2px solid #dee2e6;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.case-card.correct {
+  background-color: #d1f5d3;
+  border-color: #198754 !important;
+  box-shadow: 0 4px 15px rgba(25, 135, 84, 0.3);
+}
+
+.case-card.incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545 !important;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.validation-msg {
+  font-family: Montserrat;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.validation-msg.success { color: #198754; }
+.validation-msg.error { color: #dc3545; }
+
+/* Asegurar que d-none oculte elementos en este slider */
+.d-none { display: none; }
+
+
+.audio-container audio {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Mejoras para los selects */
+.form-select-lg {
+  font-size: 1.1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid #dee2e6;
+  transition: all 0.3s ease;
+}
+
+.form-select-lg:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-select-lg option {
+  padding: 0.5rem;
+}
+
+.transcription-toggle {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.transcription-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* Estados de cards activa/inactiva */
+.card-col {
+  transition: all 0.5s ease;
+}
+
+/* Clases personalizadas para grid 3.5-5-3.5 solo en lg+ */
+@media (min-width: 992px) {
+  .col-lg-custom-3-5 {
+    flex: 0 0 29.166667%; /* 3.5/12 = 29.166667% */
+    max-width: 29.166667%;
+  }
+
+  .col-lg-custom-5 {
+    flex: 0 0 41.666667%; /* 5/12 = 41.666667% */
+    max-width: 41.666667%;
+  }
+}
+
+.case-card.inactive {
+  opacity: 0.8;
+}
+
+.case-card.active {
+  opacity: 1;
+}
+
+/* Botón de activación */
+.card-activate-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background-color: #0c3c5c !important;
+  border-color: #0c3c5c !important;
+  box-shadow: 0 3px 8px rgba(12, 60, 92, 0.3);
+  padding: 0;
+  min-width: 35px;
+}
+
+.card-activate-btn:hover {
+  transform: scale(1.1);
+  background-color: #0a3350 !important;
+  border-color: #0a3350 !important;
+  box-shadow: 0 4px 12px rgba(12, 60, 92, 0.4);
+}
+
+.card-activate-btn i {
+  font-size: 1rem;
+}
+
+/* Ocultar elementos según estado */
+.case-card.inactive .audio-container {
+  display: none;
+}
+
+.case-card.active .card-activate-btn {
+  display: none;
+}
+
+/* Imagen más grande en estado inactivo */
+.case-card.inactive .card-image {
+  max-width: 150px !important;
+}
+
+.case-card.active .card-image {
+  max-width: 120px !important;
+}

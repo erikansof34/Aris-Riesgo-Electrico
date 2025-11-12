@@ -1,0 +1,957 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+
+
+.contInd {
+  position: absolute;
+  width: 90%;
+  z-index: 2;
+  max-width: 600px;
+  left: 10%;
+}
+
+.contInd img {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.dx2-v2 {
+  font-size: 4.6em;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  color: #badde1;
+  padding-top: 10%;
+  font-family: 'Alata', sans-serif;
+}
+
+.subtitulo {
+  font-size: 1em;
+}
+
+.fd {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-image: url(../../assets/img/fondo_index.webp);
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+  opacity: .85;
+}
+
+.left-img {
+  margin-left: 0.1rem;
+}
+
+.img-logo img {
+  padding-top: 25%;
+  width: 40%;
+  margin: 0 auto;
+}
+
+/*Boton dinamico 3d*/
+.button-right {
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+.button-1 {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 10%;
+}
+
+.button-1-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.button-1-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(to left, hsl(75deg 85% 56%) 0%, hsl(69, 100%, 32%) 8%, hsl(75deg 100% 32%) 92%, hsl(78deg 100% 16%) 100%);
+}
+
+.button-1-front {
+  display: block;
+  position: relative;
+  padding: 12px 27px;
+  border-radius: 12px;
+  font-size: 25px;
+  font-weight: 600;
+  color: #0B3D5C;
+  ;
+  background: #BFEE30;
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+@media (min-width: 768px) {
+  .button-1-front {
+    font-size: 20px;
+    padding: 12px 30px;
+  }
+}
+
+.button-1:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.button-1:hover .button-1-front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-1:active .button-1-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.button-1:hover .button-1-shadow {
+  transform: translateY(4px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-1:active .button-1-shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.button-1:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/*olas*/
+.hero {
+  position: relative;
+  background: #333333;
+  color: white;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-color: #0B3D5C;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+  transition: 500ms;
+}
+
+.waves::before,
+.waves::after {
+  content: '';
+  position: absolute;
+  width: 300vw;
+  height: 300vw;
+  top: -65vw;
+  left: 50%;
+  transform: translate(-50%, -75%);
+}
+
+.waves::before {
+  border-radius: 44%;
+  background: linear-gradient(135deg, #025ea5, #04255a);
+  animation: waves 8s linear infinite;
+}
+
+.waves::after {
+  border-radius: 44%;
+  background: linear-gradient(135deg, #025ea5, #04255a);
+  animation: waves 15s linear infinite;
+}
+
+@keyframes waves {
+  0% {
+    transform: translate(-50%, -75%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -75%) rotate(360deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  .contInd {
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .fd {
+    background-image: url(../../assets/img/fondo_mobile_home.webp);
+  }
+
+  .img-logo img {
+    padding-top: 20%;
+    width: 65%;
+    margin: 0 auto;
+    text-align: center;
+    left: 65px;
+  }
+
+  .dx2-v2 {
+    font-size: 3em;
+    text-align: center;
+    line-height: 1.0em;
+  }
+
+  .subtitulo {
+    font-size: 1.2em;
+    line-height: 1.2em;
+  }
+
+  .button-1 {
+    max-width: 150px;
+    bottom: 45%;
+  }
+
+  .button-1-front {
+    font-size: 20px;
+  }
+}
+
+/* Contenedor principal con parallax */
+.parallax-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Video de fondo con efecto parallax */
+.parallax-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.parallax-bg video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Overlay oscuro */
+.parallax-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.3) 100%);
+  z-index: 2;
+}
+
+/* Contenido sobre la imagen */
+.parallax-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: white;
+  max-width: 65rem;
+  padding: 0 20px;
+}
+
+/* Logo central */
+.parallax-icon {
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(50px) scale(0.8);
+  animation: fadeInUpScale 1s ease forwards 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parallax-logo {
+  max-width: 250px;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+  transition: all 0.3s ease;
+}
+
+.parallax-icon:hover .parallax-logo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+}
+
+.parallax-title {
+  font-size: clamp(3rem, 8vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -2px;
+  margin-bottom: 15px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 1s ease forwards 0.5s;
+}
+
+.parallax-subtitle {
+  font-size: clamp(1rem, 8vw, 3rem);
+  font-weight: 400;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 1s ease forwards 0.8s;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Botones */
+.parallax-buttons {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: fadeInUp 1s ease forwards 1.1s;
+}
+
+.parallax-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  /* padding: 18px 40px; */
+  margin: 10px;
+  background: linear-gradient(45deg, #464646, #464646);
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.4s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+  transition: left 0.5s;
+}
+
+.parallax-btn:hover::before {
+  left: 100%;
+}
+
+.parallax-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px #bee34e;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.parallax-btn.inicio-btn {
+  background: linear-gradient(45deg, #BFEE30, #bbe738);
+  box-shadow: 0 20px 40px #bee34e;
+}
+
+.parallax-btn.inicio-btn:hover {
+  box-shadow: 0 20px 40px #bee34e;
+  transform: translateY(-5px) scale(1.05);
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.parallax-btn i {
+  transition: transform 0.3s ease;
+}
+
+.parallax-btn:hover i {
+  transform: translateY(2px);
+}
+
+/* Integración de efectos flip-x con el botón inicio */
+.parallax-btn.inicio-btn.button-icon-effect {
+  overflow: hidden;
+  position: relative;
+}
+
+.parallax-btn.inicio-btn.button-icon-effect i {
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.parallax-btn.inicio-btn.button-icon-effect:hover {
+  color: #f8f9fa !important;
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 20px 40px #bee34e;
+}
+
+/* Animaciones */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Nueva animación para el ícono */
+@keyframes fadeInUpScale {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Efecto Ken Burns para video (zoom sutil) */
+@keyframes kenBurns {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.parallax-bg video.ken-burns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .parallax-bg video {
+    object-fit: cover;
+  }
+
+  .parallax-content {
+    padding: 0 15px;
+  }
+
+  .parallax-logo {
+    max-width: 200px;
+  }
+
+  .parallax-icon {
+    margin-bottom: 20px;
+  }
+
+  .parallax-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .parallax-btn {
+    width: 200px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .parallax-btn.inicio-btn.button-icon-flip-x i {
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .parallax-btn {
+    width: 180px;
+    padding: 15px;
+    font-size: 1rem;
+  }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.7);
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  40% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+
+  60% {
+    transform: translateX(-50%) translateY(-5px);
+  }
+}
+
+/* botton  */
+
+/* Base Button Styles */
+.button {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #1f2937;
+  color: #ffffff;
+  text-transform: none;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  line-height: 1.5;
+  padding: 0 22px;
+  margin: 0 4px 8px 0;
+  border-radius: 0;
+  transition: all 0.2s ease;
+  vertical-align: middle;
+  text-align: center;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button Variations */
+.button-3d {
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.button-3d:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 -3px 0 rgba(0, 0, 0, 0.15);
+}
+
+.button-border {
+  background-color: transparent;
+  border: 2px solid #1f2937;
+  color: #1f2937;
+}
+
+.button-border:hover {
+  background-color: #1f2937;
+  color: #ffffff;
+}
+
+.button-rounded {
+  border-radius: 3px;
+}
+
+.button-dark {
+  background-color: #1f2937;
+  color: #ffffff;
+}
+
+.text-end {
+  text-align: right;
+}
+
+.px-5 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+/* Button Icons */
+.button i {
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.text-end .button i {
+  margin-left: 8px;
+  margin-right: 0;
+}
+
+/* Bootstrap Button for comparison */
+.btn {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-link {
+  font-weight: 400;
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+.btn-link:hover {
+  color: #0a58ca;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.ms-4 {
+  margin-left: 1.5rem;
+}
+
+/* Button Icon Effects */
+.button-icon-effect {
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.button-icon-effect i {
+  --cnvs-btn-icon-margin-offset: 0.25rem;
+}
+
+.button-icon-effect.button-icon-flip-x i {
+  animation: buttonIconSlideBack 0.3s ease;
+}
+
+.button-icon-effect.button-icon-flip-x:hover i {
+  animation: buttonIconSlideFront 0.5s forwards;
+}
+
+@keyframes buttonIconSlideBack {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  26% {
+    transform: translateX(-100%);
+  }
+
+  27% {
+    transform: translateX(100%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes buttonIconSlideFront {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  26% {
+    transform: translateX(100%);
+  }
+
+  27% {
+    transform: translateX(-100%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.button-icon-effect.button-icon-flip-y i {
+  animation: buttonIconSlideUp 0.3s ease;
+}
+
+.button-icon-effect.button-icon-flip-y:hover i {
+  animation: buttonIconSlideDown 0.5s forwards;
+}
+
+@keyframes buttonIconSlideUp {
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  26% {
+    transform: translateY(-100%);
+  }
+
+  27% {
+    transform: translateY(100%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonIconSlideDown {
+  0% {
+    transform: translateY(0);
+  }
+
+  25% {
+    opacity: 0;
+  }
+
+  26% {
+    transform: translateY(100%);
+  }
+
+  27% {
+    transform: translateY(-100%);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Button Text Effects */
+.button-text-effect {
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.button-text-effect .button-inner {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.button-text-effect .button-inner span {
+  transition: all 0.3s cubic-bezier(0.17, 0.75, 0.8, 1);
+}
+
+.button-text-effect .button-inner span:nth-child(1) {
+  display: inline-block;
+  opacity: 1;
+}
+
+.button-text-effect .button-inner span:nth-child(2) {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.button-text-effect:hover span:nth-child(1) {
+  opacity: 0;
+}
+
+.button-text-effect:hover span:nth-child(2) {
+  opacity: 1;
+}
+
+.button-text-effect.button-text-flip-x span:nth-child(1) {
+  transform: translate(0, 0);
+}
+
+.button-text-effect.button-text-flip-x span:nth-child(2) {
+  transform: translate(100%, 0);
+}
+
+.button-text-effect.button-text-flip-x:hover span:nth-child(1) {
+  transform: translate(-100%, 0);
+}
+
+.button-text-effect.button-text-flip-x:hover span:nth-child(2) {
+  transform: translate(0, 0);
+}
+
+.button-text-effect.button-text-flip-y span:nth-child(1) {
+  transform: translate(0, 0);
+}
+
+.button-text-effect.button-text-flip-y span:nth-child(2) {
+  transform: translate(0, 100%);
+}
+
+.button-text-effect.button-text-flip-y:hover span:nth-child(1) {
+  transform: translate(0, -100%);
+}
+
+.button-text-effect.button-text-flip-y:hover span:nth-child(2) {
+  transform: translate(0, 0);
+}
+
+/* Section Styling */
+.section {
+  margin-bottom: 60px;
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.fancy-title {
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.fancy-title h4 {
+  color: #2d3748;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+}
+
+.clear {
+  clear: both;
+}
+
+.mb-6 {
+  margin-bottom: 3rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+/* Demo styles */
+.demo-note {
+  background: #f7fafc;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border-left: 4px solid #4299e1;
+}
+
+.demo-note p {
+  margin: 0;
+  color: #4a5568;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contenido {
+  height: 100vh;
+  background: #f8f9fa;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* // ajustar el fondo */
+
+.sf-blue {
+  color: #008fb6 !important;
+}

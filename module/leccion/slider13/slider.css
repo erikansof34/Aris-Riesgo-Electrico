@@ -1,0 +1,45 @@
+.slide {
+  padding: 20px;
+  background-color: #ea1111;
+}
+
+.audio-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.audio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.audio-card .card-header {
+  border: none;
+  padding: 1rem 1rem;
+}
+
+.audio-card .card-header h6 {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.audio-card .card-body {
+  background-color: #ffffff;
+}
+
+.audio-card audio {
+  border-radius: 8px;
+}
+
+.transcription-toggle {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.transcription-toggle:hover {
+  transform: scale(1.05);
+}
+

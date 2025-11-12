@@ -1,0 +1,154 @@
+.w-80 {
+  width: 80% ;
+}
+
+.draggable-item {
+  cursor: grab;
+  user-select: none;
+  transition: all 0.3s ease;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 3px solid #007bff;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+  box-shadow: 0 6px 20px rgba(0,123,255,0.25), 0 0 0 2px rgba(0,123,255,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.draggable-item.first-load {
+  animation: highlightEntry 1.5s ease-out;
+}
+
+.draggable-item:hover {
+  border-color: #007bff;
+  background-color: #e3f2fd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,123,255,0.2);
+}
+
+.draggable-item:active {
+  cursor: grabbing;
+  background-color: #007bff;
+  color: white;
+  transform: scale(0.98);
+}
+
+.draggable-item.dragging {
+  opacity: 0.8;
+  background-color: #007bff;
+  color: white;
+  transform: rotate(2deg);
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.button-group .btn {
+  min-width: 120px;
+  font-weight: 500;
+}
+
+.drop-area {
+  min-height: 120px;
+  transition: all 0.3s ease;
+  border: 3px dashed #6c757d !important;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.drop-area:hover {
+  border-color: #495057 !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.drop-area.drag-over-colaboradores {
+  background-color: #e3f2fd;
+  border-color: #007bff !important;
+  box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+  transform: scale(1.02);
+}
+
+.drop-area.drag-over-patron {
+  background-color: #e8f5e8;
+  border-color: #28a745 !important;
+  box-shadow: 0 4px 15px rgba(40,167,69,0.3);
+  transform: scale(1.02);
+}
+
+.drop-header {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.dropped-items {
+  min-height: 50px;
+}
+
+.dropped-item {
+  font-size: 0.9em;
+  border: 1px solid rgba(255,255,255,0.2);
+  animation: slideIn 0.3s ease-out;
+  line-height: 1.4;
+}
+
+.progress-info {
+  border: 1px solid #dee2e6;
+  background-color: #f8f9fa !important;
+}
+
+#feedback {
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes highlightEntry {
+  0% {
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    box-shadow: 0 2px 8px rgba(0,123,255,0.1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0,123,255,0.4), 0 0 0 4px rgba(0,123,255,0.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 6px 20px rgba(0,123,255,0.25), 0 0 0 2px rgba(0,123,255,0.1);
+  }
+}
+
+
+
+.draggable-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 2s ease-in-out infinite 1s;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

@@ -1,0 +1,208 @@
+<!-- <?php
+    require('../../../functions_helpers.php'); /*load helper*/
+    check_session(); /*check session by employee */
+    $course_code = $_GET['course_code']; /* recibir el código del curso */
+    //$module_id        = __my_simple_crypt__($_GET['module'], 'd');
+    $module_id = 54;
+    $unique_course_id = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
+    $extension_url = "?course_code=" . $course_code; /* variable url para pasar el código del curso*/
+    
+    
+    $progress = progress_courses($course_code,$module_id);
+    $firma =  image_profile($course_code);
+   
+?> -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- library bootstrap v.5.0.2 -->
+    <script src="../../plugins/libs/jquery-3.3.1.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../../plugins/libs/bootstrap/css/bootstrap.css">
+
+    <script src="../../plugins/libs/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../../plugins/libs/bootstrap/js/custom-modal-handler.js"></script>
+    <script src="../../plugins/js/touch-dnd.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- library cascading style sheets -->
+    <link rel="stylesheet" type="text/css" href="../../plugins/libs/component/transcripcion/transcripcion.css">
+
+    <link rel="stylesheet" type="text/css" href="../../plugins/css/sofactia.css">
+    <link rel="stylesheet" type="text/css" href="../../plugins/css/bg_img.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="../../plugins/css/bars.css">
+    <link rel="stylesheet" type="text/css" href="../../plugins/css/quiz-styles.css">
+
+    <link rel="stylesheet" type="text/css" href="../../plugins/libs/component/preloader/preloaders.css">
+
+    <!--Tiporgraia Montserrat-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!--Libreria iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../../plugins/libs/animate/animate.min.css" />
+
+    <!-- Estilos del widget -->
+    <link rel="stylesheet" href="../../plugins/libs/assetsWidget/css/widget.css">
+</head>
+
+<body class="sf-scroll-y-hidden body-style" id="darkStyleImgSeccion">
+    <input id='course_code' value="<?php echo $course_code;?>" hidden>
+    <input id='module_id' value="<?php echo $module_id;?>" hidden>
+    <input id='unique_course_id' value="<?php echo $unique_course_id ;?>" hidden>
+    <input id='emp_unique_id' value="<?php echo $_SESSION['employee_data']['emp_unique_id'] ;?>" hidden>
+    <!-- Header con el logo -->
+    <header class="header">
+        <div class="contentHeader bg-header-r">
+            <div>
+                <img class="logo logoTop" src="../../assets/img/logo/logo-blanco.webp">
+                <div class="miga_pan">
+                    <p id="breadcrumb"></p>
+                </div>
+                <div class="txPg">
+                    <span id="textProg">1</span> / <span id="nSlider"></span>
+                </div>
+                <div class="txPg d-xl-none" id="dropdownGripBtn">
+                    <i class="fa-solid fa-grip"></i>
+                </div>
+                <div class="txPg">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <!-- <div>
+                    <p class="txPg mb-0"><span class="d-none d-lg-block">Progreso:</span> <span
+                            id="porcentajeProgreso">0</span>% </p>
+                </div> -->
+            </div>
+
+            <div class="d-lg-none text-center">
+                <p class="mb-0 sf-text-white" id="breadcrumb_movil"></p>
+            </div>
+
+            <div class="contCircleBar contCircleBar-nav-bar">
+            </div>
+
+            <div class="progBar sf-bg-pink">
+                <div style="width: 10% !important;"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="dropdown-slider d-xl-none" id="dropdownSliderMenu" style="display: none;">
+    </div>
+    <!-- content fluid -->
+    <main class="container-fluid sf-container">
+        <!-- content slider -->
+        <div class="contentModule" id="slider-container"></div>
+        <!-- end content fluid -->
+    </main>
+    <!-- navegación  -->
+    <div class="btn-navigation-container">
+        <button id="pagIndex" class="btn-navigation btn-navigation--prev" onclick="prevSlide()">
+            <i class="fas fa-angle-left"></i> <span>Anterior</span>
+        </button>
+        <button id="next" class="btn-navigation btn-navigation--next" onclick="nextSlide()">
+            <span>Siguiente</span> <i class="fas fa-angle-right"></i>
+        </button>
+    </div>
+    <button id="btnParallaxMobile" class="btn-parallax-mobile ocultar d-block d-lg-none">
+        <i class="fas fa-arrow-down"></i>
+    </button>
+
+    <div class="headerOpc">
+        <i class="fas fa-times"></i>
+        <br>
+        <h1>Hola!<b>
+                <!-- <?= ucwords($CI->session->userdata('employee_data')['fullname']); ?> -->
+            </b></h1>
+        <!-- <h1>Hola! <b>Nombre user</b></h1> -->
+        <h5>Bienvenido a su Ruta de Aprendizaje!</h5>
+        <div class="headerProg">
+            <p><b>Progreso: </b><span id="course-progress"><strong>
+                        <?= $progress[0]['course_progress'];?>%</span></strong></p>
+        </div>
+        <hr>
+        <ul>
+            <a href="../../index.html">
+            <!-- <a href="./../index.php?course_code=<?= $course_code; ?>"> -->
+                <li><i class="fas fa-caret-right"></i> Presentación</li>
+            </a>
+            <a href="./index.html" class="act">
+            <!-- <a href="./index.php?course_code=<?= $course_code; ?>"> -->
+                <li><i class="fas fa-caret-right"></i> Contenido</li>
+            </a>
+            <a href="../evaluacion/quiz.html">
+            <!-- <a href="../evaluacion/quiz.php?course_code=<?= $course_code; ?>" class="act"> -->
+                <li><i class="fas fa-caret-right"></i> Evaluación</li>
+            </a>
+        </ul>
+        <hr>
+        <ul>
+            <!-- <a href="index.html"> -->
+            <a href="../../../../../login.php">
+                <li><i class="fas fa-caret-right"></i> Mis cursos</li>
+            </a>
+            <!-- <a href="modulo.html"> -->
+            <a href="../../../../../logout.php">
+                <li><i class="fas fa-caret-right"></i> Cerrar sesión</li>
+            </a>
+        </ul>
+        <span class="infSof">© Sofactia. powered by Unydos</span>
+    </div>
+
+    <!-- Agrega esto justo antes del cierre del body (antes de los scripts) -->
+    <div id="transcripcion-global"></div>
+    <footer>
+        <!-- library javascript -->
+        <script src="../../plugins/libs/component/transcripcion/transcripcion.js"></script>
+        <script src="../../plugins/js/main.js"></script>
+        <script src="../../plugins/js/quiz-manager.js"></script>
+        <!-- <script src="https://app.Lumi.education/api/v1/h5p/core/js/h5p-resizer.js" charset="UTF-8"></script> -->
+
+        <script src="../../plugins/js/getProgressActivity.js"></script>
+        <script src="../../plugins/js/modal-bg.js"></script>
+        <script src="../../plugins/js/trackingmanager_activities.js"></script>
+        <script src="../../plugins/js/trackingmanagern3.js"></script>
+        <script src="../../plugins/js/touch-dnd.js"></script>
+        <!-- <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> -->
+        <!-- Script del Widget -->
+         
+        <script src="../../plugins/libs/assetsWidget/js/widget.js"></script>
+        <!-- <script src="../../plugins/libs/sessvars.js"> </script> -->
+
+
+    </footer>
+
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <script>
+        // AOS.init();
+
+        //function bar menu
+        $(".fa-bars").on("click", function () {
+            console.log('click');
+
+            $(".opMenu").toggle();
+        });
+
+        //function bar menu
+        $(".fa-bars").on("click", function () {
+            event.stopPropagation();
+            $(".headerOpc").addClass('act');
+        });
+
+        $('html, .fa-times').click(function () {
+            $(".headerOpc").removeClass('act');
+        });
+
+        $('.headerOpc').click(function () {
+            event.stopPropagation();
+        });
+    </script>
+</body>
+
+</html>

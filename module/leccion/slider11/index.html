@@ -1,0 +1,111 @@
+<section class="row h-100">
+  <div class="animate__animated animate__fadeInLeftBig col-lg-7 col-md-12 sf-cl-row sf-bg-dark">
+    <div class="my-2 text-center">
+      <h1 class="sf-txt-xl sf-txt-1xl-lg sf-text-white">
+        Factores de riesgo psicosocial en el trabajo <br />
+        <span class="sf-text-secondary">En la organización de trabajo</span>
+      </h1>
+
+      <i class="hipt hipt-light mb-3">
+        Ana es gerente de proyectos en una empresa de tecnología… <br />
+        Observa el video para conocer el caso completo
+        <i class="icon-inline icon-inline--start fa-solid fa-arrow-right ms-1"></i>
+      </i>
+
+      <img src="../../assets/img/avatars/avatar_mujer2.webp" alt="Chisme" class="sf-img-40"
+        style="display: block; margin: auto" />
+
+      <div>
+        <p class="sf-text-white pt-3">
+          ¿Ya observaste el video del caso?
+          <br />
+          Ahora, pensemos...
+        </p>
+        <h4 class="sf-text-white">¿Cuáles factores de riesgo psicosocial que más se relacionan con este caso?</h4>
+      </div>
+    </div>
+
+    <i class="hipt hipt-light gap-2">
+      Haz clic en el botón para realizar la actividad
+      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
+    </i>
+
+    <button class="sf-btn sf-btn-neon" data-bs-toggle="modal" data-bs-target="#sld14_modal"><i
+        class="fa-solid fa-book"></i> Actividad</button>
+  </div>
+  <div class="animate__animated animate__fadeInRightBig col-lg-5 col-md-12 sf-cr-row">
+    <div class="my-2 text-center">
+      <i class="hipt hipt-light gap-2 mb-3">
+        Observa con detenimiento el caso
+        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
+      </i>
+
+      <!-- Marco de teléfono para web -->
+      <div class="phone-frame vertical mostrar-web">
+        <div class="iframe-container" id="Slide11Web">
+          <div class="loader spinner-pulse"></div>
+        </div>
+      </div>
+
+      <!-- Marco de teléfono para móvil -->
+      <div class="phone-frame vertical mostrar-mobile">
+        <div class="iframe-container" id="Slide11Mobile">
+          <div class="loader spinner-pulse"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="sld14_modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><i class="fa-solid fa-book"></i> Actividad: Selecciona los dos factores de riesgo
+          psicosociales</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+            class="fa fa-times"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div id="activityOptions" class="d-flex flex-column gap-2 my-3">
+          <div class="activity-option p-2 rounded" data-correct="true">A. Cargas de Trabajo</div>
+          <div class="activity-option p-2 rounded" data-correct="true">B. Jornadas Laborales Extensas</div>
+          <div class="activity-option p-2 rounded" data-correct="false">C. Violencia laboral</div>
+          <div class="activity-option p-2 rounded" data-correct="false">D. Liderazgo negativo</div>
+        </div>
+
+        <!-- Botones -->
+        <div id="activityButtons" class="d-flex justify-content-center gap-3">
+          <button id="validateBtn" class="sf-btn sf-btn-blue btn btn-primary">Validar</button>
+          <button id="resetBtn" class="sf-btn sf-btn-blue btn btn-primary"><i class="fas fa-repeat"></i>
+            Reiniciar</button>
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <div id="successMessage" class="alert alert-success mt-4 text-center d-none">
+          ¡Excelente! Has identificado correctamente los factores de riesgo psicosocial.
+          <br /><strong>Resultado: <span id="successScore"></span></strong>
+          <br />
+          <button class="btn btn-success mt-3" data-bs-dismiss="modal">Finalizar</button>
+        </div>
+
+        <!-- Mensaje parcial -->
+        <div id="partialMessage" class="alert alert-warning mt-4 text-center d-none">
+          ¡Bien! Pero puedes mejorar. Revisa tus respuestas.
+          <br /><strong>Resultado: <span id="partialScore"></span></strong>
+        </div>
+
+        <!-- Mensaje de fallo -->
+        <div id="failMessage" class="alert alert-danger mt-4 text-center d-none">
+          Respuestas incorrectas. ¡Inténtalo de nuevo!
+          <br /><strong>Resultado: <span id="failScore"></span></strong>
+        </div>
+
+        <!-- Mensaje de error -->
+        <div id="errorMessage" class="alert alert-danger mt-4 text-center d-none">Debes seleccionar exactamente 2
+          opciones. Inténtalo de nuevo.</div>
+      </div>
+    </div>
+  </div>
+</div>
