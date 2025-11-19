@@ -46,7 +46,6 @@ function initTranscripciones(container = document) {
       toggleBtn.addEventListener('click', function () {
         this.classList.toggle('active');
         this.style.color = this.classList.contains('active') ? '#2a7fba' : '#666';
-        console.log(`🔘 Botón toggle ${this.classList.contains('active') ? 'activado' : 'desactivado'}`);
 
         if (this.classList.contains('active') && !audio.paused) {
           updateTranscripcion(audio, toggleBtn);
@@ -57,7 +56,7 @@ function initTranscripciones(container = document) {
     }
 
     // Actualizar transcripción si cambia el idioma
-    window.addEventListener('storage', function (e) {
+    window.addEventListener('storage', function(e) {
       if (e.key === 'audioIdioma') {
         // Si el botón está activo y el audio está reproduciéndose, forzar actualización visual
         if (toggleBtn?.classList.contains('active') && !audio.paused) {

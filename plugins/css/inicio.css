@@ -3,172 +3,60 @@
   padding: 0;
 }
 
-body {
+/* Contenedor principal con parallax */
+.parallax-container {
   position: relative;
   width: 100%;
   height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-
-
-.contInd {
+/* Video de fondo con efecto parallax */
+.parallax-bg {
   position: absolute;
-  width: 90%;
-  z-index: 2;
-  max-width: 600px;
-  left: 10%;
-}
-
-.contInd img {
-  position: relative;
-  max-width: 400px;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin-bottom: 20px;
+  height: 100%;
+  overflow: hidden;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
 }
 
-.dx2-v2 {
-  font-size: 4.6em;
-  line-height: 1.2em;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  color: #badde1;
-  padding-top: 10%;
-  font-family: 'Alata', sans-serif;
-}
-
-.subtitulo {
-  font-size: 1em;
-}
-
-.fd {
+.parallax-bg.bg {
   position: absolute;
   width: 100%;
   height: 100vh;
-  background-image: url(../../assets/img/fondo_index.webp);
+  background-image: url(../../assets/img/fondos/fondo_index.webp);
   background-size: cover;
   background-position: center;
   z-index: 1;
   opacity: .85;
 }
 
-.left-img {
-  margin-left: 0.1rem;
-}
-
-.img-logo img {
-  padding-top: 25%;
-  width: 40%;
-  margin: 0 auto;
-}
-
-/*Boton dinamico 3d*/
-.button-right {
-  max-width: 180px;
-  margin: 0 auto;
-}
-
-.button-1 {
-  border: none;
-  background: transparent;
-  padding: 0;
-  cursor: pointer;
-  outline-offset: 4px;
-  transition: filter 250ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+.parallax-bg video {
   position: absolute;
-  z-index: 3;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  bottom: 10%;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  z-index: 1;
 }
 
-.button-1-shadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: hsl(0deg 0% 0% / 0.25);
-  will-change: transform;
-  transform: translateY(2px);
-  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-}
-
-.button-1-edge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  background: linear-gradient(to left, hsl(75deg 85% 56%) 0%, hsl(69, 100%, 32%) 8%, hsl(75deg 100% 32%) 92%, hsl(78deg 100% 16%) 100%);
-}
-
-.button-1-front {
-  display: block;
-  position: relative;
-  padding: 12px 27px;
-  border-radius: 12px;
-  font-size: 25px;
-  font-weight: 600;
-  color: #0B3D5C;
-  ;
-  background: #BFEE30;
-  will-change: transform;
-  transform: translateY(-4px);
-  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
-}
-
-@media (min-width: 768px) {
-  .button-1-front {
-    font-size: 20px;
-    padding: 12px 30px;
-  }
-}
-
-.button-1:hover {
-  filter: brightness(110%);
-  -webkit-filter: brightness(110%);
-}
-
-.button-1:hover .button-1-front {
-  transform: translateY(-6px);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.button-1:active .button-1-front {
-  transform: translateY(-2px);
-  transition: transform 34ms;
-}
-
-.button-1:hover .button-1-shadow {
-  transform: translateY(4px);
-  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
-}
-
-.button-1:active .button-1-shadow {
-  transform: translateY(1px);
-  transition: transform 34ms;
-}
-
-.button-1:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/*olas*/
 .hero {
-  position: relative;
+  /* position: relative;
   background: #333333;
   color: white;
   height: 100vh;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  overflow: hidden; */
 }
 
 .waves {
@@ -177,7 +65,7 @@ body {
   left: 0;
   right: 0;
   height: 200px;
-  background-color: #0B3D5C;
+  background-color: #005ABB;
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
   transition: 500ms;
 }
@@ -195,12 +83,14 @@ body {
 
 .waves::before {
   border-radius: 44%;
+  /*background: rgba(7, 24, 52, 1);*/
   background: linear-gradient(135deg, #025ea5, #04255a);
   animation: waves 8s linear infinite;
 }
 
 .waves::after {
   border-radius: 44%;
+  /*background: rgba(51, 51, 51, 0.5);*/
   background: linear-gradient(135deg, #025ea5, #04255a);
   animation: waves 15s linear infinite;
 }
@@ -215,83 +105,6 @@ body {
   }
 }
 
-@media (max-width: 1024px) {
-  .contInd {
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 768px) {
-  .fd {
-    background-image: url(../../assets/img/fondo_mobile_home.webp);
-  }
-
-  .img-logo img {
-    padding-top: 20%;
-    width: 65%;
-    margin: 0 auto;
-    text-align: center;
-    left: 65px;
-  }
-
-  .dx2-v2 {
-    font-size: 3em;
-    text-align: center;
-    line-height: 1.0em;
-  }
-
-  .subtitulo {
-    font-size: 1.2em;
-    line-height: 1.2em;
-  }
-
-  .button-1 {
-    max-width: 150px;
-    bottom: 45%;
-  }
-
-  .button-1-front {
-    font-size: 20px;
-  }
-}
-
-/* Contenedor principal con parallax */
-.parallax-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Video de fondo con efecto parallax */
-.parallax-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  will-change: transform;
-  transition: transform 0.1s ease-out;
-}
-
-.parallax-bg video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: 1;
-}
 
 /* Overlay oscuro */
 .parallax-overlay {
@@ -310,21 +123,21 @@ body {
 .parallax-content {
   position: relative;
   z-index: 10;
-  text-align: center;
+  /* text-align: center; */
   color: white;
   max-width: 65rem;
   padding: 0 20px;
+  left: 6.5rem;
 }
 
 /* Logo central */
 .parallax-icon {
-  margin-bottom: 30px;
+  margin-top: 3rem;
+  margin-bottom: 5rem;
   opacity: 0;
   transform: translateY(50px) scale(0.8);
   animation: fadeInUpScale 1s ease forwards 0.2s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
 }
 
 .parallax-logo {
@@ -340,9 +153,12 @@ body {
 }
 
 .parallax-title {
-  font-size: clamp(3rem, 8vw, 4rem);
+  font-size: 4.6em;
+  color: #badde1;
   font-weight: 700;
-  letter-spacing: -2px;
+  overflow-wrap: break-word;
+  white-space: normal;
+  line-height: 1.2em;
   margin-bottom: 15px;
   opacity: 0;
   transform: translateY(50px);
@@ -365,25 +181,27 @@ body {
   opacity: 0;
   transform: translateY(50px);
   animation: fadeInUp 1s ease forwards 1.1s;
+  margin-top: 9rem;
 }
 
 .parallax-btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  /* padding: 18px 40px; */
+  padding: 12px 40px;
   margin: 10px;
   background: linear-gradient(45deg, #464646, #464646);
   color: white;
   text-decoration: none;
-  border-radius: 50px;
+  border-radius: 12px;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   transition: all 0.4s ease;
   border: 2px solid transparent;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  color: #0b3d5c;
 }
 
 .parallax-btn::before {
@@ -406,17 +224,17 @@ body {
 
 .parallax-btn:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px #bee34e;
+  box-shadow: 0 20px 40px rgba(210, 84, 0, 0.4);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
 .parallax-btn.inicio-btn {
-  background: linear-gradient(45deg, #BFEE30, #bbe738);
-  box-shadow: 0 20px 40px #bee34e;
+  background: linear-gradient(45deg, #BFEE30, #c0ff00);
+  box-shadow: 0 20px 40px rgba(191, 238, 48, 0.4);
 }
 
 .parallax-btn.inicio-btn:hover {
-  box-shadow: 0 20px 40px #bee34e;
+  box-shadow: 0 20px 40px rgba(191, 238, 48, 0.5);
   transform: translateY(-5px) scale(1.05);
 }
 
@@ -444,9 +262,9 @@ body {
 }
 
 .parallax-btn.inicio-btn.button-icon-effect:hover {
-  color: #f8f9fa !important;
+  color: #0b3d5c;
   transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 20px 40px #bee34e;
+  box-shadow: 0 20px 40px rgba(191, 238, 48, 0.5);
 }
 
 /* Animaciones */
@@ -954,4 +772,17 @@ body {
 
 .sf-blue {
   color: #008fb6 !important;
+}
+
+#contenido {
+  height: 100vh;
+  background: #f8f9fa;
+  margin: 0 auto;
+  width: 100%;
+  align-content: space-around;
+}
+
+p {
+  font-family: 'Futura Bk BT', sans-serif;
+  font-size: 1.2rem;
 }

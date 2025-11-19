@@ -1,3 +1,18 @@
+<!-- <?php 
+  // $CI = require('../../ci_instance.php');
+    require('../../../functions_helpers.php'); /*load helper*/
+    check_session(); /* Comprobar la sesión activa*/
+    $course_code        = $_GET['course_code'];  /* recibir el código del curso */
+
+    $CI->load->model('training/evaluation_model');
+    $fullname = $CI->session->userdata('employee_data')['fullname'];
+    $user_id = $CI->session->userdata('employee_data')['user_id'];
+
+    $unique_course_id   = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
+    $modules_user  = $CI->evaluation_model->get_read_progress_user($unique_course_id, [], [$user_id])[0];
+    $module        = get_course_modules($course_code)[0];
+    $module_id = $module['id'];
+?> -->
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 
@@ -5,6 +20,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SOFACTIA</title>
+    <!-- <title><?= $module['category_name'] ?></title> -->
 
     <link rel="stylesheet" type="text/css" href="./plugins/css/sofactia.css">
 
@@ -17,39 +33,55 @@
     <link rel="stylesheet" href="./plugins/css/inicio.css" type="text/css">
     <link rel="stylesheet" href="./plugins/libs/component/slider/slider-component.css" type="text/css">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alata">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700">
+
 </head>
 
 <body>
     <!-- Parallax Section -->
-    <section class="hero">
-        <div class="contInd img-logo">
-            <img src="./assets/img/logo/logo-blanco.webp" alt="Logo Sofactia" class="left-img">
-            <p class="dx2-v2"><strong>Inducción<br><span class="subtitulo">Corporativa</span></strong>
-            </p>
+    <section class="parallax-container">
+        <!-- Background Video con Parallax -->
+        <div class="parallax-bg bg" id="parallax-bg"></div>
+
+        <!-- Contenido -->
+        <div class="parallax-content">
+            <!-- Logo central -->
+            <div class="parallax-icon">
+                <img src="./assets/img/logo/logo_aris_horizontal_blanco.webp" alt="Logo Sofactia" class="parallax-logo">
+            </div>
+
+            <h1 class="parallax-title">Inducción <br> <strong>Corporativa.</strong></h1>
+            <!-- <h1 class="parallax-subtitle"></h1> -->
+
+            <div class="parallax-buttons">
+                <a href="#contenido" class="parallax-btn inicio-btn button-icon-effect button-icon-flip-x">
+                    <i class="fas fa-arrow-down"></i>
+                    Iniciar
+                </a>
+            </div>
         </div>
 
-        <div class="fd"></div>
+        <!-- Indicador de scroll -->
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 15.5l-6-6h12l-6 6z" />
+            </svg>
+        </div>
 
-
-
-        <a href="#contenido" class="button-1 button-right" role="button" id="btn_index">
-            <span class="button-1-shadow"></span>
-            <span class="button-1-edge"></span>
-            <span class="button-1-front text">
-                <i class="fas fa-hand-point-down"></i> Iniciar
-            </span>
-        </a>
-
-        <div class="waves"></div>
+        <section class="hero">
+            <div class="content">
+            </div>
+            <div class="waves"></div>
+        </section>
     </section>
 
     <!-- Contenido adicional para demostrar el parallax -->
-    <section id="contenido"
-        style="height: 100vh; background: #f8f9fa; margin: 0 auto; width: 100%; align-content: space-around;">
-        <div style="text-align: center;">
+    <section id="contenido">
+        <div class="text-center">
 
             <div class="flex-container">
-                <img src="./assets/img/logo/logo-color.webp" alt="Logo Sofactia" class="parallax-logo">
+                <img src="./assets/img/logo/Logo_aris.webp" alt="Logo Sofactia" class="parallax-logo">
                 <h1 class="sf-txt-1xl text-center sf-blue">Información del curso</h1>
             </div>
 
@@ -64,8 +96,8 @@
                                 <h2>Duración del Curso</h2>
                             </div>
                             <div class="content_inst">
-                                <p>Tiempo online: <span>2 horas</span></p>
-                                <p>Tiempo validado de formación: <span>8 horas</span></p>
+                                <p>Tiempo máximo estimado de duración virtual: <span>1 hora</span></p>
+                                <p>Tiempo asociado a su perfil de formación: <span>1 hora</span></p>
                             </div>
                         </div>
                     </div>
@@ -79,11 +111,9 @@
                                 <h2>Objetivo del curso:</h2>
                             </div>
                             <div class="content_inst">
-                                <p>Identificar, analizar y prevenir los factores de riesgo psicosocial, fomentando un
-                                    entorno organizacional, positivo y favorable para todos.</p>
-                                <br>
-                                <p>Impulsar una cultura de mejora continua, donde cada persona contribuye a su bienestar
-                                    y el de su equipo, para un entorno laboral más equilibrado.</p>
+                                <p><strong> Esta formación será parte fundamental de tu inducción a la compañía,</strong>
+                                    proporcionándote información general de nuestras políticas, procedimientos e
+                                    información clave para tu ingreso</p>
                             </div>
                         </div>
                     </div>
@@ -97,8 +127,10 @@
                                 <h2>Al finalizar usted podrá:</h2>
                             </div>
                             <div class="content_inst">
-                                <p>Identificar y prevenir riesgos psicosociales, fomentando un entorno organizacional,
-                                    positivo y de apoyo para tus compañeros de trabajo y para ti mismo(a).​</p>
+                                <p><i class="fas fa-hand-point-right"></i> Conocer las políticas y procedimientos que se deben cumplir al hacer parte de esta organización.</p>
+                                <p><i class="fas fa-hand-point-right"></i> Obtener información de nuestra cultura organizacional.</p>
+                                <p><i class="fas fa-hand-point-right"></i> Conocer los beneficios que la Compañía ofrece.</p>
+                                <p><i class="fas fa-hand-point-right"></i> Y mucho más.</p>
                             </div>
                         </div>
                         <h2 class="tituloh1-center slider-single-title"></h2>
@@ -114,25 +146,15 @@
                                 <h2>Recomendaciones</h2>
                             </div>
                             <div class="content_inst_reco">
-                                <p><i class="fas fa-book-open"></i> Disponerse a adquirir nuevos conocimientos y
-                                    reforzar los
-                                    existentes para su seguridad.</p>
+                                <p><i class="fas fa-book-open"></i> Asegúrate de disponer del tiempo necesario para completar la formación.</p>
                                 <p><i class="fas fa-clock"></i> Disponer el tiempo mínimo estimado de duración para
                                     tomar este curso.
                                 </p>
                                 <p><i class="fas fa-wifi"></i> Contar con conexión a internet.</p>
-                                <p><i class="fas fa-headphone"></i> Si estás en un lugar abierto, usa audífonos, hay
-                                    audios con
-                                    información valiosa que no te querrás perder.</p>
-                                <p><i class="fas fa-clipboard-check"></i> Realizar todas las actividades de refuerzo y
-                                    repetirlas
-                                    si es
-                                    necesario.</p>
+                                <p><i class="fas fa-headphone"></i> Utilizar audifonos..</p>
+                                <p><i class="fas fa-clipboard-check"></i> Completar todas las actividades de refuerzo.</p>
                                 <p><i class="fas fa-file-alt"></i> No olvides presentar la Evaluación del curso. </p>
-                                <p><i class="fas fa-certificate"></i> Genera tu certificado que acredita que cumpliste
-                                    con el
-                                    curso
-                                    exitosamente.</p>
+                                <p><i class="fas fa-certificate"></i> Al completar el curso recibirás un certificado que acredita la finalización exitosa del mismo.</p>
                             </div>
                         </div>
                         <h2 class="tituloh1-center slider-single-title"></h2>
@@ -143,18 +165,35 @@
             <div class="flex-container">
                 <a href="module/leccion/index.html"
                     class="parallax-btn inicio-btn mt-4 button-icon-effect button-icon-flip-x">
-                    <span class="button-1-front text">
-                        <i class="fas fa-hand-point-right"></i>
-                        Siguiente
-                    </span>
-
+                    <i class="fas fa-arrow-right"></i>
+                    Siguiente
                 </a>
             </div>
         </div>
     </section>
 
     <script src="./plugins/libs/component/slider/slider-component.js"></script>
-    <script src="./plugins/js/parallax-effects.js"></script>
+    <script src="./plugins/libs/component/parallax.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            // Activar el primer tab
+            if (typeof changeTab === 'function') {
+                changeTab(1);
+            } else {
+                setTimeout(function () {
+                    if (typeof changeTab === 'function') {
+                        changeTab(1);
+                    }
+                }, 100);
+            }
+
+            // Reiniciar solo el índice del slider
+            localStorage.setItem('cursoProgreso', JSON.stringify({
+                currentIndex: 0,
+                timestamp: new Date().toISOString()
+            }));
+        });
+    </script>
 </body>
 
 </html>

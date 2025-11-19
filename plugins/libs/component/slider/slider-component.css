@@ -122,7 +122,7 @@
   position: relative;
   left: 50%;
   top: 50%;
-  width: 60%;
+  width: 70%;
   height: 60%;
   transform: translate(-50%, -50%);
 }
@@ -579,11 +579,11 @@
 }
 
 .slider-container .slider-left {
-  left: 14%;
+  left: 11%;
 }
 
 .slider-container .slider-right {
-  right: 14%;
+  right: 11%;
 }
 
 .slider-container .slider-left:hover,

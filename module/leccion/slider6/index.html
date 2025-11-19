@@ -1,45 +1,97 @@
 <section class="row h-100">
-  <div class="animate__animated animate__fadeInLeftBig col-12 sf-bg-dark sf-ct-col">
-
-    <div class="ms-xl-4 mx-xl-0">
-      <h1 class="sf-text-secondary text-center"><span class="sf-text-white">Factores de riesgo psicosocial: condiciones de trabajo
-        </span></h1>
-      <img src="../../assets/img/avatars/avatar_grupal4.webp" alt="avatar"
-        class="sf-img-80 sf-img-sm-60 sf-img-md-40 sf-img-lg-30 mx-auto d-xl-none mb-2" />
-      <p class="sf-text-white text-justify">
-        Los factores de riesgo psicosocial en el trabajo son aquellas condiciones organizacionales y ambientales que
-        pueden
-        afectar la salud de los trabajadores. En el ambiente laboral, estos incluyen espacios inseguros, deficiencias en
-        iluminación y ventilación, exposición a ruidos extremos y falta de medidas de seguridad. Identificarlos es
-        fundamental
-        para prevenir enfermedades profesionales y promover un entorno laboral saludable.
-      </p>
-    </div>
+  <!-- contenedor izquierdo  -->
+  <div class="animate__animated animate__fadeInLeftBig col-12 sf-ct sf-bg-primary">
+    <h1 class="sf-text-white text-center">Ocho políticas <span class="sf-text-secondary">que te cuidan</span>
+    </h1>
+    <!-- <img src="../../../assets/img/avatars/avatar-hombre-brigada.webp" alt="avatar" class="sf-img-1 mx-auto"> -->
+    <p class="text-center sf-text-white">
+      Presentamos las ocho políticas que implementamos en nuestras operaciones para cuidar tu salud y tu vida cada día.
+      Puedes consultarlas también en nuestra página web www.aris-mining.com , en la sección de Gobierno Corporativo.
+    </p>
+    <p class="text-center sf-text-white">
+      Además, te recordamos que en nuestras operaciones de Marmato y Segovia contamos con un Reglamento Interno de
+      Trabajo que garantiza un entorno laboral seguro, justo y respetuoso para todos nuestros colaboradores.
+    </p>
   </div>
-  <div class="animate__animated animate__fadeInRightBig col-lg-12 col-md-12 sf-crp-row">
-    <i class="hipt hipt-light my-3">
-      Escucha con atención cada situación e identifica el Factor de riesgo psicosocial en el ambiente de trabajo a que
-      corresponde:
+  <!-- contenedor derecho  -->
+  <div class="animate__animated animate__fadeInRightBig col-12 sf-center-col sf-cb">
+    <i class="hipt hipt-dark">
+      Haz clic en cada botón para descargar la política
       <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
     </i>
+    <div class="container_card_sld10_politicas">
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-handshake"></i>
+        <p>1. Política de diversidad, equidad, e inclusión</p>
+        <a class="boton_sld10_politicas" href="#" onclick="descargarPDFs()">
+          <i class="fas fa-file-pdf"></i> Descargar políticas
+        </a>
+      </div>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-ban"></i>
+        <p>2. Política contra el soborno y la corrupción</p>
+        <a class="boton_sld10_politicas" href="assets/doc/politica-contra-soborno-corrupcion.pdf"
+          download="2. Política contra el soborno y la corrupción.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
+      </div>
 
-    <!-- Actividad integrada directamente -->
-    <div class="quiz-container-ppt15">
-      <div class="cards-container-ppt15" id="cardsContainer"></div>
-      <div id="validationMessage" class="text-center-ppt15 mt-1" style="display: none;">
-        <p theme="ligth" bold="true" class="bold-text-ppt15">
-          Tus respuestas correctas son: <span id="correctCount">0</span> de <span id="totalQuestions">4</span> (
-          <span id="percentage">0</span>%).
-        </p>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-bullhorn"></i>
+        <p>3. Política de presentación de denuncias</p>
+        <a class="boton_sld10_politicas" href="assets/doc/politica-presentacion-denuncias-inquietudes.pdf"
+          download="3. Política de presentación de denuncias.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
       </div>
-      <div id="feedbackContainer" class="feedback-container-ppt15 mt-1 p-0 rounded-lg text-center"
-        style="display: none;">
-        <p id="feedbackText"></p>
+
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-balance-scale"></i>
+        <p>4. Política de conducta y ética corporativa</p>
+        <a class="boton_sld10_politicas" href="assets/doc/politica-conducta-etica-corporativa.pdf"
+          download="4. Política de conducta y ética corporativa.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
       </div>
-      <div class="reset-button-container-ppt15">
-        <button id="resetButton" class="btn btn sf-btn sf-btn-blue" disabled>
-          <i class="fas fa-sync-alt"></i> Reiniciar
-        </button>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-notes-medical"></i>
+        <p>5. Política de salud y seguridad</p>
+        <a class="boton_sld10_politicas" href="assets/doc/politica-de-salud-seguridad.pdf"
+          download="5. Política de salud y seguridad.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
+      </div>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-file-contract"></i>
+        <p>6. Política código conducta proveedores</p>
+        <a class="boton_sld10_politicas" href="assets/doc/codigo-conducta-proveedores.pdf"
+          download="6. Política código conducta proveedores.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
+      </div>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-globe"></i>
+        <p>7. Política de revelación de información corporativa, redes sociales y
+          negociación</p>
+        <a class="boton_sld10_politicas" href="assets/doc/politica-relevancia-informacion-corporativa.pdf"
+          download="7. Política de revelación de información corporativa, redes sociales y negociación.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
+      </div>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-lock"></i>
+        <p>8. Política de contraseñas - Tecnología</p>
+        <a class="boton_sld10_politicas" href="assets/doc/politica-relevancia-informacion-corporativa.pdf"
+          download="8. Política de contraseñas - Tecnología.pdf">
+          <i class="fas fa-file-pdf"></i> Descargar política
+        </a>
+      </div>
+      <div class="card_sld10_politicas">
+        <i class="icono_sld10_politicas fas fa-file-alt"></i>
+        <p>9. Reglamento interno de trabajo Aris Mining Marmato y Segovia</p>
+        <a class="boton_sld10_politicas" href="#" onclick="descargarPDFs_reglamentos()">
+          <i class="fas fa-file-pdf"></i> Descargar políticas
+        </a>
       </div>
     </div>
   </div>

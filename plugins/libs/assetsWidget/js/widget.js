@@ -861,8 +861,7 @@
 
     function toggleHighlightHeadings() {
         areHeadingsHighlighted = !areHeadingsHighlighted;
-        //var headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, i');
-        var headings = document.querySelectorAll('h1:not(#accessibility-widget *), h2:not(#accessibility-widget *), h3:not(#accessibility-widget *), h4:not(#accessibility-widget *), h5:not(#accessibility-widget *), h6:not(#accessibility-widget *), i:not(#accessibility-widget *)');
+        var headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6, i');
         headings.forEach(function (heading) {
             if (areHeadingsHighlighted) {
                 heading.classList.add('highlighted-heading');
@@ -1079,9 +1078,6 @@
         document.body.style.cursor = '';
 
         window.speechSynthesis.cancel();
-
-        // Remover event listeners
-        document.removeEventListener('keydown', handleKeyboardNavigation);
 
         var checkboxes = document.querySelectorAll('.switch input[type="checkbox"]');
         checkboxes.forEach(function (checkbox) {

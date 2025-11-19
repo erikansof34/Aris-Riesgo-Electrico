@@ -20,8 +20,6 @@ function loadProgress() {
         
         // Verificar si debe habilitar el botón
         checkAllTabsCompleted();
-        
-        console.log('Progreso cargado desde localStorage:', progressData);
     }
 }
 
@@ -32,7 +30,6 @@ function saveProgress() {
         completedAt: visitedTabs.size === 4 ? new Date().toISOString() : null
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(progressData));
-    console.log('Progreso guardado:', progressData);
 }
 
 // Función para actualizar la barra de progreso
@@ -44,8 +41,6 @@ function updateProgressBar() {
 // Función para verificar si todos los tabs están completados
 function checkAllTabsCompleted() {
     if (visitedTabs.size === 4) {
-        console.log("Todos los tabs han sido visitados. Habilitando el botón de inicio.");
-        
         document.getElementById("start-btn").disabled = false;
         document.getElementById("start-btn").classList.add("sf-btn-purple");
         document.getElementById("start-btn").classList.remove("sf-disabled");
@@ -106,8 +101,6 @@ function resetProgress() {
     document.getElementById("start-btn").classList.add("sf-disabled");
     document.getElementById('warning-msg').classList.remove('hidden');
     document.getElementById('success-msg').classList.add('hidden');
-    
-    console.log('Progreso reseteado');
 }
 
 // Al cargar la página
@@ -136,8 +129,6 @@ window.onload = () => {
     
     // Activar el primer tab
     document.getElementById("tab1").classList.add("active");
-    
-    console.log('Página cargada, progreso restaurado');
 };
 
 // Exponer funciones globalmente para debugging

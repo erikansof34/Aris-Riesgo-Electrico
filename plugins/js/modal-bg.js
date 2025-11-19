@@ -72,15 +72,15 @@ document.addEventListener('show.bs.modal', function (e) {
   });
 
   // 2. Reproducir el primer audio dentro del modal (si existe)
-  const firstAudio = modal.querySelector('audio');
-  if (firstAudio) {
-    const playPromise = firstAudio.play();
-    if (playPromise) {
-      playPromise.catch(() => {
-        // Puede fallar por políticas de autoplay si no hubo interacción del usuario
-      });
-    }
-  }
+  // const firstAudio = modal.querySelector('audio');
+  // if (firstAudio) {
+  //   const playPromise = firstAudio.play();
+  //   if (playPromise) {
+  //     playPromise.catch(() => {
+  //       // Puede fallar por políticas de autoplay si no hubo interacción del usuario
+  //     });
+  //   }
+  // }
 });
 
 document.addEventListener('shown.bs.modal', function () {

@@ -22,14 +22,24 @@
 }
 
 /* Media query para dispositivos móviles */
+@media screen and (max-width: 992px) {
+    #transcripcion-global {
+        position: fixed;
+        width: 83%;
+        max-width: 95%;
+        font-size: 16px;
+        /* left: 5%; */
+        margin: 0 auto;
+        white-space: normal;
+    }
+}
+
 @media (max-width: 768px) {
     #transcripcion-global {
         position: fixed;
-        /* Se mantiene fijo al hacer scroll */
-        bottom: 1%;
-        left: 50%;
-        transform: translateX(-50%);
+        /* transform: translateX(0); */
         width: 90%;
+        bottom: 2%;
         max-width: 95%;
         font-size: 16px;
         margin: 0 auto;

@@ -1,3 +1,29 @@
+.headerBars {
+    position: fixed;
+    top: .5rem;
+    right: 1.2rem;
+    background-color: rgb(111, 66, 193);
+    border: none;
+    padding: 14px 16px;
+    border-radius: 50% !important;
+    cursor: pointer;
+    box-shadow: rgba(111, 66, 193, 0.3) 0px 3px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    overflow: hidden;
+    color: rgb(255, 255, 255);
+    font-size: 1.25rem;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+    min-width: 49px;
+    width: 49px;
+    height: 49px;
+    transform: translateY(-1px);
+    z-index: 99;
+}
+
 .headerOpc {
     position: fixed;
     top: 0;
@@ -7,14 +33,10 @@
     height: calc(100vh - 1px);
     background: #fff;
     box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
-    padding: 25px;
+    padding: 40px 25px;
     overflow: auto;
     transition: .5s;
-    z-index: 99;
-}
-
-.headerOpc.act {
-    right: 0;
+    z-index: 1000;
 }
 
 .headerOpc h1 {
@@ -23,11 +45,11 @@
 }
 
 .headerOpc .headerProg {
-    padding: 5px 20px 0;
+    padding: 6px 0;
 }
 
 .headerOpc .headerProg p {
-    margin: 10px;
+    margin: 12px 0
 }
 
 .headerOpc .headerProg p span {
@@ -40,25 +62,23 @@
 .headerOpc ul {
     list-style: none;
     padding: 0;
+    margin-bottom: 0rem;
+    padding: 0;
+}
+
+.headerOpc hr {
+    margin: 0;
 }
 
 .headerOpc ul li {
     background: #fafafa;
     padding: 10px;
     border-radius: 10px;
-    margin: 5px;
+    margin: 5px 0;
 }
 
 .headerOpc ul li:hover {
     background: #e7e7e7;
-}
-
-.headerOpc ul .act li {
-    background: var(--primary30);
-}
-
-.headerOpc ul .act li:hover {
-    filter: grayscale(50%);
 }
 
 .headerOpc .infSof {
@@ -74,10 +94,6 @@
     color: #5e5e5e;
 }
 
-.headerOpc .act i {
-    color: #008fb6;
-}
-
 .headerOpc .fa-times {
     position: absolute;
     top: 20px;
@@ -88,9 +104,10 @@
 .headerOpc h4 {
     color: #008fb6;
     margin-top: 0;
-    margin-bottom: 0.5rem 8px;
+    margin-bottom: 8px;
     font-weight: 500;
     line-height: 1.2;
+    font-size: 0.83em;
 }
 
 @media (max-width: 991px) {
@@ -99,11 +116,42 @@
     }
 }
 
-a {
+.headerOpc.act {
+    right: 0;
+    
+}
+
+.headerOpc ul .act li {
+    background: #e7e7e7;
+    color: #008fb6;
+}
+
+.headerOpc ul .act li:hover {
+    filter: grayscale(50%);
+}
+
+.headerOpc .act i {
+    color: #008fb6;
+}
+
+.headerOpc a {
     font-size: 16px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     line-height: 1.4rem;
     margin: 0;
     margin-bottom: .5rem;
+    all: unset;          /* Resetea todo */
+    cursor: pointer;     /* Mantiene el cursor de link */
+}
+
+.headerOpc a:hover  {
+    text-decoration: none;
+    background: #e7e7e7;
+    color: #008fb6;
+}
+
+.headerOpc a:hover li i {
+    background: #e7e7e7;
+    color: #008fb6;
 }

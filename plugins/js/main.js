@@ -11,7 +11,6 @@ let slideActualEnMomento = 1;
 
 const sliders = [
   { router: 'slider1', momento: 1 },
-  { router: 'slider10', momento: 1 },
   { router: 'slider2', momento: 1 },
   { router: 'slider3', momento: 1 },
   { router: 'slider4', momento: 1 },
@@ -20,23 +19,18 @@ const sliders = [
   { router: 'slider7', momento: 1 },
   { router: 'slider8', momento: 1 },
   { router: 'slider9', momento: 1 },
-  // { router: 'slider10', momento: 1 },
+  { router: 'slider10', momento: 1 },
   { router: 'slider11', momento: 1 },
   { router: 'slider12', momento: 1 },
-  { router: 'slider13', momento: 1 },
-  { router: 'slider14', momento: 1 },
-  { router: 'slider15', momento: 1 },
-  { router: 'slider16', momento: 2 },
-  { router: 'slider17', momento: 2 },
-  { router: 'slider18', momento: 2 },
-  { router: 'slider19', momento: 3 },
-  { router: 'slider20', momento: 3 },
-  { router: 'slider22', momento: 3 },
-  { router: 'slider21', momento: 3 },
-  { router: 'slider23', momento: 3 },
-  { router: 'slider24', momento: 3 }
-
 ];
+
+// const course_code = localStorage.getItem('COURSE_CODE');
+// // Configuración de navegación entre páginas
+// const configuracionNavegacion = {
+//   paginaAnterior: '../../index.php?course_code=' + course_code,  // Página anterior
+//   paginaSiguiente: '../evaluacion/quiz.php?course_code=' + course_code,         // Página siguiente
+//   mostrarConfirmacion: false                      // Mostrar confirmación antes de navegar
+// };
 
 // Configuración de navegación entre páginas
 const configuracionNavegacion = {
@@ -164,20 +158,9 @@ function guardarProgreso(momentoId, slide) {
   // Actualizar el progreso del momento actual
   progreso[momentoId] = Math.max(progreso[momentoId] || 0, slide);
   progreso.currentIndex = currentIndex;
-  // Guardar el índice máximo alcanzado para restricciones de navegación
-  progreso.maxIndexAlcanzado = Math.max(progreso.maxIndexAlcanzado || 0, currentIndex);
   progreso.timestamp = new Date().toISOString();
 
   localStorage.setItem('cursoProgreso', JSON.stringify(progreso));
-}
-
-// Función para verificar si el usuario puede acceder a un slide específico
-function puedeAccederASlide(targetIndex) {
-  const progreso = JSON.parse(localStorage.getItem('cursoProgreso') || '{}');
-  const maxIndexAlcanzado = progreso.maxIndexAlcanzado || 0;
-  
-  // Puede acceder a cualquier slide hasta el máximo alcanzado
-  return targetIndex <= maxIndexAlcanzado;
 }
 
 // Función para cargar progreso guardado
@@ -185,11 +168,6 @@ function cargarProgresoGuardado() {
   try {
     const progreso = JSON.parse(localStorage.getItem('cursoProgreso') || '{}');
     currentIndex = Math.min(progreso.currentIndex || 0, sliders.length - 1);
-    // Asegurar que maxIndexAlcanzado esté inicializado
-    if (!progreso.maxIndexAlcanzado && progreso.maxIndexAlcanzado !== 0) {
-      progreso.maxIndexAlcanzado = currentIndex;
-      localStorage.setItem('cursoProgreso', JSON.stringify(progreso));
-    }
     return currentIndex > 0;
   } catch (error) {
     currentIndex = 0;
@@ -209,6 +187,12 @@ async function loadSlider(index) {
 
     const html = await fetch(`../../module/leccion/${router}/index.html`).then(res => res.text());
     container.innerHTML = html;
+
+    // Sincronizar idioma de audios y transcripciones después de cargar el slider
+    setTimeout(function () {
+      if (typeof setTranscripcionIdioma === 'function') setTranscripcionIdioma();
+      if (typeof setAudioSourcesIdioma === 'function') setAudioSourcesIdioma();
+    }, 100);
 
     // Cargar nuevo CSS
     const cssLink = document.createElement('link');
@@ -287,14 +271,13 @@ function limpiarTimersActivos() {
   }
 }
 
+// ================== ANTERIOR SLIDER ==================
 window.prevSlide = () => {
   if (currentIndex > 0) {
     const indexAnterior = currentIndex;
     currentIndex--;
-
     // Detectar cambio de momento
     detectarCambioMomento(indexAnterior, currentIndex);
-
     loadSlider(currentIndex);
   } else {
     // Estamos en el primer slide, ir a página anterior
@@ -302,31 +285,19 @@ window.prevSlide = () => {
   }
 };
 
+// ================== SIGUIENTE SLIDER  ==================
 window.nextSlide = () => {
   if (currentIndex < sliders.length - 1) {
     const indexAnterior = currentIndex;
     currentIndex++;
-
     // Detectar cambio de momento
     detectarCambioMomento(indexAnterior, currentIndex);
-
     loadSlider(currentIndex);
   } else {
     // Estamos en el último slide, ir a página siguiente
     navegarAPaginaSiguiente();
   }
 };
-
-// Función auxiliar para verificar si el slide actual es de sección 1, 2 o 3
-function isDisabledEvaluationSection(index) {
-  if (index < 0 || index >= sliders.length) return false;
-  
-  const slider = sliders[index];
-  const momento = slider.momento;
-  
-  // Secciones 1, 2 y 3 corresponden a momentos 1, 2 y 3
-  return momento === 1 || momento === 2 || momento === 3;
-}
 
 // Función para pausar elementos multimedia
 function pausarElementosMultimedia() {
@@ -339,17 +310,11 @@ function pausarElementosMultimedia() {
 window.progCircle = (slideNumber, plataforma = 0) => {
   pausarElementosMultimedia();
   const targetIndex = slideNumber - 1;
-  
-  // Verificar si el usuario puede acceder a este slide
-  if (!puedeAccederASlide(targetIndex)) {
-    return; // No permitir navegación
-  }
-  
   if (targetIndex >= 0 && targetIndex < sliders.length) {
     currentIndex = targetIndex;
     loadSlider(currentIndex);
     actualizarCirculosProgreso();
-    actualizarDropdownSliderMenuActivo();
+    actualizarDropdownSliderMenuActivo(); // <-- Agregado aquí
   }
 };
 
@@ -383,7 +348,7 @@ function createProgCircle() {
   }
 }
 
-// Función para actualizar círculos de progreso
+// ================== FUNCIÓN BOTONES DE PANTALLA GRANDES PARA PASAR SLIDER  ==================
 function actualizarCirculosProgreso() {
   const slideNumber = currentIndex + 1;
   const allCircles = document.querySelectorAll('.contCircleBar span, .contCircleBarMovil span');
@@ -391,16 +356,6 @@ function actualizarCirculosProgreso() {
   allCircles.forEach((span, index) => {
     span.classList.remove('current', 'current2');
     const circleNumber = index < sliders.length ? index + 1 : (index - sliders.length) + 1;
-    const targetIndex = circleNumber - 1;
-
-    // Actualizar accesibilidad dinámicamente
-    if (puedeAccederASlide(targetIndex)) {
-      span.style.cursor = 'pointer';
-      span.style.opacity = '1';
-    } else {
-      span.style.cursor = 'not-allowed';
-      span.style.opacity = '0.5';
-    }
 
     if (circleNumber < slideNumber) {
       span.classList.add('current2');
@@ -410,32 +365,13 @@ function actualizarCirculosProgreso() {
   });
 }
 
+// ================== FUNCIÓN BOTONES DE MOVILES PARA PASAR SLIDER  ==================
 function actualizarDropdownSliderMenuActivo() {
   const slideNumber = currentIndex + 1;
   const dots = document.querySelectorAll('#dropdownSliderMenu .dropdown-oval-dot');
-  const listItems = document.querySelectorAll('#dropdownSliderMenu li');
 
   dots.forEach((dot, index) => {
     dot.classList.remove('current', 'current2', 'active');
-    const li = listItems[index];
-    
-    // Actualizar accesibilidad dinámicamente
-    if (puedeAccederASlide(index)) {
-      if (li) {
-        li.style.cursor = 'pointer';
-        li.onclick = () => {
-          document.getElementById('dropdownSliderMenu').style.display = 'none';
-          progCircle(index + 1, 1);
-        };
-      }
-      dot.style.opacity = '1';
-    } else {
-      if (li) {
-        li.style.cursor = 'not-allowed';
-        li.onclick = null;
-      }
-      dot.style.opacity = '0.5';
-    }
 
     const circleNumber = index < sliders.length ? index + 1 : (index - sliders.length) + 1;
 
@@ -444,6 +380,10 @@ function actualizarDropdownSliderMenuActivo() {
     } else if (circleNumber === slideNumber) {
       dot.classList.add('active');
     }
+
+    // if (index === currentIndex) {
+    //   dot.classList.add('active');
+    // }
   });
 }
 
@@ -460,14 +400,15 @@ function crearDropdownSliderMovil() {
   sliders.forEach((slider, idx) => {
     const li = document.createElement('li');
     li.className = 'list-group-item border-0 bg-transparent p-0 m-0';
-    li.style.cursor = 'pointer';
-    
     // Punto ovalado
     const punto = document.createElement('span');
     punto.className = 'dropdown-oval-dot';
     if (idx === currentIndex) punto.classList.add('active');
-    
     li.appendChild(punto);
+    li.onclick = () => {
+      dropdown.style.display = 'none';
+      progCircle(idx + 1, 1);
+    };
     ul.appendChild(li);
   });
   dropdown.appendChild(ul);
@@ -539,7 +480,7 @@ function loadIframe({ id, src, srcMobile, className = '', style = '', styleMobil
   const finalSrc = isMobile && srcMobile ? srcMobile : src;
   const finalStyle = isMobile && styleMobile ? styleMobile : style;
 
-  const loader = container.querySelector(".loader");
+  const loader = container.querySelector(".c-loader");
   const existingIframe = container.querySelector("iframe");
 
   if (loader) loader.style.display = "block";
@@ -565,7 +506,7 @@ function loadIframe({ id, src, srcMobile, className = '', style = '', styleMobil
     existingIframe.addEventListener("load", function () {
       if (loader) loader.style.display = "none";
       existingIframe.style.opacity = "1";
-      setTimeout(() => adjustIframeHeight(existingIframe), 500);
+      setTimeout(() => adjustIframeHeight(existingIframe), 800);
     }, { once: true });
   } else {
     const iframe = document.createElement("iframe");
@@ -579,251 +520,12 @@ function loadIframe({ id, src, srcMobile, className = '', style = '', styleMobil
     iframe.style = `opacity: 0; transition: opacity 0.5s; min-width: 300px; ${finalStyle}`;
     iframe.addEventListener("load", function () {
       if (loader) loader.style.display = "none";
-      iframe.style.opacity = "1";
-      setTimeout(() => adjustIframeHeight(iframe), 500);
+      iframe.style = `opacity: 1; transition: opacity 0.5s; min-width: 300px; ${finalStyle}`;
+      setTimeout(() => adjustIframeHeight(iframe), 800);
     });
     container.appendChild(iframe);
   }
 }
-
-// ========================= SISTEMA DE MODALES DINÁMICOS =========================
-
-/**
- * Detecta si el dispositivo es móvil basado en el ancho de pantalla y user agent
- * @returns {boolean} true si es dispositivo móvil
- */
-function isMobile() {
-  return (
-    window.innerWidth <= 768 ||
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    )
-  );
-}
-
-/**
- * Crea el elemento modal dinámicamente (función interna)
- * @param {string} slideId - ID del slide
- * @param {Object} config - Configuración del modal
- * @returns {HTMLElement|null} El modal creado o null si hay error
- */
-function createModal(slideId, config) {
-  const modalContainer = document.getElementById(
-    `modalContainer${slideId.charAt(0).toUpperCase() + slideId.slice(1)}`
-  );
-
-  if (!modalContainer) {
-    return null;
-  }
-
-  const modal = document.createElement("div");
-  modal.className = `modal-common modal-${config.modalSize}`;
-
-  modal.innerHTML = `
-        <div class="modal-content-common">
-            <div class="modal-content-header sf-bg-dark">
-                <div class="modal-title">
-                    <h2 class="sf-text-white"></h2>
-                </div>
-                <span class="close">&times;</span>
-            </div>
-            <div class="modal-body">
-                <div class="loader spinner-pulse"></div>
-                <div class="iframe-container"></div>
-            </div>
-        </div>
-    `;
-
-  modalContainer.appendChild(modal);
-  return modal;
-}
-
-/**
- * Abre un modal configurado previamente (función interna)
- * @param {string} slideId - ID del slide
- * @param {Object} config - Configuración del modal
- */
-function openModal(slideId, config) {
-  // Ocultar navegación inmediatamente
-  const navContainer = document.querySelector('.btn-navigation-container-2');
-  if (navContainer) {
-    navContainer.style.display = 'none';
-  }
-
-  // Agregar clase al body
-  document.body.classList.add('modal-active');
-
-  const modal = createModal(slideId, config);
-  if (!modal) return;
-
-  const title = modal.querySelector(".modal-title h2");
-  const loader = modal.querySelector(".loader");
-  const iframeContainer = modal.querySelector(".iframe-container");
-  const closeBtn = modal.querySelector(".close");
-
-  // Configurar título según dispositivo
-  title.textContent = isMobile() && config.titleMobile ? config.titleMobile : config.title;
-
-  // Mostrar loader
-  loader.classList.remove('hidden');
-
-  // Crear iframe
-  const iframe = document.createElement("iframe");
-  iframe.style.width = "100%";
-  iframe.style.height = isMobile() ? config.mobileHeight : config.desktopHeight;
-  iframe.style.border = "none";
-  iframe.style.opacity = "0";
-  iframe.style.transition = "opacity 0.3s";
-  iframe.setAttribute("allowfullscreen", "true");
-  iframe.setAttribute("scrolling", "no");
-  iframe.setAttribute("frameborder", "0");
-
-  // Variable para controlar el estado del loader
-  let loaderHidden = false;
-
-  // Función para ocultar loader (solo una vez)
-  const hideLoader = () => {
-    if (!loaderHidden) {
-      loaderHidden = true;
-      loader.classList.add('hidden');
-      iframe.style.opacity = "1";
-    }
-  };
-
-  // Agregar iframe al contenedor PRIMERO
-  iframeContainer.appendChild(iframe);
-
-  // DESPUÉS configurar el evento load y el src
-  iframe.addEventListener("load", function () {
-    hideLoader();
-  });
-
-  // También escuchar cuando el iframe esté completamente listo
-  iframe.addEventListener("DOMContentLoaded", function () {
-    hideLoader();
-  });
-
-  // Delay de 8 segundos antes de empezar a cargar el iframe
-  setTimeout(() => {
-    // Configurar src después del delay para que se dispare el load
-    iframe.src = isMobile() ? config.mobileSrc : config.desktopSrc;
-  }, 3000); // Delay de 8 segundos
-
-  // Timeout de seguridad (pero que no interfiera con el evento load normal)
-  setTimeout(() => {
-    if (!loaderHidden) {
-      loaderHidden = true;
-      loader.classList.add('hidden');
-      // Solo mostrar mensaje de error si realmente no se cargó
-      if (iframe.style.opacity === "0") {
-        iframeContainer.innerHTML = "<p>El contenido está tardando demasiado en cargar...</p>";
-      }
-    }
-  }, 23000); // Aumentado a 23 segundos (8 segundos de delay + 15 segundos de timeout)
-
-  // Función de cierre mejorada
-  const customCloseModal = () => {
-    closeModal(modal);
-    // Mostrar navegación al cerrar
-    if (navContainer) {
-      navContainer.style.display = 'flex';
-    }
-    // Remover clase del body
-    document.body.classList.remove('modal-active');
-  };
-
-  // Eventos de cierre (sin duplicados)
-  closeBtn.addEventListener("click", customCloseModal, { once: true });
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) customCloseModal();
-  }, { once: true });
-
-  // Animación de entrada
-  modal.classList.add("fade-in");
-}
-
-/**
- * Cierra un modal con animación (función interna)
- * @param {HTMLElement} modal - El elemento modal a cerrar
- */
-function closeModal(modal) {
-  modal.classList.remove("fade-in");
-  modal.classList.add("fade-out");
-  setTimeout(() => {
-    modal.remove();
-  }, 300);
-}
-
-// Función similar a loadIframe pero para modales
-/**
- * Función principal para crear modales dinámicos con iframes
- * Se usa en los sliders para cargar actividades interactivas
- * Ejemplo de uso:
- * loadModalIframe({
- *   id: "Slide25WebActivity",
- *   src: "../../actividades/actividad_dragandrop_ordenar_nom035/index.html",
- *   title: "Protocolo de Atención ATS",
- *   titleMobile: "Protocolo ATS",
- *   mobileHeight: '69vh',
- *   desktopHeight: '76vh',
- *   modalSize: 'large'
- * });
- */
-function loadModalIframe({ id, src, title, titleMobile, mobileHeight = '69vh', desktopHeight = '76vh', modalSize = 'large', buttonId, mobileSrc, desktopSrc }) {
-  // Usar src para ambos si no se especifican mobileSrc/desktopSrc
-  const finalMobileSrc = mobileSrc || src;
-  const finalDesktopSrc = desktopSrc || src;
-  const finalTitle = title || 'Actividad Interactiva';
-  const finalButtonId = buttonId || `modalButton_${id}`;
-
-  // Configuración del modal (local, no global)
-  const config = {
-    buttonId: finalButtonId,
-    title: finalTitle,
-    titleMobile: titleMobile || finalTitle,
-    mobileSrc: finalMobileSrc,
-    desktopSrc: finalDesktopSrc,
-    mobileHeight,
-    desktopHeight,
-    modalSize
-  };
-
-  // Buscar el contenedor donde debería estar el botón
-  const container = document.getElementById(id);
-  if (!container) {
-    return;
-  }
-
-  // Crear botón si no existe
-  let button = document.getElementById(finalButtonId);
-  if (!button) {
-    button = document.createElement('button');
-    button.id = finalButtonId;
-    button.className = 'btn btn-primary btn-lg sf-btn-primary';
-    button.innerHTML = `<i class="fas fa-play-circle me-2"></i>${finalTitle}`;
-
-    // Limpiar contenedor y agregar botón
-    container.innerHTML = '';
-    container.appendChild(button);
-
-    // Crear contenedor del modal
-    const modalContainer = document.createElement('div');
-    modalContainer.id = `modalContainer${id.charAt(0).toUpperCase() + id.slice(1)}`;
-    container.appendChild(modalContainer);
-  }
-
-  // Asignar evento al botón solo si no lo tiene ya
-  if (!button.hasAttribute('data-modal-initialized')) {
-    button.addEventListener("click", () => openModal(id, config));
-    button.setAttribute('data-modal-initialized', 'true');
-    console.log(`🎯 Modal ${id} configurado con loadModalIframe`);
-  } else {
-    console.log(`⚠️ Modal ${id} ya estaba inicializado`);
-  }
-}
-
-// Exportar función principal globalmente para uso en sliders
-window.loadModalIframe = loadModalIframe;
 
 function actualizarPosicionNavegacion() {
   // Solo ejecutar en pantallas menores a 992px de ancho
@@ -853,11 +555,9 @@ function actualizarPosicionNavegacion() {
   if (visible) {
     nav.classList.add('btn-navigation-fixed-bottom');
     header.classList.add('sf-bg-transparent');
-    console.log("🎯 Header y navegación actualizados");
   } else {
     nav.classList.remove('btn-navigation-fixed-bottom');
     header.classList.remove('sf-bg-transparent');
-    console.log("🎯 Header y navegación actualizado s");
   }
   if (window.innerWidth >= 992) {
     const nav = document.querySelector('.btn-navigation-container');
@@ -935,7 +635,7 @@ window.loadSlider = async function (index) {
   setTimeout(actualizarBotonesNavegacion, 5);
 };
 
-// boton hacia abajo 
+// ================== FUNCIÓN BOTON HACIA ABAJO  ==================
 function controlarVisibilidadHaciaAbajo() {
   const btnAbajo = document.getElementById('btnParallaxMobile');
   if (!btnAbajo) return;
@@ -999,4 +699,70 @@ document.getElementById('btnParallaxMobile')?.addEventListener('click', function
       behavior: 'smooth'
     });
   }
+});
+
+// ================== MÉTODOS DE IDIOMA PARA AUDIOS Y TRANSCRIPCIONES ==================
+function setTranscripcionIdioma() {
+  var idioma = localStorage.getItem('audioIdioma') || 'es';
+  var audios = document.querySelectorAll('audio.audio-con-transcripcion');
+  audios.forEach(function (audio) {
+    var transcripcion = audio.getAttribute('data-transcripcion-' + idioma);
+    if (transcripcion) {
+      audio.setAttribute('data-transcripcion', transcripcion);
+    }
+  });
+}
+
+function setAudioSourcesIdioma() {
+  var idioma = localStorage.getItem('audioIdioma') || 'es';
+  var audios = document.querySelectorAll('audio.lang-audio');
+  audios.forEach(function (audio) {
+    var source = audio.querySelector('source');
+    if (source) {
+      var srcBase = source.getAttribute('data-base') || source.src;
+      if (!source.getAttribute('data-base')) {
+        var parts = srcBase.split('/');
+        var fileName = parts[parts.length - 1];
+        source.setAttribute('data-base', fileName);
+        srcBase = fileName;
+      }
+      // Regex más flexible para cualquier carpeta
+      var pathMatch = source.src.match(/(.+\/audio\/)(es|en)\//);
+      var newSrc = '';
+      if (pathMatch) {
+        newSrc = pathMatch[1] + idioma + '/' + source.getAttribute('data-base');
+      } else {
+        newSrc = '../../assets/audio/' + idioma + '/' + source.getAttribute('data-base');
+      }
+      source.src = newSrc;
+      audio.load();
+    }
+  });
+}
+
+// Eventos para sincronizar idioma
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleSwitch = document.getElementById('toggleSwitch');
+  if (!toggleSwitch) return;
+  const label = document.querySelector('.toggle-label.english-miga-2');
+  const label2 = document.querySelector('.toggle-label.english-miga-1');
+  let idioma = localStorage.getItem('audioIdioma');
+  if (!idioma) idioma = localStorage.getItem('audioIdioma');
+  toggleSwitch.checked = (idioma === 'en');
+  label.textContent = (idioma === 'en') ? 'English Hints' : 'English Hints';
+  toggleSwitch.addEventListener('change', function () {
+    if (toggleSwitch.checked) {
+      localStorage.setItem('audioIdioma', 'en');
+      label.textContent = 'English Hints';
+      label2.textContent = 'EN';
+    } else {
+      localStorage.setItem('audioIdioma', 'es');
+      label.textContent = 'English Hints';
+      label2.textContent = 'ES';
+    }
+    setAudioSourcesIdioma();
+    setTranscripcionIdioma();
+  });
+  setAudioSourcesIdioma();
+  setTranscripcionIdioma();
 });

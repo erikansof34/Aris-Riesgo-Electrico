@@ -1,47 +1,7 @@
-/* Estilos para la sección y la imagen de fondo */
-.slide {
-    padding: 20px;
-    background-color: #ea1111;
-}
-
-/* Clase personalizada para el fondo de imagen */
-.sf-bg-image {
-    background-image: url('../slider10/img/recuerda_sld5.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-}
-
-/* Asegurar que el contenido se muestre correctamente sobre la imagen */
-.sf-bg-image .position-relative {
-    z-index: 2;
-}
-
-/* Overlay para mejorar la legibilidad del botón */
-.sf-bg-image::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-}
-
-.sf-text-container {
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Ajustes responsivos */
-@media (max-width: 991.98px) {
-    .sf-bg-image {
-        min-height: 300px;
-        /* Altura mínima en dispositivos móviles */
-    }
+.background-sld1 {
+  position: relative;
+  background-image: url(./img/colllage_sld21.webp);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
 }

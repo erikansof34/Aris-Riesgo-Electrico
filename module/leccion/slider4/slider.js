@@ -31,8 +31,6 @@ export function init() {
   let isValidated = false;
   let selectedPositions = {};
   let draggedItem = null;
-  let dragOverItem = null;
-  let isDragging = false;
 
   // Inicializar la actividad
   function initActivity() {
@@ -78,15 +76,13 @@ export function init() {
 
     const letterImage = document.createElement('img');
     letterImage.className = 'letter-image-nom035';
-    letterImage.src = `../../assets/img/${item.image}`;
+    letterImage.src = `./slider4/img/${item.image}`;
     letterImage.alt = `Letra ${item.letter}`;
-    letterImage.draggable = false; // Evitar que la imagen sea arrastrable
 
     letterContainer.appendChild(letterImage);
     itemElement.appendChild(letterContainer);
 
     container.appendChild(itemElement);
-    return itemElement;
   }
 
   // Configurar drag and drop
@@ -98,13 +94,7 @@ export function init() {
       item.addEventListener('dragover', handleDragOver);
       item.addEventListener('drop', handleDrop);
       item.addEventListener('dragend', handleDragEnd);
-      item.addEventListener('dragenter', handleDragEnter);
       item.addEventListener('dragleave', handleDragLeave);
-
-      // Eventos táctiles para dispositivos con pantalla táctil
-      item.addEventListener('touchstart', handleTouchStart, { passive: false });
-      item.addEventListener('touchmove', handleTouchMove, { passive: false });
-      item.addEventListener('touchend', handleTouchEnd);
     });
   }
 
@@ -112,189 +102,47 @@ export function init() {
   function handleDragStart(e) {
     draggedItem = this;
     e.dataTransfer.effectAllowed = 'move';
-    e.dataTransfer.setData('text/plain', this.dataset.id);
-
-    // Añadir clase de arrastre después de un pequeño retraso
-    setTimeout(() => {
-      this.classList.add('dragging');
-      isDragging = true;
-    }, 0);
-
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    setTimeout(() => this.classList.add('dragging'), 0);
     hasInteraction = true;
     validateBtn.disabled = false;
-  }
-
-  function handleDragEnter(e) {
-    e.preventDefault();
-    if (this !== draggedItem && isDragging) {
-      this.classList.add('drag-over');
-      dragOverItem = this;
-    }
   }
 
   function handleDragOver(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
-
-    if (this !== draggedItem && isDragging) {
-      const rect = this.getBoundingClientRect();
-      const midX = rect.left + rect.width / 2;
-
-      // Determinar si está a la izquierda o derecha para el efecto visual
-      if (e.clientX > midX) {
-        this.classList.add('drag-over-right');
-        this.classList.remove('drag-over-left');
-      } else {
-        this.classList.add('drag-over-left');
-        this.classList.remove('drag-over-right');
-      }
-    }
+    this.style.border = '2px dashed #ccc';
   }
 
   function handleDragLeave() {
-    if (isDragging) {
-      this.classList.remove('drag-over', 'drag-over-left', 'drag-over-right');
-      if (this === dragOverItem) {
-        dragOverItem = null;
-      }
-    }
+    this.style.border = '2px solid #ddd';
   }
 
   function handleDrop(e) {
     e.stopPropagation();
     e.preventDefault();
 
-    if (!isDragging || !draggedItem) return;
-
-    // Limpiar todas las clases de arrastre
     const items = desktopContainer.querySelectorAll('.sortable-item-nom035');
     items.forEach(item => {
-      item.classList.remove('drag-over', 'drag-over-left', 'drag-over-right');
+      item.style.border = '2px solid #ddd';
     });
 
-    if (draggedItem && this !== draggedItem) {
-      // Intercambiar posiciones
-      const allItems = Array.from(desktopContainer.children);
-      const draggedIndex = allItems.indexOf(draggedItem);
-      const targetIndex = allItems.indexOf(this);
-
-      if (draggedIndex < targetIndex) {
-        desktopContainer.insertBefore(draggedItem, this.nextSibling);
-      } else {
-        desktopContainer.insertBefore(draggedItem, this);
-      }
-
+    if (draggedItem !== this) {
+      desktopContainer.insertBefore(draggedItem, this);
       updateCurrentItems();
     }
 
-    dragOverItem = null;
     return false;
   }
 
   function handleDragEnd() {
-    isDragging = false;
     this.classList.remove('dragging');
-
-    // Limpiar todas las clases de arrastre
-    const items = desktopContainer.querySelectorAll('.sortable-item-nom035');
-    items.forEach(item => {
-      item.classList.remove('drag-over', 'drag-over-left', 'drag-over-right');
-    });
-
     draggedItem = null;
-    dragOverItem = null;
-  }
 
-  // Manejo de eventos táctiles
-  function handleTouchStart(e) {
-    e.preventDefault();
-    draggedItem = this;
-    this.classList.add('dragging');
-    isDragging = true;
-    hasInteraction = true;
-    validateBtn.disabled = false;
-
-    // Obtener la posición inicial del touch
-    const touch = e.touches[0];
-    this.startX = touch.clientX;
-    this.startY = touch.clientY;
-    this.initialIndex = Array.from(desktopContainer.children).indexOf(this);
-  }
-
-  function handleTouchMove(e) {
-    if (!isDragging) return;
-    e.preventDefault();
-
-    const touch = e.touches[0];
-    const deltaX = touch.clientX - this.startX;
-    const deltaY = touch.clientY - this.startY;
-
-    // Mover el elemento con el dedo
-    this.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-    this.style.zIndex = '1000';
-
-    // Detectar sobre qué elemento estamos
-    const elements = document.elementsFromPoint(touch.clientX, touch.clientY);
-    const overItem = elements.find(el => el.classList.contains('sortable-item-nom035') && el !== draggedItem);
-
-    // Limpiar clases anteriores
     const items = desktopContainer.querySelectorAll('.sortable-item-nom035');
     items.forEach(item => {
-      if (item !== draggedItem) {
-        item.classList.remove('drag-over', 'drag-over-left', 'drag-over-right');
-      }
+      item.style.border = '2px solid #ddd';
     });
-
-    // Aplicar clase al elemento sobre el que estamos
-    if (overItem) {
-      overItem.classList.add('drag-over');
-
-      const overRect = overItem.getBoundingClientRect();
-      const overMidX = overRect.left + overRect.width / 2;
-
-      if (touch.clientX > overMidX) {
-        overItem.classList.add('drag-over-right');
-      } else {
-        overItem.classList.add('drag-over-left');
-      }
-
-      dragOverItem = overItem;
-    } else {
-      dragOverItem = null;
-    }
-  }
-
-  function handleTouchEnd(e) {
-    if (!isDragging) return;
-
-    this.style.transform = '';
-    this.style.zIndex = '';
-    this.classList.remove('dragging');
-
-    // Si hay un elemento sobre el que soltamos, intercambiar posiciones
-    if (dragOverItem) {
-      const allItems = Array.from(desktopContainer.children);
-      const draggedIndex = allItems.indexOf(draggedItem);
-      const targetIndex = allItems.indexOf(dragOverItem);
-
-      if (draggedIndex < targetIndex) {
-        desktopContainer.insertBefore(draggedItem, dragOverItem.nextSibling);
-      } else {
-        desktopContainer.insertBefore(draggedItem, dragOverItem);
-      }
-
-      updateCurrentItems();
-    }
-
-    // Limpiar todas las clases de arrastre
-    const items = desktopContainer.querySelectorAll('.sortable-item-nom035');
-    items.forEach(item => {
-      item.classList.remove('drag-over', 'drag-over-left', 'drag-over-right');
-    });
-
-    isDragging = false;
-    draggedItem = null;
-    dragOverItem = null;
   }
 
   // Actualizar currentItems
@@ -319,7 +167,7 @@ export function init() {
 
       const letterImage = document.createElement('img');
       letterImage.className = 'letter-image-nom035';
-      letterImage.src = `../../assets/img/${item.image}`;
+      letterImage.src = `./slider4/img/${item.image}`;
       letterImage.alt = `Letra ${item.letter}`;
 
       imageItem.appendChild(letterImage);
@@ -408,7 +256,7 @@ export function init() {
         if (letter) {
           const img = document.createElement('img');
           img.className = 'slot-image-nom035';
-          img.src = `../../assets/img/${letter.image}`;
+          img.src = `./slider4/img/${letter.image}`;
           img.alt = `Letra ${letter.letter}`;
           slot.appendChild(img);
         }

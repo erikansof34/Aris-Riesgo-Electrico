@@ -1,0 +1,144 @@
+/* Estilos para el div en el lado izquierdo */
+.english-hints {
+  /* Estilo específico para el texto "English Hints" */
+  color: #fff;
+  /* Verde manzana (puedes cambiar el color según tu preferencia) */
+  font-size: 16px;
+  /* Tamaño de fuente (ajústalo según tus preferencias) */
+  font-weight: bold;
+  /* Fuente en negrita */
+  font-family: "Arial", sans-serif;
+  /* Cambia la fuente si lo deseas */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  /* Sombra sutil */
+}
+
+.container2 {
+  display: inline-flex;
+  float: left;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.toggle-label {
+  display: inline-block;
+  text-align: left;
+  margin-left: 10px;
+}
+
+@media (max-width: 991px) {
+  .container2 {
+    padding: 0px;
+    display: inline-flex;
+    float: left;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .english-hints {
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Arial", sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .toggle-label {
+    display: inline-block;
+    text-align: center;
+  }
+
+  .rowcards>.col-1-of-3 {
+    width: 100%;
+    margin-bottom: 100px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
+
+.container3 {
+  width: 250px;
+  padding: 5px;
+  display: inline-flex;
+  float: left;
+}
+
+.toggle-switch {
+  width: 31px;
+  height: 18px;
+  position: relative;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-bottom: 0;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  cursor: pointer;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 15px;
+  left: 2.5px;
+  bottom: 1.2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.5s;
+}
+
+.toggle-switch input:checked+.slider {
+  background-color: #089b62;
+}
+
+.toggle-switch input:checked+.slider:before {
+  transform: translateX(11px);
+}
+
+.center-media {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 3%;
+}
+
+@media (min-width: 992px) {
+  .toggle-switch {
+    width: 50px;
+    height: 24px;
+    position: relative;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-bottom: 0;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 17px;
+    width: 17px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.5s;
+  }
+
+  .toggle-switch input:checked+.slider:before {
+    transform: translateX(26px);
+  }
+}

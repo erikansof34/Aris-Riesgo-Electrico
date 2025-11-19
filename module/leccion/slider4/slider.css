@@ -21,13 +21,12 @@
   position: relative;
   z-index: 1;
   margin-bottom: 1.25rem;
-  min-height: 12rem;
 }
 
 .sortable-item-nom035 {
   cursor: grab;
   user-select: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
   position: relative;
   background-color: white;
   border: 0.125rem solid #ddd;
@@ -40,30 +39,20 @@
   box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.1);
 }
 
-.sortable-item-nom035:hover {
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
-}
-
-.sortable-item-nom035.dragging {
-  z-index: 100;
-  transform: scale(1.05);
-  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.2);
+.sortable-item-nom035:active {
   cursor: grabbing;
-}
-
-.sortable-item-nom035.drag-over {
-  border: 0.125rem dashed #4a90e2;
-  background-color: #f0f8ff;
+  position: relative;
+  z-index: 10;
 }
 
 .sortable-item-nom035.correct-item-nom035 {
   border: 0.125rem solid #4CAF50;
-  background-color: #e8f5e9;
+  background-color: #4CAF50;
 }
 
 .sortable-item-nom035.incorrect-item-nom035 {
   border: 0.125rem solid #f44336;
-  background-color: #ffebee;
+  background-color: #f44336;
 }
 
 /* Mobile Version Styles */
@@ -125,21 +114,15 @@
   align-items: center;
   position: relative;
   background-color: #f8f8f8;
-  transition: all 0.2s ease;
-}
-
-.letter-slot-nom035.drag-over {
-  border: 2px dashed #4a90e2;
-  background-color: #f0f8ff;
 }
 
 .letter-slot-nom035.correct-slot-nom035 {
-  background-color: #e8f5e9;
+  background-color: #4CAF50;
   border-color: #4CAF50;
 }
 
 .letter-slot-nom035.incorrect-slot-nom035 {
-  background-color: #ffebee;
+  background-color: #F44336;
   border-color: #F44336;
 }
 
@@ -215,9 +198,6 @@
   text-align: center;
   border-radius: 0.5rem;
   width: 100%;
-  padding: 1rem;
-  margin: 1rem 0;
-  background-color: #f8f9fa;
 }
 
 .validation-text-nom035 {
@@ -238,7 +218,6 @@
   justify-content: center;
   gap: 0.9375rem;
   width: 100%;
-  margin-top: 1rem;
 }
 
 .audio-container-nom035 {
@@ -263,15 +242,6 @@
   .button-container-nom035 button {
     width: 100%;
     max-width: 18.75rem;
-  }
-
-  .sortable-container-nom035 {
-    min-height: 10rem;
-  }
-
-  .sortable-item-nom035 {
-    width: 8rem;
-    height: 8rem;
   }
 }
 
@@ -311,10 +281,5 @@
   .instruction-mobile-nom035 {
     font-size: 1rem;
     padding: 0 10px;
-  }
-
-  .sortable-item-nom035 {
-    width: 6rem;
-    height: 6rem;
   }
 }

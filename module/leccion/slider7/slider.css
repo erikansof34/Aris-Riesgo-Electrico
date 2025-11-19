@@ -1,24 +1,41 @@
-/* ESTILOS ACTIVIDAD */
-
-.activity-option {
-  background-color: #f2f2f2;
-  cursor: pointer;
-  transition: background-color 0.3s, border 0.3s;
-  border: 2px solid transparent;
-  font-weight: 500;
+figure.effect-layla{
+  border-radius: 3%;
 }
 
-.activity-option.selected {
-  background-color: #e0f0ff;
-  border-color: #0d6efd;
+figure.effect-layla h2 {
+    padding-top: 0;
+    position: absolute;
+    /* -webkit-transition: -webkit-transform 0.35s; */
+    transition: transform 0.3s;
+    /* color: #fff; */
+    bottom: 12.5%;
+    width: 75%;
+    left: 12.5%;
 }
 
-.activity-option.correct {
-  background-color: #d1f5d3;
-  border-color: #198754;
+/* Hover y clic con colores según el nth-child */
+figure.effect-layla.cl-1  {
+  background: linear-gradient(360deg, #5DFF00, #FFF400);
 }
 
-.activity-option.incorrect {
-  background-color: #f8d7da;
-  border-color: #dc3545;
+figure.effect-layla.cl-2 {
+  background: linear-gradient(360deg, #00C1FF, #43FF94);
+}
+
+figure.effect-layla.cl-3 {
+  background: linear-gradient(360deg, #FABC00, #FFED00);
+}
+
+figure.effect-layla.cl-4 {
+  background: linear-gradient(360deg, #8E43FF, #3B346D);
+}
+
+figure.effect-layla.cl-5 {
+  background: linear-gradient(360deg, #8E43FF, #FF4971);
+}
+
+
+figure.effect-layla:hover h2 {
+    background: #fff;
+    /* color: #fff; */
 }
