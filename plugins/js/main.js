@@ -23,6 +23,7 @@ const sliders = [
   { router: 'slider10', momento: 1 },
   { router: 'slider11', momento: 1 },
   { router: 'slider12', momento: 1 },
+  { router: 'slider13', momento: 1 },
 ];
 
 // const course_code = localStorage.getItem('COURSE_CODE');
