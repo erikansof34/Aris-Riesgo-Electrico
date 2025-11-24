@@ -1,68 +1,110 @@
-.container_card_sld10_politicas {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  margin-top: 1.5%;
-  gap: 20px;
+/* Estilos para la actividad de selección */
+.select-container {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.card_sld10_politicas {
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 380px;
-  width: 100%;
-  height: 165px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
+.select-activity {
+  text-align: justify;
 }
 
-.card_sld10_politicas:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
-}
-
-.card_sld10_politicas p {
-  margin-bottom: 5px;
-  line-height: 1.2;
-  font-weight: 600;
-  flex-grow: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.boton_sld10_politicas {
-  background-color: #008fb6;
-  color: #ffffff;
-  border: none;
-  border-radius: 20px;
-  padding: 5px 5px;
-  font-size: 18px;
-  font-weight: 500;
+.select {
+  border: 0.125rem solid #afafaf;
+  border-radius: 0.625rem;
+  padding: 0.0625rem 0.5rem;
+  font-size: 0.875rem;
+  color: #3a3a3a;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: auto;
+  outline: none;
+  transition: all 0.3s;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+  min-width: 7.5rem;
+  background-color: white;
+}
+
+.select:focus {
+  border-color: #008FB6;
+}
+
+.select-item {
+  margin-bottom: 0.75rem;
+}
+
+.select-text {
+  line-height: 1.6;
+}
+
+.select-feedback {
+  border-radius: 0.375rem;
   text-align: center;
-  width: 60%;
+  font-weight: 500;
 }
 
-.icono_sld10_politicas {
-    font-size: 40px;
-    color: #008fb6;
-    margin-bottom: 15px;
+.select-correct {
+  background-color: #4CAF50;
+  color: white;
 }
 
-.boton_sld10_politicas:hover {
-    background-color: #fff;
-    color: #008fb6;
-    border: solid 1px #008fb6;
+.select-incorrect {
+  background-color: #F44336;
+  color: white;
+}
+
+.select-results {
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.select-selected {
+  background-color: #008FB6;
+  color: white;
+  border-color: #008FB6;
+}
+
+.select-correct-answer {
+  background-color: #4CAF50 !important;
+  color: white !important;
+  border-color: #388E3C !important;
+}
+
+.select-incorrect-answer {
+  background-color: #F44336 !important;
+  color: white !important;
+  border-color: #D32F2F !important;
+}
+
+.select-error {
+  color: #D32F2F;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.75rem;
+  padding: 0.625rem;
+  border-radius: 0.3125rem;
+}
+
+.select-actions {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.select-validate,
+.select-reset {
+  margin: 0 0.25rem;
+}
+
+.select-reset:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hipt-centered {
+  text-align: center !important;
+  display: inline-block !important;
+  width: auto !important;
 }
