@@ -1,52 +1,51 @@
 <section class="row h-100">
   <!-- contenedor izquierdo  -->
-  <div class="animate__animated animate__fadeInLeftBig col-lg-7 col-md-12 sf-center-col sf-cl sf-bg-primary">
-    <h1 class="sf-text-white text-center">Titulo principal <span class="sf-text-secondary">Titulo secundario</span>
+  <div class="animate__animated animate__fadeInLeftBig col-lg-6 col-md-12 sf-center-col sf-cl">
+    <h1 class="text-center">
+      ¿Alguna vez has<br>
+      <span class="sf-text-secondary">sufrido una quemadura</span>
     </h1>
-    <img src="../../../assets/img/avatars/avatar-hombre-brigada.webp" alt="avatar" class="sf-img-1 mx-auto">
-    <p class="text-justify sf-text-white">
-      Aris Mining es una empresa minera que <strong>genera valor para sus grupos de interés:</strong> accionistas, comunidades, pequeños
-      mineros, gobierno, proveedores y colaboradores, a través de la <strong>adopción de prácticas seguras, eficientes y
-      sostenibles.</strong>
+    <img src="../../assets/img/avatars/fondo_blanco_borde_azul/avatar5_circulo_azul_fondo_blanco.webp" alt="avatar"
+      class="sf-img-50 mx-auto">
+    <p class="text-justify mt-2">
+      Si alguna vez has sufrido alguna quemadura, choque eléctrico, un atrapamiento de alguna parte del cuerpo (de un
+      pie, o una mano con un guante atrapado con una máquina) Es porque estas interactuando con diferentes tipos de
+      energía
     </p>
-    <i class="hipt hipt-primary">
-      Haz clic para ejecutar el audio
-      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
-    </i>
-    <div class="audio-center py-2">
-      <audio  class="lang-audio audio-con-transcripcion" controls data-transcripcion-es='
-          [
-          {"end":4.76,"start":0,"text":"Recordemos que el riesgo químico es la probabilidad de que una o varias sustancias químicas"},
-          {"end":10.04,"start":4.76,"text":"desaten eventos que terminen en daños relacionados con la salud de las personas, afectación al"},
-          {"end":14,"start":10.04,"text":"medio ambiente, deterioro de las instalaciones o espacios físicos."}
-          ]
-          ' data-transcripcion-en='
-          [
-          {"end":9,"start":0,"text":"Let us remember that chemical risk is the probability that one or several chemical substances trigger events that end up in damages related to the health of people,"},
-          {"end":14,"start":9,"text":"the application of the environment, deterioration of facilities or physical spaces."}
-          ]
-          '>
-        <source src="./slider5/audio/es/la-nom-035-m1-slide-19.mp3" type="audio/mp3">
-      </audio>
-      <i class="transcription-toggle fas fa-closed-captioning audio-estilos"></i>
-    </div>
   </div>
-  <!-- contenedor derecho  -->
-  <div class="animate__animated animate__fadeInRightBig col-lg-5 col-md-12 sf-center-col sf-cr">
-    <i class="hipt hipt-light">
-      En México somos pioneros en regulación de los factores de riesgo psicosocial con la norma NOM-035, observa
-      atentamente:
-      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
-    </i>
-    <div class="my-3 video-wrapper">
 
-      <div class="iframe-container d-none d-xl-flex justify-content-center align-items-center" id="Slide5Web">
-        <div class="c-loader"><span class="loader spinner-pulse"></span></div>
+  <div class="animate__animated animate__fadeInRightBig col-lg-6 col-md-12 sf-center-col sf-cr sf-bg-primary">
+
+    <!-- Imagen grande -->
+      <div class="main-image-display" id="mainDisplay">
+      <img id="mainImg" src="./slider5/img/signo_interrogacion.webp" alt="Imagen seleccionada" class="main-img fade-in">
+      <p id="mainTitle" class="main-title"></p>
+      <div id="mainError" class="error" style="display:none;">Error al cargar la imagen</div>
+    </div>
+
+       <i class="hipt hipt-light mb-3">
+       Haz click sobre los círculos y descubre la imagen
+        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
+      </i>
+
+    <div class="grid-opciones" id="gridOpciones">
+      <div class="opcion-cuadrado" data-src="./slider5/img/quemadura.webp" data-title="SUFRIDO UNA QUEMADURA" tabindex="0">
+        <img src="./slider5/img/signo_interrogacion.webp" alt="Quemadura">
+        <p>SUFRIDO UNA QUEMADURA</p>
       </div>
 
-      <div class="iframe-container d-lg-none" id="Slide5Mobile">
-        <div class="c-loader"><span class="loader spinner-pulse"></span></div>
+      <div class="opcion-cuadrado" data-src="./slider5/img/choque_electrico.webp" data-title="CHOQUE ELÉCTRICO" tabindex="0">
+        <img src="./slider5/img/signo_interrogacion.webp" alt="Choque Eléctrico">
+        <p>CHOQUE ELÉCTRICO</p>
+      </div>
+
+      <div class="opcion-cuadrado" data-src="./slider5/img/atrapamiento.webp" data-title="ATRAPAMIENTO" tabindex="0">
+        <img src="./slider5/img/signo_interrogacion.webp" alt="Atrapamiento">
+        <p>ATRAPAMIENTO</p>
       </div>
     </div>
+   
   </div>
+
+
 </section>
