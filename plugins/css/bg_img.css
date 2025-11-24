@@ -11,6 +11,10 @@
     z-index: 1;
 }
 
+#darkStyleImgSeccion:has(.dividerSeccionColor) {
+    background-color: #022249;
+}
+
 #darkStyleImgSeccion:has(.dividerImgSeccion1) {
     background: url(../../assets/img/seccion/seccion1-web.webp);
 }
@@ -115,4 +119,8 @@
     #darkStyleImgSeccion:has(.dividerImg2Seccion1) {
         background: url(../../assets/img/fondos/fondo-diversidad-morado-mobile.webp);
     }
+}
+
+.icon-white {
+    color: #fff;
 }
