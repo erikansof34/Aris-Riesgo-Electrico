@@ -13,6 +13,7 @@ const sliders = [
   { router: 'slider1', momento: 1 },
   { router: 'slider2', momento: 1 },
   { router: 'slider3', momento: 1 },
+  { router: 'slider4-momento', momento: 1 },
   { router: 'slider4', momento: 1 },
   { router: 'slider5', momento: 1 },
   { router: 'slider6', momento: 1 },
