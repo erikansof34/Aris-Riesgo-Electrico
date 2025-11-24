@@ -1,38 +1,96 @@
 <section class="row h-100">
-  <!-- contenedor izquierdo  -->
-  <div class="animate__animated animate__fadeInLeftBig col-lg-7 col-md-12 sf-center-col sf-cl sf-bg-primary">
-    <h1 class="sf-text-white text-center">Código de vestuario <br><span class="sf-text-secondary">administrativo en oficina</span></h1>
-    <div class="mt-2">
-      <p class="sf-text-white mb-1 text-justify">Nuestro código de vestimenta <span class="sf-text-success">
-        es casual con un estilo informal</span> donde la simpleza y la comodidad son importantes. Sin embargo, se requieren
-        <span class="sf-text-success"> ciertos estándares en nuestra vestimenta </span> la cual debe ser apropiada y, al mismo tiempo, profesional.
-      </p>
-      <ul class="sf-text-white mb-1 text-justify"> 
-        <li>El <span class="sf-text-success">uso de blue jean no debe tener rotos</span>, desgastes o decorados fuertes.</li>
-        <li>Evitar prendas que sean <span class="sf-text-success">demasiado cortas</span> o reveladoras.</li>
-        <li>Te invitamos <span class="sf-text-success">a cuidar tu presentación personal</span> durante los días de trabajo y a tener en cuenta que, en Aris Mining, <span class="sf-text-success">un estilo casual e informal</span> siempre prioriza tu comodidad.</li>
-      </ul>
-
+  <!-- Contenedor Izquierdo -->
+  <div class="animate__animated animate__fadeInLeftBig col-lg-6 col-md-12 sf-center-col order-2 order-lg-1">
+    <div class="text-center mb-4">
+      <h1 class="sf-text-white text-center">La clave es</h1>
+      <h2 class="sf-text-secondary subtitle-energia">¡ENERGÍA CERO!</h2>
     </div>
-    <i class="hipt hipt-primary mt-3">
-      Haz clic para escuchar el audio
-      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down ms-1"></i>
-    </i>
-    <div class="audio-center py-3">
-      <audio class="audio-con-transcripcion" controls data-transcripcion='[
-            {"start": 0, "end": 5, "text": "Las manos están con nosotros todo el tiempo, las usamos para atender nuestras necesidades,"},
-            {"start": 5, "end": 10, "text": "para relacionarnos con los demás, para amar y proteger a nuestros seres queridos,"},
-            {"start": 10, "end": 15, "text": "las lavamos, les cortamos las uñas y las llevamos a todo lado a donde vamos,"},
-            {"start": 15, "end": 20, "text": "incluso son ellas las que nos permiten, en este momento, estar tomando este curso...."},
-            {"start": 20, "end": 21, "text": "pero..."},
-            {"start": 22, "end": 27, "text": "¿Realmente las valoramos y agradecemos, por permitirnos llevar una vida útil y agradable?"},
-            {"start": 28, "end": 31, "text": "¡¡Somos fanáticos de proteger y cuidar nuestras Manos!!"}
-        ]'>
-        <source src="./slider5/audio/la-nom-035-m1-slide-19.mp3" type="audio/mp3">
-      </audio>
-      <i class="transcription-toggle fas fa-closed-captioning audio-estilos"></i>
+
+    <p class="text-center mb-4">
+      Antes de darle servicio o mantenimiento a un equipo, verifica que todas las fuentes de energía estén:
+    </p>
+    
+    <div class="d-flex justify-content-center mb-3">
+      <i class="hipt hipt-primary">
+        Selecciona cada paso para ver su descripción detallada
+        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
+      </i>
+    </div>
+
+    <!-- Grid de botones de verificación -->
+    <div class="verification-grid">
+      <button class="verification-btn" data-verification="apagadas">
+        Apagadas
+      </button>
+      <button class="verification-btn" data-verification="aisladas">
+        Aisladas
+      </button>
+      <button class="verification-btn" data-verification="desconectadas">
+        Desconectadas
+      </button>
+      <button class="verification-btn" data-verification="purgadas">
+        Purgadas
+      </button>
+      <button class="verification-btn" data-verification="encerradas">
+        Encerradas
+      </button>
+      <button class="verification-btn" data-verification="inmovilizadas">
+        Inmovilizadas
+      </button>
+      <button class="verification-btn" data-verification="bloqueadas">
+        Bloqueadas
+      </button>
+      <button class="verification-btn" data-verification="obstruidas">
+        Obstruidas
+      </button>
+    </div>
+
+    <!-- Contenedor de descripción -->
+    <div class="verification-description-container mt-4">
+      <div id="verification-description" class="verification-description" style="display: none;">
+        <h3 id="verification-title" class="verification-title"></h3>
+        <p id="verification-text" class="verification-text"></p>
+      </div>
     </div>
   </div>
-  <!-- contenedor derecho  -->
-  <div class="animate__animated animate__fadeInRightBig col-lg-5 col-md-12 background-sld1 p-0"></div>
+
+  <!-- Contenedor Derecho -->
+  <div class="animate__animated animate__fadeInRightBig col-lg-6 col-md-12 sf-center-col order-1 order-lg-2 d-flex flex-column align-items-center">    
+    <!-- Swiper Container -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="slide-content" style="background-image: url('./slider10/img/multimetro_digital.webp')">
+            <div class="slide-text-overlay">
+              <h2 class="slide-text">Multímetro Digital</h2>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content" style="background-image: url('./slider10/img/manometro.webp')">
+            <div class="slide-text-overlay">
+              <h2 class="slide-text">Manómetro</h2>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content" style="background-image: url('./slider10/img/medidor_ausencia_tension.webp')">
+            <div class="slide-text-overlay">
+              <h2 class="slide-text">Medidor de Ausencia de Tensión</h2>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="slide-content" style="background-image: url('./slider10/img/termometro_digital.webp')">
+            <div class="slide-text-overlay">
+              <h2 class="slide-text">Termómetro Digital</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Navegación del slider -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+  </div>
 </section>
