@@ -1,72 +1,79 @@
 <section class="row h-100">
-  <div class="col-lg-12 col-md-12 sf-bg-primary sf-center-col sf-cc">
-    <h1 class="sf-text-white text-center">Conoce
-      <span class="sf-text-success">nuestra compañía</span>
+  <!-- contenedor izquierdo  -->
+  <div class="animate__animated animate__fadeInLeftBig col-lg-6 col-md-12 sf-center-col sf-cl">
+    <h1 class="text-left">Bienvenidos al módulo Riesgo Eléctrico
+      <span class="sf-text-secondary">(Aislamiento Seguro, Bloqueo y Tarjeteo)</span>
     </h1>
 
-    <p class="text-center sf-text-white">Queremos que te familiarices con <span class="sf-txt-600 sf-text-success">
-        Aris Mining</span> en estas <span class="sf-txt-600 sf-text-success">cuatro secciones.</span>
-    </p>
+    <h1></h1>
+    <div class="mt-2">
+      <p class="mb-1 text-justify">Bienvenid@s a este módulo virtual, en el cual queremos que todas las personas que
+        trabajan con energías peligrosas, gestionen el riesgo latente en los diferentes tipos de energía existentes en
+        nuestra operación.</p>
 
-    <!--Instruccion-->
-    <div class="d-none d-md-block text-center">
-      <i class="hipt hipt-primary">
-        Pasa el mouse por cada sección para descubrir su contenido
-        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
-      </i>
     </div>
-
-    <div class="d-md-none text-center">
-      <i class="hipt hipt-primary">
-        Lee el contenido de cada momento
-        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
-      </i>
+    <hr class="sf-hr-light my-3">
+    <i class="hipt hipt-light">
+      Haz clic para escuchar el audio
+      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down ms-1"></i>
+    </i>
+    <div class="audio-center py-3">
+      <audio class="audio-con-transcripcion" controls data-transcripcion='[
+            {"start": 0, "end": 5, "text": "Las manos están con nosotros todo el tiempo, las usamos para atender nuestras necesidades,"},
+            {"start": 5, "end": 10, "text": "para relacionarnos con los demás, para amar y proteger a nuestros seres queridos,"},
+            {"start": 10, "end": 15, "text": "las lavamos, les cortamos las uñas y las llevamos a todo lado a donde vamos,"},
+            {"start": 15, "end": 20, "text": "incluso son ellas las que nos permiten, en este momento, estar tomando este curso...."},
+            {"start": 20, "end": 21, "text": "pero..."},
+            {"start": 22, "end": 27, "text": "¿Realmente las valoramos y agradecemos, por permitirnos llevar una vida útil y agradable?"},
+            {"start": 28, "end": 31, "text": "¡¡Somos fanáticos de proteger y cuidar nuestras Manos!!"}
+        ]'>
+        <source src="./slider1/audio/la-nom-035-m1-slide-19.mp3" type="audio/mp3">
+      </audio>
+      <i class="transcription-toggle fas fa-closed-captioning audio-estilos"></i>
     </div>
+  </div>
+  <!-- contenedor derecho  -->
+  <div class="animate__animated animate__fadeInRightBig col-lg-6 col-md-12 sf-center-col sf-cr sf-bg-primary">
+      <div class="carousel-bienvenida">
+        <img src="./slider2/img/bienvenida1.webp" alt="Bienvenida 1" class="mx-auto carousel-img active">
+        <img src="./slider2/img/bienvenida2.webp" alt="Bienvenida 2" class="mx-auto carousel-img">
+        <img src="./slider2/img/bienvenida3.webp" alt="Bienvenida 3" class="mx-auto carousel-img">
+        <img src="./slider2/img/bienvenida4.webp" alt="Bienvenida 4" class="mx-auto carousel-img">
+      </div>
+  </div>
+</section>
 
-    <div class="d-flex flex-column flex-md-row mt-4 pb-4 mx-xl-8">
-      <div class="animate__animated animate__zoomIn col-sm-12 col-md-3 col-lg-3 mb-3 mb-md-0 px-0 px-md-3">
-        <div class="card-moment">
-          <img src="./slider2/img/seccion1.webp" alt="Imagen 1">
-          <div class="card-info">
-            <h3 class="sf-fm-4">Sección 1</h3>
-            <hr>
-            <p class="sf-fm-4">Conoce más acerca de la Compañía.</p>
-          </div>
-        </div>
+<div class="modal fade" id="sld1_modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg-650">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Es clave</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div
-        class="animate__animated animate__zoomIn animate__delay-1s col-sm-12 col-md-3 col-lg-3 mb-3 mb-md-0 px-0 px-md-3">
-        <div class="card-moment">
-          <img src="./slider2/img/seccion2.webp" alt="Imagen 2">
-          <div class="card-info">
-            <h3 class="sf-fm-4">Sección 2</h3>
-            <hr>
-            <p class="sf-fm-4">En Aris Mining impulsamos tu desarrollo.</p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="animate__animated animate__zoomIn animate__delay-2s col-sm-12 col-md-3 col-lg-3 mb-3 mb-md-0 px-0 px-md-3">
-        <div class="card-moment">
-          <img src="./slider2/img/seccion3.webp" alt="Imagen 2">
-          <div class="card-info">
-            <h3 class="sf-fm-4">Sección 3</h3>
-            <hr>
-            <p class="sf-fm-4">¿Qué esperamos de ti como miembro del equipo?</p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="animate__animated animate__zoomIn animate__delay-3s col-sm-12 col-md-3 col-lg-3 mb-3 mb-md-0 px-0 px-md-3">
-        <div class="card-moment">
-          <img src="./slider2/img/seccion4.webp" alt="Imagen 2">
-          <div class="card-info">
-            <h3 class="sf-fm-4">Sección 4</h3>
-            <hr>
-            <p class="sf-fm-4">¡Así nos cuidamos!</p>
-          </div>
+      <div class="modal-body">
+        <p>
+          La energía eléctrica no se puede ver ni oler, pero puede causar lesiones graves en menos de 0.1 segundos si
+          atraviesa el cuerpo humano con suficiente intensidad; por eso la primera medida de control siempre es
+          interrumpir la fuente de energía antes de intervenir cualquier equipo.
+        </p>
+        <i class="hipt ins-center">
+          Escuchemos con atención este audio
+          <i class="icon-inline icon-inline--start fas fa-arrow-turn-down"></i>
+        </i>
+        <div class="audio-center py-2">
+          <audio id="audio_sld_11" class="lang-audio audio-con-transcripcion" controls data-transcripcion-es='[
+            {"end":0.5,"start":0,"text":"Es clave,"},
+            {"end":6.22,"start":1.12,"text":"Una sustancia química puede estar asociada a más de un tipo de peligro clasificado por la"},
+            {"end":10.7,"start":6.22,"text":"SGA, para ello las tablas de clasificación te ayudarán a identificarlos."}
+            ]' data-transcripcion-en='[
+            {"end":5.02,"start":0,"text":"It´s key. A chemical substance may be associated with more than one type of hazard classified"},
+            {"end":9.68,"start":5.02,"text":"by the SGA, for this the classification tables will help you identify them."}
+            ]'>
+            <source src="./slider11/audio/es/slide-11.mp3" type="audio/mp3">
+          </audio>
+          <i class="transcription-toggle fas fa-closed-captioning audio-estilos"></i>
         </div>
       </div>
     </div>
   </div>
-</section>
+</div>

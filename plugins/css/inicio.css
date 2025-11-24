@@ -141,7 +141,8 @@
 }
 
 .parallax-logo {
-  max-width: 250px;
+  margin-top: 2%;
+  max-width: 200px;
   height: auto;
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
   transition: all 0.3s ease;
@@ -159,7 +160,7 @@
   overflow-wrap: break-word;
   white-space: normal;
   line-height: 1.2em;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   opacity: 0;
   transform: translateY(50px);
   animation: fadeInUp 1s ease forwards 0.5s;
@@ -174,6 +175,7 @@
   transform: translateY(50px);
   animation: fadeInUp 1s ease forwards 0.8s;
   color: rgba(255, 255, 255, 0.9);
+  width: 70%;
 }
 
 /* Botones */
