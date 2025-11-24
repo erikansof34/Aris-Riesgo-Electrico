@@ -12,6 +12,8 @@
     $modules_user  = $CI->evaluation_model->get_read_progress_user($unique_course_id, [], [$user_id])[0];
     $module        = get_course_modules($course_code)[0];
     $module_id = $module['id'];
+
+    $progress = progress_courses($course_code, $module_id)[0];
 ?> -->
 <!DOCTYPE html>
 <html lang="es">
@@ -30,16 +32,14 @@
     <script src="../../plugins/libs/bootstrap/js/custom-modal-handler.js"></script>
     <script src="../../plugins/js/touch-dnd.js"></script>
 
-
     <!-- library cascading style sheets -->
     <link rel="stylesheet" type="text/css" href="../../plugins/libs/component/transcripcion/transcripcion.css">
 
     <link rel="stylesheet" type="text/css" href="../../plugins/css/sofactia.css">
     <link rel="stylesheet" type="text/css" href="../../plugins/css/bg_img.css">
-    <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" type="text/css" href="../../plugins/css/bars.css">
-
-
+    
+    
     <!--Tiporgraia Montserrat-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alata">
@@ -47,17 +47,18 @@
 
     <!--Libreria iconos-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    
     <!-- Estilos del widget -->
     <link rel="stylesheet" href="../../plugins/libs/assetsWidget/css/widget.css">
-
+    
     <!-- Componentes -->
     <link rel="stylesheet" href="../../plugins/libs/component/preloader/preloaders.css" type="text/css" />
     <link rel="stylesheet" href="../../plugins/libs/animate/animate.min.css" type="text/css" />
     <link rel="stylesheet" href="../../plugins/libs/effectImage/effect.css" type="text/css" />
     <link rel="stylesheet" href="../../plugins/libs/effectImage/effectimage2.css" type="text/css" />
     <link rel="stylesheet" href="../../plugins/libs/component/lang/switch.css" type="text/css" />
-
+    
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 <body class="sf-scroll-y-hidden body-style" id="darkStyleImgSeccion">
@@ -69,34 +70,34 @@
     <header class="header">
         <div class="contentHeader bg-header-r">
             <div>
-                <img class="logo logoTop" src="../../assets/img/logo/logo_aris_horizontal_blanco.webp">
-                <div class="d-flex justify-content-between align-items-center ">
+                <img class="pe-1 logo logoTop" src="../../assets/img/logo/logo_aris_horizontal_blanco.webp">
+                <div class="al d-flex justify-content-between align-items-center ">
                     <div class="miga_pan">
                         <p id="breadcrumb"></p>
                     </div>
-                    <div class="container2">
+                    <!-- <div class="container2">
                         <label class="toggle-switch">
                             <input type="checkbox" id="toggleSwitch">
                             <span class="slider" id="englishHints"></span>
                         </label>
                         <span class="toggle-label english-hints english-miga-1 d-xl-none">EN</span>
                         <span class="toggle-label english-hints english-miga-2 d-none d-xl-block">English Hints</span>
-                    </div>
+                    </div> -->
                 </div>
-                <div class="d-flex gap-md-1 align-items-center justify-content-end">
-                    <div class="txPg d-flex justify-content-center">
+                <div class="al gap-md-1 d-flex align-items-center justify-content-end">
+                    <div class="al2 border-end px-2 txPg d-flex justify-content-center">
                         <div class="">
                             <span id="textProg">1</span> / <span id="nSlider"></span>
                         </div>
                     </div>
-                    <div class="d-none d-md-block txPg mb-0">
-                        <!-- <?= $progress[0]['course_progress'];?>% -->
+                    <div class="al2 border-end px-2 d-none d-md-block txPg mb-0">
+                        <!-- <?= $progress['course_progress'];?>% -->
                         <span id="porcentajeProgreso">0</span>%
                     </div>
                     <div class="txPg d-xl-none" id="dropdownGripBtn">
                         <i class="fa-solid fa-grip"></i>
                     </div>
-                    <div class="d-none d-xl-block">
+                    <div class="border-end d-none d-xl-block">
                         <button id="home" onclick="progCircle(1);">
                             <i class="fas fa-home"></i>
                         </button>
