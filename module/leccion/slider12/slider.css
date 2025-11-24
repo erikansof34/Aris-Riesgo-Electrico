@@ -1,0 +1,225 @@
+/* Actividad LOTO */
+.loto-activity {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loto-instruction-text {
+  display: block;
+  text-align: center;
+}
+
+/* Desktop - Todo horizontal */
+.loto-desktop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.loto-drop-zones {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.loto-drop-zone {
+  width: 100px;
+  height: 100px;
+  border: 2px dashed #008FB6;
+  background-color: #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  position: relative;
+}
+
+.drop-placeholder {
+  color: #666;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.loto-drop-zone.drag-over {
+  background-color: #e3f2fd;
+  border-color: #1976d2;
+}
+
+.loto-draggable-items {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.loto-item {
+  width: 100px;
+  height: 100px;
+  cursor: grab;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.loto-item:hover {
+  transform: scale(1.05);
+}
+
+.loto-item.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.loto-item.dropped {
+  display: none;
+}
+
+.loto-item.hidden {
+  opacity: 0;
+  transform: scale(0);
+  width: 0;
+  margin: 0;
+}
+
+/* Mobile - Selects */
+.loto-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loto-letters-display {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.letter-box {
+  width: 48px;
+  height: 48px;
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.letter-box.correct {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+}
+
+.letter-box.incorrect {
+  background-color: #F44336;
+  color: white;
+  border-radius: 4px;
+}
+
+.loto-selects {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.loto-select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.loto-select.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.loto-select.incorrect {
+  background-color: #F44336;
+  color: white;
+}
+
+/* Verificación visual */
+.verification-icon {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.verification-icon.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.verification-icon.incorrect {
+  background-color: #F44336;
+  color: white;
+}
+
+/* Resultado */
+.loto-result {
+  text-align: center;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Botones */
+.loto-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+/* Responsive */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-only {
+    display: block;
+  }
+  
+  .loto-instruction-text {
+    font-size: 0.9rem;
+  }
+  
+  .loto-drop-zones {
+    gap: 0.5rem;
+  }
+  
+  .loto-drop-zone,
+  .loto-item {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .loto-draggable-items {
+    gap: 0.5rem;
+  }
+}
