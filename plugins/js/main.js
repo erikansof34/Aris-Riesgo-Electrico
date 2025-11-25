@@ -1,8 +1,8 @@
 // Configuración del curso - Momentos simplificados
 const momentosCurso = {
-  1: '1° Salud Mental',
-  2: '2° Nuestras Responsabilidades frente al riesgo psicosocial​',
-  3: '3° Protocolos de Atencion y Recomendaciones'
+  1: '1-La Energía en nuestro trabajo',
+  2: '2-Principios del bloqueo y etiquetado (LOTO)',
+  3: '3-Procedimiento de bloqueo y etiquetado (LOTO)'
 };
 
 // Estado actual del curso
@@ -16,10 +16,12 @@ const sliders = [
   { router: 'slider4-momento', momento: 1 },
   { router: 'slider5', momento: 1 },
   { router: 'slider6', momento: 1 },
-  { router: 'slider10', momento: 1 },
-  { router: 'slider11', momento: 1 },
-  { router: 'slider12', momento: 1 },
-  { router: 'slider13', momento: 1 },
+   { router: 'slider9', momento: 2 },
+  { router: 'slider10', momento: 2 },
+  { router: 'slider11', momento: 2 },
+  { router: 'slider12', momento: 2 },
+  { router: 'slider13', momento: 2 },
+   { router: 'slider15', momento: 3 },
 ];
 
 // const course_code = localStorage.getItem('COURSE_CODE');
