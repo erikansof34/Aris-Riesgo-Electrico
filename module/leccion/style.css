@@ -1,0 +1,16 @@
+.header .contentHeader>div:nth-child(1)>div {
+    border-left: 1px solid #ddd;
+}
+
+.header .contentHeader>div:nth-child(1)>div:first-child {
+    border-left: none;
+}
+
+.al {
+    height: 80%;
+}
+
+.al2 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}

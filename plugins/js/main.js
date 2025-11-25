@@ -16,12 +16,14 @@ const sliders = [
   { router: 'slider4-momento', momento: 1 },
   { router: 'slider5', momento: 1 },
   { router: 'slider6', momento: 1 },
-   { router: 'slider9', momento: 2 },
+  { router: 'slider9', momento: 2 },
   { router: 'slider10', momento: 2 },
   { router: 'slider11', momento: 2 },
   { router: 'slider12', momento: 2 },
   { router: 'slider13', momento: 2 },
-   { router: 'slider15', momento: 3 },
+  { router: 'slider14', momento: 2 },
+  { router: 'slider15', momento: 3 },
+  { router: 'slider17', momento: 3 },
 ];
 
 // const course_code = localStorage.getItem('COURSE_CODE');
