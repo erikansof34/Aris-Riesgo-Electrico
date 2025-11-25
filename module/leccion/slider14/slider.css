@@ -1,0 +1,167 @@
+.candados-activity {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    max-width: 90vw;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.candado-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.candado-item {
+    position: relative;
+}
+
+.candado-image {
+    flex-shrink: 0;
+}
+
+.candado-img {
+    width: 12rem;
+    height: 12rem;
+    object-fit: contain;
+}
+
+.candado-select {
+    width: 100%;
+}
+
+.candado-dropdown {
+    width: 100%;
+    padding: 10px 40px 10px 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23666" d="M2 5L0 3h4z"/></svg>') no-repeat right 10px center;
+    background-size: 12px;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.candado-dropdown:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.verification-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.verification-icon.correct {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.verification-icon.incorrect {
+    background-color: #F44336;
+    color: white;
+}
+
+.validation-message {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #5e5e5e;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #545b62;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    background: #6c757d;
+}
+
+.validation-message.error {
+    color: #d32f2f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .candados-activity {
+        flex-direction: column;
+    }
+
+    .candado-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        max-width: none;
+    }
+
+    .candado-img {
+        width: 12rem;
+        height: 12rem;
+    }
+
+    .buttons-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 200px;
+    }
+}
