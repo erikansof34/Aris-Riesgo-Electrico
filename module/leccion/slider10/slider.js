@@ -89,6 +89,9 @@ export function init() {
   const descriptionContainer = document.getElementById('verification-description');
   const titleElement = document.getElementById('verification-title');
   const textElement = document.getElementById('verification-text');
+  const visited = new Set();
+  const validateBtn = document.getElementById('validate-btn');
+  const validationMessage = document.getElementById('validation-message');
 
   verificationButtons.forEach((button) => {
     button.addEventListener('click', function () {
@@ -119,6 +122,56 @@ export function init() {
       // Forzar reflow para que la animación funcione
       void descriptionContainer.offsetWidth;
       descriptionContainer.classList.add('show');
+
+      visited.add(verificationType);
+      if (visited.size === Object.keys(verifications).length) {
+        const doneMsg = document.createElement('div');
+        doneMsg.className = 'mt-3';
+        doneMsg.textContent = 'Has revisado todos los pasos. ¡Actividad completada!';
+        descriptionContainer.appendChild(doneMsg);
+        window.setActividadCompletada?.('slider10');
+        if (validateBtn) validateBtn.disabled = true;
+        if (validationMessage) {
+          validationMessage.textContent = 'Actividad completada.';
+          validationMessage.classList.add('select-correct');
+        }
+      }
     });
   });
+
+  // Si ya se completó previamente, marcar como completada sin requerir acción
+  if (window.getEstadoActividades?.()['slider10']) {
+    const doneMsg = document.createElement('div');
+    doneMsg.className = 'mt-3';
+    doneMsg.textContent = 'Actividad completada previamente.';
+    descriptionContainer.style.display = 'block';
+    descriptionContainer.appendChild(doneMsg);
+    if (validateBtn) validateBtn.disabled = true;
+    if (validationMessage) {
+      validationMessage.textContent = 'Actividad completada previamente.';
+      validationMessage.classList.add('select-correct');
+    }
+  }
+
+  if (validateBtn) {
+    validateBtn.addEventListener('click', function () {
+      const total = Object.keys(verifications).length;
+      const count = visited.size;
+      if (count < total) {
+        if (validationMessage) {
+          validationMessage.textContent = `Te faltan ${total - count} paso(s) por revisar antes de validar.`;
+          validationMessage.classList.remove('select-correct');
+          validationMessage.classList.add('select-incorrect');
+        }
+        return;
+      }
+      window.setActividadCompletada?.('slider10');
+      validateBtn.disabled = true;
+      if (validationMessage) {
+        validationMessage.textContent = 'Validación exitosa. Actividad completada.';
+        validationMessage.classList.remove('select-incorrect');
+        validationMessage.classList.add('select-correct');
+      }
+    });
+  }
 }

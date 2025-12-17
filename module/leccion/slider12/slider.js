@@ -12,61 +12,59 @@ function initLotoActivity() {
   let droppedItems = new Set();
   let dropSuccessful = false;
   let currentDraggedElement = null;
-  
+
   // Elementos del DOM
   const validateBtn = document.querySelector('.loto-validate');
   const resetBtn = document.querySelector('.loto-reset');
   const resultDiv = document.querySelector('.loto-result');
-  
+
   // Detectar cambio de tamaño de pantalla
   window.addEventListener('resize', () => {
     isMobile = window.innerWidth <= 768;
   });
-  
+
   // Funcionalidad Desktop - Drag and Drop
   function initDesktopDragDrop() {
     const draggableItems = document.querySelectorAll('.loto-item');
     const dropZones = document.querySelectorAll('.loto-drop-zone');
-    
-    draggableItems.forEach(item => {
+
+    draggableItems.forEach((item) => {
       item.addEventListener('dragstart', handleDragStart);
       item.addEventListener('dragend', handleDragEnd);
     });
-    
-    dropZones.forEach(zone => {
+
+    dropZones.forEach((zone) => {
       zone.addEventListener('dragover', handleDragOver);
       zone.addEventListener('drop', handleDrop);
       zone.addEventListener('dragenter', handleDragEnter);
       zone.addEventListener('dragleave', handleDragLeave);
-      
-
     });
   }
-  
+
   function handleDragStart(e) {
     e.dataTransfer.setData('text/plain', e.target.dataset.value);
     e.dataTransfer.setData('element-id', e.target.src);
     e.target.classList.add('dragging');
-    
+
     // Ocultar inmediatamente
     e.target.classList.add('hidden');
     dropSuccessful = false;
     currentDraggedElement = e.target;
   }
-  
+
   function handleDragEnd(e) {
     e.target.classList.remove('dragging');
-    
+
     // Si no fue exitoso, restaurar
     if (!dropSuccessful) {
       e.target.classList.remove('hidden');
     }
-    
+
     // Reset variables
     currentDraggedElement = null;
     dropSuccessful = false;
   }
-  
+
   function handleDragOver(e) {
     const dropZone = e.target.closest('.loto-drop-zone');
     if (dropZone) {
@@ -76,7 +74,7 @@ function initLotoActivity() {
       }
     }
   }
-  
+
   function handleDragEnter(e) {
     const dropZone = e.target.closest('.loto-drop-zone');
     if (dropZone && !dropZone.querySelector('img')) {
@@ -84,25 +82,25 @@ function initLotoActivity() {
       dropZone.classList.add('drag-over');
     }
   }
-  
+
   function handleDragLeave(e) {
     e.target.classList.remove('drag-over');
   }
-  
+
   function handleDrop(e) {
     const dropZone = e.target.closest('.loto-drop-zone');
-    
+
     if (!dropZone || dropZone.querySelector('img')) {
       // Drop inválido - no hacer nada, dragEnd se encarga
       return;
     }
-    
+
     e.preventDefault();
     dropZone.classList.remove('drag-over');
-    
+
     const value = e.dataTransfer.getData('text/plain');
     const elementSrc = e.dataTransfer.getData('element-id');
-    
+
     // Crear imagen en la zona de drop
     const img = document.createElement('img');
     img.src = elementSrc;
@@ -112,22 +110,22 @@ function initLotoActivity() {
     img.style.objectFit = 'contain';
     img.dataset.value = value;
     img.dataset.originalSrc = elementSrc;
-    
+
     // Limpiar placeholder y agregar imagen
     dropZone.innerHTML = '';
     dropZone.appendChild(img);
-    
+
     // Marcar como exitoso
     dropSuccessful = true;
     droppedItems.add(elementSrc);
-    
+
     // Ocultar completamente el original
     if (currentDraggedElement) {
       setTimeout(() => {
         currentDraggedElement.style.display = 'none';
       }, 300);
     }
-    
+
     // Hacer la imagen clickeable para devolverla
     img.addEventListener('click', () => {
       if (!isValidated) {
@@ -135,55 +133,55 @@ function initLotoActivity() {
       }
     });
   }
-  
+
   // Funcionalidad Mobile - Selects
   function initMobileSelects() {
     const selects = document.querySelectorAll('.loto-select');
     const letterBoxes = document.querySelectorAll('.letter-box');
-    
-    selects.forEach(select => {
+
+    selects.forEach((select) => {
       select.addEventListener('change', handleSelectChange);
     });
   }
-  
+
   function handleSelectChange(e) {
     const index = parseInt(e.target.dataset.index);
     const newValue = e.target.value;
     const oldValue = mobileGuess[index];
     const letterBox = document.querySelector(`.letter-box[data-index="${index}"]`);
-    
+
     mobileGuess[index] = newValue;
     letterBox.textContent = newValue || '_';
-    
+
     updateAvailableOptions();
   }
-  
+
   function updateAvailableOptions() {
     const selects = document.querySelectorAll('.loto-select');
     const usedLetters = { L: 0, O: 0, T: 0 };
-    
+
     // Contar letras usadas
-    mobileGuess.forEach(letter => {
+    mobileGuess.forEach((letter) => {
       if (letter) usedLetters[letter]++;
     });
-    
+
     // Actualizar cada select
     selects.forEach((select, selectIndex) => {
       const currentValue = select.value;
-      
+
       // Recrear opciones
       select.innerHTML = '<option value="">Seleccione</option>';
-      
+
       // Agregar solo opciones disponibles
-      Object.keys(availableLetters).forEach(letter => {
+      Object.keys(availableLetters).forEach((letter) => {
         const maxCount = availableLetters[letter];
         const usedCount = usedLetters[letter];
         const availableCount = maxCount - usedCount;
         const currentSelectHasThis = currentValue === letter;
-        
+
         // Solo agregar opciones si hay disponibles O si es el valor actual
         const optionsToAdd = currentSelectHasThis ? 1 : availableCount;
-        
+
         for (let i = 0; i < optionsToAdd; i++) {
           const option = document.createElement('option');
           option.value = letter;
@@ -191,26 +189,26 @@ function initLotoActivity() {
           select.appendChild(option);
         }
       });
-      
+
       // Restaurar valor seleccionado
       select.value = currentValue;
     });
   }
-  
+
   // Validación
   function validateOrder() {
     let correct = 0;
     const answers = [];
-    
+
     if (isMobile) {
       // Validación móvil
       const letterBoxes = document.querySelectorAll('.letter-box');
       const selects = document.querySelectorAll('.loto-select');
-      
+
       mobileGuess.forEach((letter, index) => {
         const isCorrect = letter === correctOrder[index];
         answers.push(letter);
-        
+
         if (isCorrect) {
           correct++;
           letterBoxes[index].classList.add('correct');
@@ -219,21 +217,28 @@ function initLotoActivity() {
           letterBoxes[index].classList.add('incorrect');
           selects[index].classList.add('incorrect');
         }
-        
+
         selects[index].disabled = true;
       });
     } else {
       // Validación desktop
       const dropZones = document.querySelectorAll('.loto-drop-zone');
-      
+      // Si falta alguna letra, mostrar mensaje y abortar
+      const incompletas = Array.from(dropZones).some((zone) => !zone.querySelector('img'));
+      if (incompletas) {
+        resultDiv.textContent = 'Debes ubicar todas las letras antes de validar.';
+        resultDiv.classList.remove('hidden');
+        return;
+      }
+
       dropZones.forEach((zone, index) => {
         const img = zone.querySelector('img');
         const value = img ? img.dataset.value : '';
         const isCorrect = value === correctOrder[index];
         answers.push(value);
-        
+
         if (isCorrect) correct++;
-        
+
         // Agregar icono de verificación
         const icon = document.createElement('div');
         icon.className = `verification-icon ${isCorrect ? 'correct' : 'incorrect'}`;
@@ -241,84 +246,88 @@ function initLotoActivity() {
         zone.appendChild(icon);
       });
     }
-    
+
     // Mostrar resultado
     const percentage = Math.round((correct / 4) * 100);
     resultDiv.textContent = `Respuestas correctas: ${correct} de 4. (${percentage}%)`;
     resultDiv.classList.remove('hidden');
-    
+
     isValidated = true;
     validateBtn.disabled = true;
+
+    if (percentage === 100) {
+      window.setActividadCompletada?.('slider12');
+    }
   }
-  
+
   // Función para devolver imagen al origen
   function returnImageToOrigin(img, dropZone) {
     const originalSrc = img.dataset.originalSrc;
     const originalElement = document.querySelector(`.loto-draggable-items [src="${originalSrc}"]`);
-    
+
     if (originalElement) {
       originalElement.style.display = 'block';
       originalElement.classList.remove('hidden');
       droppedItems.delete(originalSrc);
     }
-    
+
     dropZone.innerHTML = '<span class="drop-placeholder">Arrastre aquí</span>';
   }
-  
+
   // Reiniciar actividad
   function resetActivity() {
     isValidated = false;
     mobileGuess = ['', '', '', ''];
     availableLetters = { L: 1, O: 2, T: 1 };
     droppedItems.clear();
-    
+
     // Reset desktop
     const dropZones = document.querySelectorAll('.loto-drop-zone');
     const draggableItems = document.querySelectorAll('.loto-item');
-    
+
     dropZones.forEach((zone, index) => {
       zone.innerHTML = '<span class="drop-placeholder">Arrastre aquí</span>';
     });
-    
-    draggableItems.forEach(item => {
+
+    draggableItems.forEach((item) => {
       item.style.display = 'block';
       item.classList.remove('dropped', 'hidden');
     });
-    
+
     // Reset mobile
     const letterBoxes = document.querySelectorAll('.letter-box');
     const selects = document.querySelectorAll('.loto-select');
-    
+
     letterBoxes.forEach((box, index) => {
       box.textContent = '_';
       box.classList.remove('correct', 'incorrect');
     });
-    
-    selects.forEach(select => {
+
+    selects.forEach((select) => {
       select.value = '';
       select.disabled = false;
       select.classList.remove('correct', 'incorrect');
     });
-    
+
     updateAvailableOptions();
-    
+
     // Reset UI
     resultDiv.classList.add('hidden');
     resultDiv.textContent = '';
     validateBtn.disabled = false;
   }
-  
+
   // Event listeners
   validateBtn.addEventListener('click', validateOrder);
   resetBtn.addEventListener('click', resetActivity);
-  
+
   // Manejar drop fuera de zonas válidas
   document.addEventListener('dragover', (e) => {
     if (!e.target.closest('.loto-drop-zone')) {
       e.preventDefault();
     }
   });
-  
+
   document.addEventListener('drop', (e) => {
     if (!e.target.closest('.loto-drop-zone')) {
       e.preventDefault();
@@ -330,8 +339,19 @@ function initLotoActivity() {
       }
     }
   });
-  
+
   // Inicializar funcionalidades
   initDesktopDragDrop();
   initMobileSelects();
+
+  // Si ya se completó previamente, bloquear interacción y mostrar mensaje
+  if (window.getEstadoActividades?.()['slider12']) {
+    const dropZones = document.querySelectorAll('.loto-drop-zone');
+    const selects = document.querySelectorAll('.loto-select');
+    validateBtn.disabled = true;
+    selects.forEach((s) => (s.disabled = true));
+    dropZones.forEach((z) => (z.style.pointerEvents = 'none'));
+    resultDiv.classList.remove('hidden');
+    resultDiv.textContent = 'Actividad completada previamente.';
+  }
 }

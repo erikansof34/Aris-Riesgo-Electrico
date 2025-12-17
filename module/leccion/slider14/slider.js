@@ -1,134 +1,150 @@
 export function init() {
-    const options = [
-        { value: "1", label: "Bloqueo de sistema eléctrico" },
-        { value: "2", label: "Bloqueo de sistema de válvulas" },
-        { value: "3", label: "Bloqueo de escaleras y equipos" },
-        { value: "4", label: "Bloqueo de instrumentos" },
-        { value: "5", label: "Equipos contratistas" }
-    ];
+  const options = [
+    { value: '1', label: 'Bloqueo de sistema eléctrico' },
+    { value: '2', label: 'Bloqueo de sistema de válvulas' },
+    { value: '3', label: 'Bloqueo de escaleras y equipos' },
+    { value: '4', label: 'Bloqueo de instrumentos' },
+    { value: '5', label: 'Equipos contratistas' },
+  ];
 
-    const correctOrder = ["3", "4", "5", "2", "1"]; // Amarillo→Escaleras, Verde→Instrumentos, Naranja→Contratistas, Azul→Válvulas, Rojo→Eléctrico
-    let selectedValues = ["", "", "", "", ""];
+  const correctOrder = ['3', '4', '5', '2', '1']; // Amarillo→Escaleras, Verde→Instrumentos, Naranja→Contratistas, Azul→Válvulas, Rojo→Eléctrico
+  let selectedValues = ['', '', '', '', ''];
 
-    const dropdowns = document.querySelectorAll('.candado-dropdown');
-    const validateBtn = document.getElementById('validate-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    const validationMessage = document.getElementById('validation-message');
+  const dropdowns = document.querySelectorAll('.candado-dropdown');
+  const validateBtn = document.getElementById('validate-btn');
+  const resetBtn = document.getElementById('reset-btn');
+  const validationMessage = document.getElementById('validation-message');
 
-    function updateDropdownOptions() {
-        dropdowns.forEach((dropdown, index) => {
-            const currentValue = dropdown.value;
-            dropdown.innerHTML = '<option value="">Seleccione...</option>';
-            
-            options.forEach(option => {
-                if (!selectedValues.includes(option.value) || option.value === currentValue) {
-                    const optionElement = document.createElement('option');
-                    optionElement.value = option.value;
-                    optionElement.textContent = option.label;
-                    dropdown.appendChild(optionElement);
-                }
-            });
-            
-            dropdown.value = currentValue;
-        });
-    }
+  function updateDropdownOptions() {
+    dropdowns.forEach((dropdown, index) => {
+      const currentValue = dropdown.value;
+      dropdown.innerHTML = '<option value="">Seleccione...</option>';
 
-    function handleDropdownChange(event) {
-        const index = parseInt(event.target.dataset.index);
-        const oldValue = selectedValues[index];
-        const newValue = event.target.value;
-        
-        selectedValues[index] = newValue;
-        
-        // Limpiar iconos de validación
-        const candadoItem = event.target.closest('.candado-item');
-        const existingIcon = candadoItem.querySelector('.verification-icon');
-        if (existingIcon) {
-            existingIcon.remove();
+      options.forEach((option) => {
+        if (!selectedValues.includes(option.value) || option.value === currentValue) {
+          const optionElement = document.createElement('option');
+          optionElement.value = option.value;
+          optionElement.textContent = option.label;
+          dropdown.appendChild(optionElement);
         }
-        
-        updateDropdownOptions();
-        updateResetButtonState();
-        
-        // Limpiar mensaje de validación
-        validationMessage.textContent = '';
-        validationMessage.className = "validation-message";
-    }
+      });
 
-    function validateAnswers() {
-        // Verificar si todas las opciones están seleccionadas
-        const allSelected = selectedValues.every(value => value !== "");
-        
-        if (!allSelected) {
-            validationMessage.textContent = "Debe seleccionar todas las opciones antes de validar.";
-            validationMessage.className = "validation-message error";
-            return;
-        }
-        
-        let correctCount = 0;
-        
-        dropdowns.forEach((dropdown, index) => {
-            const candadoItem = dropdown.closest('.candado-item');
-            const isCorrect = selectedValues[index] === correctOrder[index];
-            
-            // Remover iconos existentes
-            const existingIcon = candadoItem.querySelector('.verification-icon');
-            if (existingIcon) {
-                existingIcon.remove();
-            }
-            
-            const icon = document.createElement('div');
-            icon.className = 'verification-icon';
-            
-            if (isCorrect) {
-                icon.classList.add('correct');
-                icon.innerHTML = '<i class="fa fa-check"></i>';
-                correctCount++;
-            } else {
-                icon.classList.add('incorrect');
-                icon.innerHTML = '<i class="fa fa-times"></i>';
-            }
-            
-            candadoItem.appendChild(icon);
-        });
-        
-        const percentage = ((correctCount / correctOrder.length) * 100).toFixed(0);
-        validationMessage.textContent = `Respuestas correctas ${correctCount} de 5. (${percentage}%)`;
-        validationMessage.className = "validation-message";
-    }
-
-    function updateResetButtonState() {
-        const hasSelections = selectedValues.some(value => value !== "");
-        resetBtn.disabled = !hasSelections;
-    }
-    
-    function resetActivity() {
-        selectedValues = ["", "", "", "", ""];
-        
-        dropdowns.forEach((dropdown) => {
-            dropdown.value = "";
-            const candadoItem = dropdown.closest('.candado-item');
-            const existingIcon = candadoItem.querySelector('.verification-icon');
-            if (existingIcon) {
-                existingIcon.remove();
-            }
-        });
-        
-        updateDropdownOptions();
-        updateResetButtonState();
-        validationMessage.textContent = '';
-        validationMessage.className = "validation-message";
-    }
-
-    // Event listeners
-    dropdowns.forEach((dropdown) => {
-        dropdown.addEventListener('change', handleDropdownChange);
+      dropdown.value = currentValue;
     });
+  }
 
-    validateBtn.addEventListener('click', validateAnswers);
-    resetBtn.addEventListener('click', resetActivity);
+  function handleDropdownChange(event) {
+    const index = parseInt(event.target.dataset.index);
+    const oldValue = selectedValues[index];
+    const newValue = event.target.value;
 
-    // Inicializar
+    selectedValues[index] = newValue;
+
+    // Limpiar iconos de validación
+    const candadoItem = event.target.closest('.candado-item');
+    const existingIcon = candadoItem.querySelector('.verification-icon');
+    if (existingIcon) {
+      existingIcon.remove();
+    }
+
     updateDropdownOptions();
     updateResetButtonState();
+
+    // Limpiar mensaje de validación
+    validationMessage.textContent = '';
+    validationMessage.className = 'validation-message';
+  }
+
+  function validateAnswers() {
+    // Verificar si todas las opciones están seleccionadas
+    const allSelected = selectedValues.every((value) => value !== '');
+
+    if (!allSelected) {
+      validationMessage.textContent = 'Debe seleccionar todas las opciones antes de validar.';
+      validationMessage.className = 'validation-message error';
+      return;
+    }
+
+    let correctCount = 0;
+
+    dropdowns.forEach((dropdown, index) => {
+      const candadoItem = dropdown.closest('.candado-item');
+      const isCorrect = selectedValues[index] === correctOrder[index];
+
+      // Remover iconos existentes
+      const existingIcon = candadoItem.querySelector('.verification-icon');
+      if (existingIcon) {
+        existingIcon.remove();
+      }
+
+      const icon = document.createElement('div');
+      icon.className = 'verification-icon';
+
+      if (isCorrect) {
+        icon.classList.add('correct');
+        icon.innerHTML = '<i class="fa fa-check"></i>';
+        correctCount++;
+      } else {
+        icon.classList.add('incorrect');
+        icon.innerHTML = '<i class="fa fa-times"></i>';
+      }
+
+      candadoItem.appendChild(icon);
+    });
+
+    const percentage = ((correctCount / correctOrder.length) * 100).toFixed(0);
+    validationMessage.textContent = `Respuestas correctas ${correctCount} de 5. (${percentage}%)`;
+    validationMessage.className = 'validation-message';
+
+    if (Number(percentage) === 100) {
+      window.setActividadCompletada?.('slider14');
+      validateBtn.disabled = true;
+      dropdowns.forEach((d) => (d.disabled = true));
+      validationMessage.classList.add('select-correct');
+    } else {
+      validationMessage.classList.add('select-incorrect');
+    }
+  }
+
+  function updateResetButtonState() {
+    const hasSelections = selectedValues.some((value) => value !== '');
+    resetBtn.disabled = !hasSelections;
+  }
+
+  function resetActivity() {
+    selectedValues = ['', '', '', '', ''];
+
+    dropdowns.forEach((dropdown) => {
+      dropdown.value = '';
+      const candadoItem = dropdown.closest('.candado-item');
+      const existingIcon = candadoItem.querySelector('.verification-icon');
+      if (existingIcon) {
+        existingIcon.remove();
+      }
+    });
+
+    updateDropdownOptions();
+    updateResetButtonState();
+    validationMessage.textContent = '';
+    validationMessage.className = 'validation-message';
+  }
+
+  // Event listeners
+  dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener('change', handleDropdownChange);
+  });
+
+  validateBtn.addEventListener('click', validateAnswers);
+  resetBtn.addEventListener('click', resetActivity);
+
+  // Inicializar
+  updateDropdownOptions();
+  updateResetButtonState();
+
+  if (window.getEstadoActividades?.()['slider14']) {
+    validateBtn.disabled = true;
+    dropdowns.forEach((d) => (d.disabled = true));
+    validationMessage.textContent = 'Actividad completada previamente.';
+    validationMessage.classList.add('select-correct');
+  }
 }
