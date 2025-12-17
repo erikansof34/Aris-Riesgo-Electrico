@@ -1,7 +1,6 @@
 export function init() {
-
   // Actividad Select
-  const correctAnswers = ["1", "4", "2", "3", "5", "6"];
+  const correctAnswers = ['1', '4', '2', '3', '5', '6'];
   let selectedValues = {};
 
   const selects = document.querySelectorAll('.select');
@@ -10,21 +9,21 @@ export function init() {
   const feedbackDiv = document.querySelector('.select-feedback');
   const errorContainer = document.querySelector('.select-error-container');
 
-  selects.forEach(select => {
-    selectedValues[select.dataset.index] = "0";
+  selects.forEach((select) => {
+    selectedValues[select.dataset.index] = '0';
   });
 
   function updateSelectOptions() {
-    selects.forEach(select => {
-      Array.from(select.options).forEach(option => {
-        if (option.value !== "0") option.hidden = false;
+    selects.forEach((select) => {
+      Array.from(select.options).forEach((option) => {
+        if (option.value !== '0') option.hidden = false;
       });
     });
 
-    selects.forEach(currentSelect => {
+    selects.forEach((currentSelect) => {
       const currentValue = currentSelect.value;
-      if (currentValue !== "0") {
-        selects.forEach(otherSelect => {
+      if (currentValue !== '0') {
+        selects.forEach((otherSelect) => {
           if (otherSelect !== currentSelect) {
             const optionToHide = otherSelect.querySelector(`option[value="${currentValue}"]`);
             if (optionToHide) optionToHide.hidden = true;
@@ -33,8 +32,8 @@ export function init() {
       }
     });
 
-    selects.forEach(select => {
-      if (select.value !== "0") {
+    selects.forEach((select) => {
+      if (select.value !== '0') {
         select.classList.add('select-selected');
       } else {
         select.classList.remove('select-selected');
@@ -42,7 +41,7 @@ export function init() {
     });
   }
 
-  selects.forEach(select => {
+  selects.forEach((select) => {
     select.addEventListener('change', function () {
       selectedValues[select.dataset.index] = select.value;
       updateSelectOptions();
@@ -51,8 +50,8 @@ export function init() {
 
   validateBtn.addEventListener('click', function () {
     let allSelected = true;
-    selects.forEach(select => {
-      if (select.value === "0") allSelected = false;
+    selects.forEach((select) => {
+      if (select.value === '0') allSelected = false;
     });
 
     if (!allSelected) {
@@ -80,6 +79,7 @@ export function init() {
       feedbackDiv.textContent = '¡Muy bien! Has completado correctamente la actividad.';
       feedbackDiv.classList.remove('hidden', 'select-incorrect');
       feedbackDiv.classList.add('select-correct');
+      window.setActividadCompletada?.('slider6');
     } else {
       feedbackDiv.textContent = '¡Piénsalo bien! Algunas respuestas no son correctas.';
       feedbackDiv.classList.remove('hidden', 'select-correct');
@@ -91,7 +91,7 @@ export function init() {
     resetBtn.classList.remove('hidden');
     resetBtn.disabled = false;
 
-    selects.forEach(select => {
+    selects.forEach((select) => {
       select.disabled = true;
     });
 
@@ -99,17 +99,17 @@ export function init() {
   });
 
   resetBtn.addEventListener('click', function () {
-    selects.forEach(select => {
-      select.value = "0";
+    selects.forEach((select) => {
+      select.value = '0';
       select.classList.remove('select-correct-answer', 'select-incorrect-answer', 'select-selected');
       select.disabled = false;
-      Array.from(select.options).forEach(option => {
+      Array.from(select.options).forEach((option) => {
         option.hidden = false;
       });
     });
 
-    selects.forEach(select => {
-      selectedValues[select.dataset.index] = "0";
+    selects.forEach((select) => {
+      selectedValues[select.dataset.index] = '0';
     });
 
     feedbackDiv.innerHTML = '';
@@ -124,4 +124,14 @@ export function init() {
   });
 
   updateSelectOptions();
+
+  // Si ya se completó previamente, deshabilitar y mostrar mensaje
+  if (window.getEstadoActividades?.()['slider6']) {
+    selects.forEach((select) => (select.disabled = true));
+    validateBtn.disabled = true;
+    resetBtn.classList.add('hidden');
+    feedbackDiv.textContent = 'Actividad completada previamente.';
+    feedbackDiv.classList.remove('hidden');
+    feedbackDiv.classList.add('select-correct');
+  }
 }

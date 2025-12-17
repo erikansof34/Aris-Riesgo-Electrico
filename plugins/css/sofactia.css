@@ -1664,13 +1664,9 @@ ol {
 }
 @media (max-width: 1200px) {
   .btn-navigation-fixed-bottom {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1000;
+    position: static;
     background: rgba(0, 0, 0, 0.05);
-    /* Fondo negro semitransparente */
+    width: 100%;
   }
 }
 #breadcrumb_movil {

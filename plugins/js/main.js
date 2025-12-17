@@ -24,7 +24,83 @@ const sliders = [
   { router: 'slider14', momento: 2 },
   { router: 'slider15', momento: 3 },
   { router: 'slider17', momento: 3 },
+  { router: 'slider18', momento: 3 },
 ];
+
+// ================== PARÁMETRO GLOBAL DE RESTRICCIONES ==================
+const RESTRICCIONES = false;
+
+// ================== ACTIVIDADES REQUERIDAS ==================
+const actividadesRequeridas = new Set(['slider6', 'slider10', 'slider14']);
+
+function getEstadoActividades() {
+  try {
+    return JSON.parse(localStorage.getItem('actividadesCompletadas') || '{}');
+  } catch (e) {
+    return {};
+  }
+}
+
+function setActividadCompletada(router) {
+  const estado = getEstadoActividades();
+  estado[router] = true;
+  localStorage.setItem('actividadesCompletadas', JSON.stringify(estado));
+}
+
+function actividadPendienteEnRouter(router) {
+  if (!actividadesRequeridas.has(router)) return false;
+  const estado = getEstadoActividades();
+  return !estado[router];
+}
+
+function mostrarModalAdvertenciaAvance(mensajePersonalizado) {
+  const existing = document.getElementById('modalAdvertenciaAvance');
+  if (!existing) {
+    const html = `
+      <div class="modal fade" id="modalAdvertenciaAvance" tabindex="-1" aria-hidden="true" data-modal-initialized="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg-650">
+          <div class="modal-content">
+            <div class="modal-header sf-bg-primary">
+              <h5 class="modal-title sf-text-white">¡Atención!</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+              <img src="../../assets/img/botones/pregunta_icono.webp" alt="alerta" style="width:90px;height:90px;object-fit:contain;" class="mb-3"/>
+              <p id="modalAdvertenciaTexto" class="text-justify mb-3">
+                Debes completar la actividad de este slide al 100% para poder avanzar. Puedes navegar hacia atrás libremente para revisar contenido previo.
+              </p>
+              <div class="d-flex justify-content-center gap-3">
+                <button type="button" class="btn sf-btn sf-btn-success sf-btn-gray" data-bs-dismiss="modal">
+                  <i class="fa fa-times-circle"></i> Entendido
+                </button>
+                <button type="button" class="btn sf-btn sf-btn-success" id="btnIrAtrasAdvertencia">
+                  <i class="fa fa-arrow-left"></i> Ir al anterior
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    document.body.insertAdjacentHTML('beforeend', html);
+    document.getElementById('btnIrAtrasAdvertencia')?.addEventListener('click', () => {
+      const modal = bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAdvertenciaAvance'));
+      modal.hide();
+      prevSlide();
+    });
+  }
+  const modalEl = document.getElementById('modalAdvertenciaAvance');
+  const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+  const textoEl = document.getElementById('modalAdvertenciaTexto');
+  if (mensajePersonalizado && textoEl) {
+    textoEl.textContent = mensajePersonalizado;
+  }
+  modal.show();
+}
+
+// Exponer utilidades a otros módulos
+window.setActividadCompletada = setActividadCompletada;
+window.getEstadoActividades = getEstadoActividades;
+window.actividadPendienteEnRouter = actividadPendienteEnRouter;
 
 // const course_code = localStorage.getItem('COURSE_CODE');
 // // Configuración de navegación entre páginas
@@ -161,6 +237,7 @@ function guardarProgreso(momentoId, slide) {
   progreso[momentoId] = Math.max(progreso[momentoId] || 0, slide);
   progreso.currentIndex = currentIndex;
   progreso.timestamp = new Date().toISOString();
+  progreso.maxUnlockedIndex = Math.max(progreso.maxUnlockedIndex || 0, currentIndex);
 
   localStorage.setItem('cursoProgreso', JSON.stringify(progreso));
 }
@@ -289,14 +366,17 @@ window.prevSlide = () => {
 
 // ================== SIGUIENTE SLIDER  ==================
 window.nextSlide = () => {
+  const routerActual = sliders[currentIndex]?.router;
+  if (RESTRICCIONES && actividadesRequeridas.has(routerActual) && actividadPendienteEnRouter(routerActual)) {
+    mostrarModalAdvertenciaAvance();
+    return;
+  }
   if (currentIndex < sliders.length - 1) {
     const indexAnterior = currentIndex;
     currentIndex++;
-    // Detectar cambio de momento
     detectarCambioMomento(indexAnterior, currentIndex);
     loadSlider(currentIndex);
   } else {
-    // Estamos en el último slide, ir a página siguiente
     navegarAPaginaSiguiente();
   }
 };
@@ -313,10 +393,25 @@ window.progCircle = (slideNumber, plataforma = 0) => {
   pausarElementosMultimedia();
   const targetIndex = slideNumber - 1;
   if (targetIndex >= 0 && targetIndex < sliders.length) {
+    if (RESTRICCIONES) {
+      const progreso = JSON.parse(localStorage.getItem('cursoProgreso') || '{}');
+      const maxUnlocked = Number.isInteger(progreso.maxUnlockedIndex) ? progreso.maxUnlockedIndex : currentIndex;
+      if (targetIndex > currentIndex) {
+        if (targetIndex > maxUnlocked + 1) {
+          mostrarModalAdvertenciaAvance('Debes avanzar en orden. Completa los slides previos para desbloquear este contenido.');
+          return;
+        }
+        const routerActual = sliders[currentIndex]?.router;
+        if (actividadesRequeridas.has(routerActual) && actividadPendienteEnRouter(routerActual)) {
+          mostrarModalAdvertenciaAvance();
+          return;
+        }
+      }
+    }
     currentIndex = targetIndex;
     loadSlider(currentIndex);
     actualizarCirculosProgreso();
-    actualizarDropdownSliderMenuActivo(); // <-- Agregado aquí
+    actualizarDropdownSliderMenuActivo();
   }
 };
 
@@ -577,8 +672,7 @@ document.addEventListener('DOMContentLoaded', actualizarPosicionNavegacion);
 function sliderActualTieneScroll() {
   const container = document.getElementById('slider-container');
   if (!container) return false;
-  // Si el contenido del slider es más alto que el área visible, hay scroll
-  return container.scrollHeight > container.clientHeight;
+  return false;
 }
 
 function controlarVisibilidadBotonesNavegacion() {
@@ -588,25 +682,9 @@ function controlarVisibilidadBotonesNavegacion() {
   const btnAbajo = document.getElementById('btnParallaxMobile');
 
   const container = document.getElementById('slider-container');
-  if (!btnPrev || !btnNext || !container || !btnAbajo) return;
-
-  if (!sliderActualTieneScroll()) {
-    btnPrev.classList.remove('ocultar');
-    btnNext.classList.remove('ocultar');
-    btnAbajo.classList.remove('ocultar');
-    return;
-  }
-
-  // Si hay scroll, mostrar solo al llegar al final del slider-container
-  if (container.scrollTop + container.clientHeight >= container.scrollHeight - 2) {
-    btnPrev.classList.remove('ocultar');
-    btnNext.classList.remove('ocultar');
-    btnAbajo.classList.add('ocultar');
-  } else {
-    btnPrev.classList.add('ocultar');
-    btnNext.classList.add('ocultar');
-    btnAbajo.classList.remove('ocultar');
-  }
+  if (!btnPrev || !btnNext) return;
+  btnPrev.classList.remove('ocultar');
+  btnNext.classList.remove('ocultar');
 }
 
 function actualizarBotonesNavegacion() {
@@ -632,10 +710,44 @@ window.loadSlider = async function (index) {
   await originalLoadSlider(index);
   const btnPrev = document.getElementById('pagIndex');
   const btnNext = document.getElementById('next');
-  if (btnPrev) btnPrev.classList.add('ocultar');
-  if (btnNext) btnNext.classList.add('ocultar');
+  if (btnPrev) btnPrev.classList.remove('ocultar');
+  if (btnNext) btnNext.classList.remove('ocultar');
   setTimeout(actualizarBotonesNavegacion, 5);
 };
+
+function ejecutarPruebasNavegacion() {
+  const prev = document.getElementById('pagIndex');
+  const next = document.getElementById('next');
+  const container = document.getElementById('slider-container');
+  const visibleAlCargar = prev && next && !prev.classList.contains('ocultar') && !next.classList.contains('ocultar');
+  console.log('Prueba flechas visibles al cargar:', visibleAlCargar);
+  if (container) {
+    const inicial = !prev.classList.contains('ocultar') && !next.classList.contains('ocultar');
+    container.scrollTop = 0;
+    const inicioScroll = !prev.classList.contains('ocultar') && !next.classList.contains('ocultar');
+    container.scrollTop = container.scrollHeight;
+    const finScroll = !prev.classList.contains('ocultar') && !next.classList.contains('ocultar');
+    console.log('Prueba flechas activas durante scroll (inicio):', inicial && inicioScroll);
+    console.log('Prueba flechas activas durante scroll (final):', finScroll);
+  }
+}
+
+function ejecutarPruebasBarraProgreso() {
+  const inicio = currentIndex;
+  const progreso = JSON.parse(localStorage.getItem('cursoProgreso') || '{}');
+  const maxUnlocked = Number.isInteger(progreso.maxUnlockedIndex) ? progreso.maxUnlockedIndex : inicio;
+  const destino = Math.min(inicio + 3, sliders.length - 1);
+  const bloqueoCorrecto = destino > maxUnlocked + 1;
+  console.log('Prueba barra de progreso no permite saltos grandes:', bloqueoCorrecto);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const runTests = localStorage.getItem('RUN_NAV_TESTS') === 'true' || window.__runNavTests === true;
+  if (runTests) {
+    setTimeout(ejecutarPruebasNavegacion, 100);
+    setTimeout(ejecutarPruebasBarraProgreso, 200);
+  }
+});
 
 // ================== FUNCIÓN BOTON HACIA ABAJO  ==================
 function controlarVisibilidadHaciaAbajo() {
