@@ -1,28 +1,78 @@
 /* Layout base y elementos del timeline */
-.timeline-container { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 8px 0; }
-.timeline-arrow { background: transparent; border: none; color: #fff; font-size: 26px; padding: 8px; line-height: 1; }
-.timeline-track { flex: 1; max-width: 980px; }
-.timeline-line { position: relative; height: 6px; background: rgba(255,255,255,0.75); border-radius: 3px; }
+.timeline-container { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 20px 0; width: 100%; max-width: 800px; margin: 0 auto; }
+.timeline-track { flex: 1; width: 100%; position: relative; padding: 0 10px; }
+.timeline-line { position: relative; height: 6px; background: rgba(255,255,255,0.75); border-radius: 3px; width: 100%; }
 .timeline-line::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; border-radius: 50%; background: #fff; }
 .timeline-line::after { content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; border-radius: 50%; background: #fff; }
-.timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; cursor: pointer; transition: transform .2s ease; }
-.timeline-dot[data-index="0"] { left: 6%; }
+.timeline-dot { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; border-radius: 50%; background: #fff; cursor: pointer; transition: transform .2s ease; z-index: 2; }
+.timeline-dot[data-index="0"] { left: 0%; }
 .timeline-dot[data-index="1"] { left: 50%; }
-.timeline-dot[data-index="2"] { left: 94%; }
+.timeline-dot[data-index="2"] { left: 100%; }
 .timeline-dot.active { background: #BFEE30; box-shadow: 0 0 0 6px rgba(191,238,48,0.25); transform: translate(-50%, -50%) scale(1.1); }
 
-.timeline-cards { gap: 18px; }
-.timeline-cards .timeline-card { background: rgba(255,255,255,0.18); border-radius: 12px; padding: 16px 20px; min-width: 260px; border: 1px solid rgba(255,255,255,0.25); transition: transform .2s ease, box-shadow .2s ease; }
-.timeline-cards .timeline-card.active { transform: translateY(-3px); box-shadow: rgba(0,0,0,.3) 0 8px 22px; }
+.timeline-cards { gap: 18px; align-items: flex-start; }
+.timeline-cards .timeline-card { background: rgba(255,255,255,0.18); border-radius: 12px; padding: 16px 20px; width: 300px; border: 1px solid rgba(255,255,255,0.25); transition: all .3s ease; font-family: 'Futura Bk BT', sans-serif; }
+.timeline-cards .timeline-card.active { transform: translateY(-3px); box-shadow: rgba(0,0,0,.3) 0 8px 22px; background: rgba(255,255,255,0.25); }
 .timeline-card h3 { font-size: clamp(1rem, 2.2vw, 1.3rem); margin-bottom: 6px; }
 .timeline-card p { font-size: clamp(1rem, 1.8vw, 1.15rem); }
+.timeline-desc { display: none; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px; }
+.timeline-card.active .timeline-desc { display: block; animation: fadeIn 0.5s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
 @media (max-width: 768px) {
-  .timeline-arrow { font-size: 24px; }
-  .timeline-track { max-width: 100%; }
-  .timeline-dot[data-index="0"] { left: 12%; }
-  .timeline-dot[data-index="1"] { left: 50%; }
-  .timeline-dot[data-index="2"] { left: 88%; }
-  .timeline-cards { flex-direction: column; align-items: center; }
-  .timeline-cards .timeline-card { min-width: 85%; }
+  /* Ocultar la línea de tiempo horizontal original */
+  .timeline-container { display: none; }
+
+  /* Ajustar el contenedor de tarjetas para la línea vertical */
+  .timeline-cards {
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    padding-left: 20px; /* Espacio para la línea */
+    margin-left: 20px; /* Margen desde el borde izquierdo */
+    gap: 30px;
+    margin-top: 0 !important;
+  }
+
+  /* Dibujar la línea vertical usando un pseudo-elemento del contenedor */
+  .timeline-cards::before {
+    content: '';
+    position: absolute;
+    left: 6px; /* Posición horizontal de la línea */
+    top: 10px;
+    bottom: 10px;
+    width: 6px;
+    background: rgba(255,255,255,0.75);
+    border-radius: 3px;
+  }
+
+  .timeline-cards .timeline-card {
+    width: 100%;
+    min-width: unset;
+    margin-left: 10px; /* Espacio entre el punto y la tarjeta */
+    position: relative; /* Para posicionar el punto relativo a la tarjeta */
+    overflow: visible; /* Permitir que el punto se salga si es necesario */
+  }
+
+  /* Dibujar los puntos (dots) en cada tarjeta */
+  .timeline-cards .timeline-card::before {
+    content: '';
+    position: absolute;
+    left: -32px; /* Alineado con la línea vertical (20px padding + 6px width/2 + ajustes) */
+    top: 20px; /* Alineado con el título */
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    z-index: 1;
+    transition: transform 0.2s ease;
+  }
+
+  /* Estilo para el punto activo */
+  .timeline-cards .timeline-card.active::before {
+    background: #BFEE30;
+    box-shadow: 0 0 0 6px rgba(191,238,48,0.25);
+    transform: scale(1.1);
+  }
 }
