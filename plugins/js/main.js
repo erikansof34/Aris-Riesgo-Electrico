@@ -26,6 +26,9 @@ const sliders = [
   { router: 'slider17', momento: 3 },
 ];
 
+// ================== PARÁMETRO GLOBAL DE RESTRICCIONES ==================
+const RESTRICCIONES = false;
+
 // ================== ACTIVIDADES REQUERIDAS ==================
 const actividadesRequeridas = new Set(['slider6', 'slider10', 'slider14']);
 
@@ -363,7 +366,7 @@ window.prevSlide = () => {
 // ================== SIGUIENTE SLIDER  ==================
 window.nextSlide = () => {
   const routerActual = sliders[currentIndex]?.router;
-  if (actividadesRequeridas.has(routerActual) && actividadPendienteEnRouter(routerActual)) {
+  if (RESTRICCIONES && actividadesRequeridas.has(routerActual) && actividadPendienteEnRouter(routerActual)) {
     mostrarModalAdvertenciaAvance();
     return;
   }
@@ -389,18 +392,19 @@ window.progCircle = (slideNumber, plataforma = 0) => {
   pausarElementosMultimedia();
   const targetIndex = slideNumber - 1;
   if (targetIndex >= 0 && targetIndex < sliders.length) {
-    const progreso = JSON.parse(localStorage.getItem('cursoProgreso') || '{}');
-    const maxUnlocked = Number.isInteger(progreso.maxUnlockedIndex) ? progreso.maxUnlockedIndex : currentIndex;
-    // Permitir libre hacia atrás. Para avanzar, validar actividad del slide actual y no permitir saltos
-    if (targetIndex > currentIndex) {
-      if (targetIndex > maxUnlocked + 1) {
-        mostrarModalAdvertenciaAvance('Debes avanzar en orden. Completa los slides previos para desbloquear este contenido.');
-        return;
-      }
-      const routerActual = sliders[currentIndex]?.router;
-      if (actividadesRequeridas.has(routerActual) && actividadPendienteEnRouter(routerActual)) {
-        mostrarModalAdvertenciaAvance();
-        return;
+    if (RESTRICCIONES) {
+      const progreso = JSON.parse(localStorage.getItem('cursoProgreso') || '{}');
+      const maxUnlocked = Number.isInteger(progreso.maxUnlockedIndex) ? progreso.maxUnlockedIndex : currentIndex;
+      if (targetIndex > currentIndex) {
+        if (targetIndex > maxUnlocked + 1) {
+          mostrarModalAdvertenciaAvance('Debes avanzar en orden. Completa los slides previos para desbloquear este contenido.');
+          return;
+        }
+        const routerActual = sliders[currentIndex]?.router;
+        if (actividadesRequeridas.has(routerActual) && actividadPendienteEnRouter(routerActual)) {
+          mostrarModalAdvertenciaAvance();
+          return;
+        }
       }
     }
     currentIndex = targetIndex;
