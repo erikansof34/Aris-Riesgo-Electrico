@@ -3,12 +3,10 @@ export function init() {
     { value: '1', label: 'Bloqueo de sistema eléctrico' },
     { value: '2', label: 'Bloqueo de sistema de válvulas' },
     { value: '3', label: 'Bloqueo de escaleras y equipos' },
-    { value: '4', label: 'Bloqueo de instrumentos' },
-    { value: '5', label: 'Equipos contratistas' },
   ];
 
-  const correctOrder = ['3', '4', '5', '2', '1']; // Amarillo→Escaleras, Verde→Instrumentos, Naranja→Contratistas, Azul→Válvulas, Rojo→Eléctrico
-  let selectedValues = ['', '', '', '', ''];
+  const correctOrder = ['3', '2', '1']; // Amarillo→Escaleras, Azul→Válvulas, Rojo→Eléctrico
+  let selectedValues = ['', '', ''];
 
   const dropdowns = document.querySelectorAll('.candado-dropdown');
   const validateBtn = document.getElementById('validate-btn');
@@ -93,7 +91,7 @@ export function init() {
     });
 
     const percentage = ((correctCount / correctOrder.length) * 100).toFixed(0);
-    validationMessage.textContent = `Respuestas correctas ${correctCount} de 5. (${percentage}%)`;
+    validationMessage.textContent = `Respuestas correctas ${correctCount} de 3. (${percentage}%)`;
     validationMessage.className = 'validation-message';
 
     if (Number(percentage) === 100) {
@@ -112,7 +110,7 @@ export function init() {
   }
 
   function resetActivity() {
-    selectedValues = ['', '', '', '', ''];
+    selectedValues = ['', '', ''];
 
     dropdowns.forEach((dropdown) => {
       dropdown.value = '';
