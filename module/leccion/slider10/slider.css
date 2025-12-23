@@ -38,7 +38,7 @@
   color: white;
   border: none;
   border-radius: 25px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -46,14 +46,18 @@
 }
 
 .verification-btn:hover {
-  background-color: #0056b3;
+  background-color: #fff;
+  border: 2px solid #0056b3;
+  color: #0056b3;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .verification-btn.active {
-  background-color: rgb(191, 238, 48);
+  background-color: #fff;
   transform: scale(0.95);
+  border: 2px solid #0056b3;
+  color: #0056b3;
 }
 
 /* Contenedor de descripción */

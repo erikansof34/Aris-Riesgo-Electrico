@@ -1,27 +1,19 @@
+const slides_sld2_bienvenida = document.querySelectorAll('.slide_sld2_bienvenida');
+  let index_sld2_bienvenida = 0;
 
-document.addEventListener('DOMContentLoaded', function () {
-  const carouselImages = document.querySelectorAll('.carousel-img');
-  
-  if (carouselImages.length === 0) {
-    console.warn('No carousel images found');
-    return;
-  }
-  
-  let currentIndex = 0;
+  function cambiarSlide_sld2_bienvenida(){
+    slides_sld2_bienvenida.forEach(slide => {
+      slide.classList.remove('active_sld2_bienvenida');
+    });
 
-  function showNextImage() {
-    // Remover active de la imagen actual
-    carouselImages[currentIndex].classList.remove('active');
-    
-    // Avanzar al siguiente índice (ciclo infinito)
-    currentIndex = (currentIndex + 1) % carouselImages.length;
-    
-    // Agregar active a la nueva imagen
-    carouselImages[currentIndex].classList.add('active');
-    
-    console.log('Mostrando imagen:', currentIndex + 1);
+    slides_sld2_bienvenida[index_sld2_bienvenida]
+      .classList.add('active_sld2_bienvenida');
+
+    index_sld2_bienvenida++;
+    if(index_sld2_bienvenida >= slides_sld2_bienvenida.length){
+      index_sld2_bienvenida = 0;
+    }
   }
 
-  // Cambiar imagen cada 4 segundos
-  setInterval(showNextImage, 4000);
-});
+  setInterval(cambiarSlide_sld2_bienvenida, 3000);
+
