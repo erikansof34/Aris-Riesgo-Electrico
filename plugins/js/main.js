@@ -15,7 +15,7 @@ const sliders = [
   { router: 'slider3', momento: 1 },
   { router: 'slider4-momento', momento: 1 },
   { router: 'slider5', momento: 1 },
-   { router: 'slider18', momento: 3 },
+  { router: 'slider18', momento: 1 },
   { router: 'slider6', momento: 1 },
   { router: 'slider9', momento: 2 },
   { router: 'slider10', momento: 2 },
@@ -25,7 +25,6 @@ const sliders = [
   { router: 'slider14', momento: 2 },
   { router: 'slider15', momento: 3 },
   { router: 'slider17', momento: 3 },
- 
 ];
 
 // ================== PARÁMETRO GLOBAL DE RESTRICCIONES ==================

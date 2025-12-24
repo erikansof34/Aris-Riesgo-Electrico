@@ -57,7 +57,7 @@
     padding: 0.75rem;
     border-bottom: 1px solid #dee2e6;
   }
-  
+
   .tab-button.active {
     border-bottom: 3px solid #0056b3;
   }
@@ -118,7 +118,7 @@
 .slide-image-kit {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 
@@ -192,14 +192,69 @@
 
 /* Animaciones */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+/* Stack slides absolutely so fade transitions work smoothly */
+.swiper-wrapper-kit { position: relative; }
 .swiper-slide-kit {
-  animation: fadeIn 0.5s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease-in-out, transform 320ms ease-in-out;
+  will-change: opacity;
+  z-index: 1;
 }
+
+/* Fallback to show first slide before JS runs */
+.swiper-slide-kit:first-child {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.swiper-slide-kit.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10;
+}
+
+.swiper-container-kit { position: relative; }
+
+.kit-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.45);
+  border: none;
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 22px;
+}
+.kit-nav:hover { background: rgba(0,0,0,0.6); }
+
+.kit-prev { left: 8px; }
+.kit-next { right: 8px; }
+
+.kit-nav:focus { outline: 2px solid rgba(255, 255, 255, 0.9); }
+
+/* Larger touch targets on small screens */
+@media (max-width: 576px) {
+  .kit-nav { width: 52px; height: 52px; font-size: 26px; }
+}
+
+/* Ensure images scale correctly inside absolute slides */
+.slide-content-kit { width: 100%; height: 100%; }
+.slide-image-kit { width: 100%; height: 100%; object-fit: contain; display: block; }
