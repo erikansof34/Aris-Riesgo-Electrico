@@ -79,3 +79,51 @@
       setTimeout(() => first.click(), 0);
     }
   })();
+
+
+  const palabras_sld2_bienvenida = [
+    "sufrido una quemadura",
+    "sufrido un choque eléctrico",
+    "sufrido un atrapamiento"
+  ];
+
+  const textoElemento_sld2_bienvenida =
+    document.getElementById("typing_sld2_bienvenida");
+
+  let palabraIndex_sld2_bienvenida = 0;
+  let letraIndex_sld2_bienvenida = 0;
+  let escribiendo_sld2_bienvenida = true;
+
+  function efectoTeclado_sld2_bienvenida(){
+    const palabraActual =
+      palabras_sld2_bienvenida[palabraIndex_sld2_bienvenida];
+
+    if(escribiendo_sld2_bienvenida){
+      textoElemento_sld2_bienvenida.textContent =
+        palabraActual.substring(0, letraIndex_sld2_bienvenida + 1);
+      letraIndex_sld2_bienvenida++;
+
+      if(letraIndex_sld2_bienvenida === palabraActual.length){
+        escribiendo_sld2_bienvenida = false;
+        setTimeout(efectoTeclado_sld2_bienvenida, 1200);
+        return;
+      }
+    } else {
+      textoElemento_sld2_bienvenida.textContent =
+        palabraActual.substring(0, letraIndex_sld2_bienvenida - 1);
+      letraIndex_sld2_bienvenida--;
+
+      if(letraIndex_sld2_bienvenida === 0){
+        escribiendo_sld2_bienvenida = true;
+        palabraIndex_sld2_bienvenida++;
+        if(palabraIndex_sld2_bienvenida >= palabras_sld2_bienvenida.length){
+          palabraIndex_sld2_bienvenida = 0;
+        }
+      }
+    }
+
+    setTimeout(efectoTeclado_sld2_bienvenida, 90);
+  }
+
+  efectoTeclado_sld2_bienvenida();
+

@@ -3,7 +3,7 @@
   <div class="animate__animated animate__fadeInLeftBig col-lg-6 col-md-12 sf-center-col sf-cl">
     <h1 class="text-center">
       ¿Alguna vez has<br>
-      <span class="sf-text-secondary">sufrido una quemadura</span>
+      <span class="sf-text-secondary" id="typing_sld2_bienvenida"></span>?
     </h1>
     <img src="../../assets/img/avatars/fondo_blanco_borde_azul/avatar5_circulo_azul_fondo_blanco.webp" alt="avatar"
       class="sf-img-50 mx-auto">
@@ -12,29 +12,44 @@
       pie, o una mano con un guante atrapado con una máquina) Es porque estas interactuando con diferentes tipos de
       energía
     </p>
+
+     <i class="hipt hipt-light">
+      Haz clic para escuchar el audio
+      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down ms-1"></i>
+    </i>
+    <div class="audio-center py-3">
+      <audio class="audio-con-transcripcion" controls data-transcripcion='[
+         
+        ]'>
+        <source src="./slider5/audio/sld5-quemadura.mp3" type="audio/mp3">
+      </audio>
+      <i class="transcription-toggle fas fa-closed-captioning audio-estilos"></i>
+    </div>
   </div>
 
   <div class="animate__animated animate__fadeInRightBig col-lg-6 col-md-12 sf-center-col sf-cr sf-bg-primary">
 
     <!-- Imagen grande -->
-      <div class="main-image-display" id="mainDisplay">
+    <div class="main-image-display" id="mainDisplay">
       <img id="mainImg" src="./slider5/img/signo_interrogacion.webp" alt="Imagen seleccionada" class="main-img fade-in">
       <p id="mainTitle" class="main-title"></p>
       <div id="mainError" class="error" style="display:none;">Error al cargar la imagen</div>
     </div>
 
-       <i class="hipt hipt-light mb-3">
-       Haz click sobre los círculos y descubre la imagen
-        <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
-      </i>
+    <i class="hipt hipt-light mb-3">
+      Haz click sobre los círculos y descubre la imagen
+      <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
+    </i>
 
     <div class="grid-opciones" id="gridOpciones">
-      <div class="opcion-cuadrado" data-src="./slider5/img/quemadura.webp" data-title="SUFRIDO UNA QUEMADURA" tabindex="0">
+      <div class="opcion-cuadrado" data-src="./slider5/img/quemadura.webp" data-title="SUFRIDO UNA QUEMADURA"
+        tabindex="0">
         <img src="./slider5/img/signo_interrogacion.webp" alt="Quemadura">
         <p>SUFRIDO UNA QUEMADURA</p>
       </div>
 
-      <div class="opcion-cuadrado" data-src="./slider5/img/choque_electrico.webp" data-title="CHOQUE ELÉCTRICO" tabindex="0">
+      <div class="opcion-cuadrado" data-src="./slider5/img/choque_electrico.webp" data-title="CHOQUE ELÉCTRICO"
+        tabindex="0">
         <img src="./slider5/img/signo_interrogacion.webp" alt="Choque Eléctrico">
         <p>CHOQUE ELÉCTRICO</p>
       </div>
@@ -44,7 +59,7 @@
         <p>ATRAPAMIENTO</p>
       </div>
     </div>
-   
+
   </div>
 
 
