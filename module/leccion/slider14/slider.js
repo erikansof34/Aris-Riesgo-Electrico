@@ -1,11 +1,11 @@
 export function init() {
   const options = [
-    { value: '1', label: 'Bloqueo de sistema eléctrico' },
-    { value: '2', label: 'Bloqueo de sistema de válvulas' },
-    { value: '3', label: 'Bloqueo de escaleras y equipos' },
+    { value: '3', label: 'Candado de Seguridad Personal' },
+    { value: '1', label: 'Candado Oficial de Bloqueo' },
+    { value: '2', label: 'Candado Coordinador de Aislamiento' },
   ];
 
-  const correctOrder = ['3', '2', '1']; // Amarillo→Escaleras, Azul→Válvulas, Rojo→Eléctrico
+  const correctOrder = ['1', '2', '3']; // Amarillo→Oficial, Azul→Coordinador, Rojo→Seguridad
   let selectedValues = ['', '', ''];
 
   const dropdowns = document.querySelectorAll('.candado-dropdown');

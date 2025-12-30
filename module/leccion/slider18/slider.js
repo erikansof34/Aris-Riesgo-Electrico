@@ -1,26 +1,43 @@
 export function init() {
-  const dots = document.querySelectorAll('.timeline-dot');
-  const cards = document.querySelectorAll('.timeline-card');
+  const wavePoints = document.querySelectorAll('.wave-point');
+  const isMobile = window.innerWidth <= 576;
 
-  let activeIndex = 0;
-
-  function setActive(index) {
-    activeIndex = Math.max(0, Math.min(dots.length - 1, index));
-    dots.forEach((d) => d.classList.toggle('active', Number(d.dataset.index) === activeIndex));
-    cards.forEach((c) => {
-      const isActive = Number(c.dataset.index) === activeIndex;
-      c.classList.toggle('active', isActive);
-      c.setAttribute('aria-selected', isActive ? 'true' : 'false');
-    });
+  // Activar el primer punto inicialmente
+  if (wavePoints.length > 0) {
+    wavePoints[0].classList.add('active');
   }
 
-  dots.forEach((d) => d.addEventListener('click', () => setActive(Number(d.dataset.index))));
-  cards.forEach((c) => c.addEventListener('click', () => setActive(Number(c.dataset.index))));
+  wavePoints.forEach((point, index) => {
+    point.addEventListener('click', () => {
+      // En móvil, permitir múltiples activos para mejor UX
+      if (isMobile) {
+        point.classList.toggle('active');
+      } else {
+        // En escritorio, mantener comportamiento original
+        wavePoints.forEach(p => p.classList.remove('active'));
+        point.classList.add('active');
+      }
+    });
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') setActive(activeIndex - 1);
-    if (e.key === 'ArrowRight') setActive(activeIndex + 1);
+    // Mejorar accesibilidad
+    point.setAttribute('role', 'button');
+    point.setAttribute('tabindex', '0');
+    point.setAttribute('aria-label', `Paso ${index + 1} del procedimiento`);
+    
+    // Soporte para teclado
+    point.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        point.click();
+      }
+    });
   });
 
-  setActive(0);
+  // Actualizar comportamiento en resize
+  window.addEventListener('resize', () => {
+    const newIsMobile = window.innerWidth <= 576;
+    if (newIsMobile !== isMobile) {
+      location.reload(); // Recargar para aplicar nuevos estilos
+    }
+  });
 }

@@ -1,8 +1,8 @@
 // Configuración del curso - Momentos simplificados
 const momentosCurso = {
   1: '1-La Energía en nuestro trabajo',
-  2: '2-Principios del bloqueo y etiquetado (LOTO)',
-  3: '3-Procedimiento de bloqueo y etiquetado (LOTO)'
+  2: '2-Principios del bloqueo y tarjeteo (LOTO)',
+  3: '3-Procedimiento de bloqueo y tarjeteo (LOTO)'
 };
 
 // Estado actual del curso
