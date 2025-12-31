@@ -24,6 +24,7 @@ const sliders = [
   { router: 'slider13', momento: 2 },
   { router: 'slider14', momento: 2 },
   { router: 'slider15', momento: 3 },
+  { router: 'slider19', momento: 3 },
   { router: 'slider17', momento: 3 },
 ];
 
