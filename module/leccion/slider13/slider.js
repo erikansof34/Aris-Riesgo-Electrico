@@ -11,7 +11,7 @@ export function init() {
     },
     etiquetas: {
       currentSlide: 0,
-      totalSlides: 2
+      totalSlides: 4
     }
   };
 
@@ -20,7 +20,7 @@ export function init() {
 
   // Inicializar las pestañas
   initTabs();
-  
+
   // Inicializar los sliders para cada pestaña
   initSliders();
 
@@ -29,25 +29,25 @@ export function init() {
     const tabPanes = document.querySelectorAll('.tab-pane');
 
     tabButtons.forEach(button => {
-      button.addEventListener('click', function() {
+      button.addEventListener('click', function () {
         const tabId = this.getAttribute('data-tab');
-        
+
         // Remover active de todos los botones y panes
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabPanes.forEach(pane => pane.classList.remove('active'));
-        
+
         // Activar el botón y pane clickeado
         this.classList.add('active');
         document.querySelector(`[data-tab-content="${tabId}"]`).classList.add('active');
-        
+
         // Detener el slider anterior
         if (slideIntervals[activeTab]) {
           clearInterval(slideIntervals[activeTab]);
         }
-        
+
         // Actualizar pestaña activa
         activeTab = tabId;
-        
+
         // Reiniciar el slider de la nueva pestaña
         tabsData[tabId].currentSlide = 0;
         showSlide(tabId, 0);
@@ -121,7 +121,7 @@ export function init() {
     if (slides[index]) {
       slides[index].style.display = 'block';
       slides[index].style.opacity = '0';
-      
+
       // Pequeño delay para la animación
       setTimeout(() => {
         slides[index].style.opacity = '1';
