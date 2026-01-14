@@ -30,7 +30,7 @@ const sliders = [
 ];
 
 // ================== PARÁMETRO GLOBAL DE RESTRICCIONES ==================
-const RESTRICCIONES = false;
+const RESTRICCIONES = true;
 
 // ================== ACTIVIDADES REQUERIDAS ==================
 const actividadesRequeridas = new Set(['slider6', 'slider10', 'slider14']);
