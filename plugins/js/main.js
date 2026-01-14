@@ -66,7 +66,7 @@ function mostrarModalAdvertenciaAvance(mensajePersonalizado) {
               <h5 class="modal-title sf-text-white">¡Atención!</h5>
             </div>
             <div class="modal-body text-center">
-              <img src="../../assets/img/botones/pregunta_icono.webp" alt="alerta" style="width:90px;height:90px;object-fit:contain;" class="mb-3"/>
+              <img src="../../assets/img/botones/atencion_modal.webp" alt="alerta" style="width:90px;height:90px;object-fit:contain;" class="mb-3"/>
               <p id="modalAdvertenciaTexto" class="text-justify mb-3">
                 Debes completar la actividad de este slide al 100% para poder avanzar. Puedes navegar hacia atrás libremente para revisar contenido previo.
               </p>
@@ -74,7 +74,7 @@ function mostrarModalAdvertenciaAvance(mensajePersonalizado) {
                 <button type="button" class="btn sf-btn sf-btn-success sf-btn-gray" data-bs-dismiss="modal">
                   <i class="fa fa-times-circle"></i> Entendido
                 </button>
-                <button type="button" class="btn sf-btn sf-btn-success" id="btnIrAtrasAdvertencia">
+                <button type="button" class="btn sf-btn sf-btn-success" id="">
                   <i class="fa fa-arrow-left"></i> Ir al anterior
                 </button>
               </div>
