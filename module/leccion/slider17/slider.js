@@ -305,6 +305,11 @@ export function init() {
                 </p>
             `;
             validationMessage.style.backgroundColor = '#e8f5e9';
+            
+            // Marcar actividad como completada
+            if (typeof window.setActividadCompletada === 'function') {
+                window.setActividadCompletada('slider17');
+            }
         } else {
             validationMessage.innerHTML = `
                 <p class="validation-text-dadarrast">

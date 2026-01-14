@@ -33,7 +33,7 @@ const sliders = [
 const RESTRICCIONES = true;
 
 // ================== ACTIVIDADES REQUERIDAS ==================
-const actividadesRequeridas = new Set(['slider6', 'slider10', 'slider14']);
+const actividadesRequeridas = new Set(['slider6', 'slider12', 'slider14', 'slider17']);
 
 function getEstadoActividades() {
   try {
@@ -64,7 +64,6 @@ function mostrarModalAdvertenciaAvance(mensajePersonalizado) {
           <div class="modal-content">
             <div class="modal-header sf-bg-primary">
               <h5 class="modal-title sf-text-white">¡Atención!</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
               <img src="../../assets/img/botones/pregunta_icono.webp" alt="alerta" style="width:90px;height:90px;object-fit:contain;" class="mb-3"/>
