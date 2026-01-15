@@ -27,7 +27,7 @@ function mostrarModalInicioCurso() {
             <h5 class="modal-title sf-text-white">¡Atención!</h5>
           </div>
           <div class="modal-body text-center">
-            <img src="../../assets/img/botones/atencion_modal.webp" alt="alerta" style="width:90px;height:90px;object-fit:contain;" class="mb-3"/>
+            <img src="../../assets/img/botones/atencion_modal.webp" alt="alerta" style="width:90px;height:90px;object-fit:contain;margin: 0 auto;" class="mb-3"/>
             <p class="text-justify mb-3">
               Para poder avanzar en el proceso, es necesario que completes todas las actividades en el orden establecido.
               No podrás adelantar la barra de progreso sin haber visualizado primero todos los slides.

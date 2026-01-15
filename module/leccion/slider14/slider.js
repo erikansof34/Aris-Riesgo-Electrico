@@ -138,11 +138,4 @@ export function init() {
   // Inicializar
   updateDropdownOptions();
   updateResetButtonState();
-
-  if (window.getEstadoActividades?.()['slider14']) {
-    validateBtn.disabled = true;
-    dropdowns.forEach((d) => (d.disabled = true));
-    validationMessage.textContent = 'Actividad completada previamente.';
-    validationMessage.classList.add('select-correct');
-  }
 }
