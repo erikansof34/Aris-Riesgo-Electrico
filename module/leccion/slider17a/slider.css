@@ -3,7 +3,6 @@
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 24px;
-    margin-bottom: 30px;
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.05);
     height: 100%;
@@ -73,11 +72,11 @@
 }
 
 .procedure-card .description.collapsed {
-    max-height: 80px;
+    max-height: 10.0625rem;
 }
 
 .procedure-card .description.expanded {
-    max-height: 500px;
+    max-height: 31.25rem;
 }
 
 .btn-ver-mas {

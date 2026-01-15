@@ -343,15 +343,4 @@ function initLotoActivity() {
   // Inicializar funcionalidades
   initDesktopDragDrop();
   initMobileSelects();
-
-  // Si ya se completó previamente, bloquear interacción y mostrar mensaje
-  if (window.getEstadoActividades?.()['slider12']) {
-    const dropZones = document.querySelectorAll('.loto-drop-zone');
-    const selects = document.querySelectorAll('.loto-select');
-    validateBtn.disabled = true;
-    selects.forEach((s) => (s.disabled = true));
-    dropZones.forEach((z) => (z.style.pointerEvents = 'none'));
-    resultDiv.classList.remove('hidden');
-    resultDiv.textContent = 'Actividad completada previamente.';
-  }
 }

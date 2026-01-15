@@ -139,20 +139,6 @@ export function init() {
     });
   });
 
-  // Si ya se completó previamente, marcar como completada sin requerir acción
-  if (window.getEstadoActividades?.()['slider10']) {
-    const doneMsg = document.createElement('div');
-    doneMsg.className = 'mt-3';
-    doneMsg.textContent = 'Actividad completada previamente.';
-    descriptionContainer.style.display = 'block';
-    descriptionContainer.appendChild(doneMsg);
-    if (validateBtn) validateBtn.disabled = true;
-    if (validationMessage) {
-      validationMessage.textContent = 'Actividad completada previamente.';
-      validationMessage.classList.add('select-correct');
-    }
-  }
-
   if (validateBtn) {
     validateBtn.addEventListener('click', function () {
       const total = Object.keys(verifications).length;

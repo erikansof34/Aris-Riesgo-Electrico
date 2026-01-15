@@ -124,14 +124,4 @@ export function init() {
   });
 
   updateSelectOptions();
-
-  // Si ya se completó previamente, deshabilitar y mostrar mensaje
-  if (window.getEstadoActividades?.()['slider6']) {
-    selects.forEach((select) => (select.disabled = true));
-    validateBtn.disabled = true;
-    resetBtn.classList.add('hidden');
-    feedbackDiv.textContent = 'Actividad completada previamente.';
-    feedbackDiv.classList.remove('hidden');
-    feedbackDiv.classList.add('select-correct');
-  }
 }
