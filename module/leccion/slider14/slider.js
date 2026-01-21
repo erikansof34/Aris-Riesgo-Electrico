@@ -38,12 +38,16 @@ export function init() {
 
     selectedValues[index] = newValue;
 
-    // Limpiar iconos de validación
+    // Limpiar iconos de validación y estilos
     const candadoItem = event.target.closest('.candado-item');
     const existingIcon = candadoItem.querySelector('.verification-icon');
     if (existingIcon) {
       existingIcon.remove();
     }
+    
+    // Limpiar estilos de validación
+    candadoItem.classList.remove('correct', 'incorrect');
+    event.target.classList.remove('correct', 'incorrect');
 
     updateDropdownOptions();
     updateResetButtonState();
@@ -75,13 +79,26 @@ export function init() {
         existingIcon.remove();
       }
 
+      // Aplicar estilos de validación a la card y select
+      if (isCorrect) {
+        candadoItem.classList.add('correct');
+        candadoItem.classList.remove('incorrect');
+        dropdown.classList.add('correct');
+        dropdown.classList.remove('incorrect');
+        correctCount++;
+      } else {
+        candadoItem.classList.add('incorrect');
+        candadoItem.classList.remove('correct');
+        dropdown.classList.add('incorrect');
+        dropdown.classList.remove('correct');
+      }
+
       const icon = document.createElement('div');
       icon.className = 'verification-icon';
 
       if (isCorrect) {
         icon.classList.add('correct');
         icon.innerHTML = '<i class="fa fa-check"></i>';
-        correctCount++;
       } else {
         icon.classList.add('incorrect');
         icon.innerHTML = '<i class="fa fa-times"></i>';
@@ -119,6 +136,10 @@ export function init() {
       if (existingIcon) {
         existingIcon.remove();
       }
+      
+      // Limpiar estilos de validación
+      candadoItem.classList.remove('correct', 'incorrect');
+      dropdown.classList.remove('correct', 'incorrect');
     });
 
     updateDropdownOptions();

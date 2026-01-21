@@ -74,7 +74,7 @@ function mostrarModalAdvertenciaAvance(mensajePersonalizado) {
                 <button type="button" class="btn sf-btn sf-btn-success sf-btn-gray" data-bs-dismiss="modal">
                   <i class="fas fa-check-circle"></i> Entendido
                 </button>
-                <button type="button" class="btn sf-btn sf-btn-success" id="">
+                <button type="button" class="btn sf-btn sf-btn-success" id="btnIrAtrasAdvertencia">
                   <i class="fa fa-arrow-left"></i> Ir al anterior
                 </button>
               </div>

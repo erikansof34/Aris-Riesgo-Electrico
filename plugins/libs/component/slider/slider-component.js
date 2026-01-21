@@ -32,6 +32,13 @@ class SliderComponent {
         this.slideCurrent = -1;
         this.autoplayTimer = null;
 
+        // Variables para soporte táctil
+        this.touchStartX = 0;
+        this.touchEndX = 0;
+        this.touchStartY = 0;
+        this.touchEndY = 0;
+        this.minSwipeDistance = 50;
+
         // Inicializar el slider
         this.init();
     }
@@ -55,6 +62,7 @@ class SliderComponent {
 
         this.initBullets();
         this.initArrows();
+        this.initTouchEvents();
         this.setupInitialState();
         
         // Comenzar el slider
@@ -117,6 +125,78 @@ class SliderComponent {
 
         this.container.appendChild(leftArrow);
         this.container.appendChild(rightArrow);
+    }
+
+    /**
+     * Inicializa los eventos táctiles para navegación por deslizamiento
+     */
+    initTouchEvents() {
+        if (!this.container) return;
+
+        // Eventos táctiles
+        this.container.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+        this.container.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+
+        // Eventos de mouse para compatibilidad con escritorio
+        this.container.addEventListener('mousedown', (e) => this.handleMouseStart(e));
+        this.container.addEventListener('mouseup', (e) => this.handleMouseEnd(e));
+    }
+
+    /**
+     * Maneja el inicio del toque
+     */
+    handleTouchStart(e) {
+        this.touchStartX = e.touches[0].clientX;
+        this.touchStartY = e.touches[0].clientY;
+    }
+
+    /**
+     * Maneja el final del toque y determina la dirección del deslizamiento
+     */
+    handleTouchEnd(e) {
+        this.touchEndX = e.changedTouches[0].clientX;
+        this.touchEndY = e.changedTouches[0].clientY;
+        this.handleSwipe();
+    }
+
+    /**
+     * Maneja el inicio del mouse (para compatibilidad con escritorio)
+     */
+    handleMouseStart(e) {
+        this.touchStartX = e.clientX;
+        this.touchStartY = e.clientY;
+    }
+
+    /**
+     * Maneja el final del mouse (para compatibilidad con escritorio)
+     */
+    handleMouseEnd(e) {
+        this.touchEndX = e.clientX;
+        this.touchEndY = e.clientY;
+        this.handleSwipe();
+    }
+
+    /**
+     * Procesa el gesto de deslizamiento
+     */
+    handleSwipe() {
+        const deltaX = this.touchEndX - this.touchStartX;
+        const deltaY = this.touchEndY - this.touchStartY;
+        
+        // Verificar que el movimiento horizontal sea mayor que el vertical
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Verificar que el deslizamiento sea suficientemente largo
+            if (Math.abs(deltaX) > this.minSwipeDistance) {
+                if (deltaX > 0) {
+                    // Deslizamiento hacia la derecha - ir al slide anterior
+                    this.slideLeft();
+                } else {
+                    // Deslizamiento hacia la izquierda - ir al siguiente slide
+                    this.slideRight();
+                }
+                this.resetAutoplay();
+            }
+        }
     }
 
     /**
