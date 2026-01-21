@@ -1,4 +1,5 @@
 .candados-activity {
+    padding: 10px;
     display: flex;
     flex-direction: row;
     gap: 5px;
@@ -136,6 +137,29 @@
 
 .validation-message.error {
     color: #d32f2f;
+}
+
+/* Estilos de validación */
+.candado-item.correct {
+    background: #4caf50;
+    border-color: #4caf50;
+}
+
+.candado-item.incorrect {
+    background: #f44336;
+    border-color: #f44336;
+}
+
+.candado-dropdown.correct {
+    background-color: #c8e6c9;
+    border-color: #4caf50;
+    color: #333;
+}
+
+.candado-dropdown.incorrect {
+    background-color: #ffcdd2;
+    border-color: #f44336;
+    color: #333;
 }
 
 /* Responsive */

@@ -125,15 +125,12 @@ export function init() {
 
       visited.add(verificationType);
       if (visited.size === Object.keys(verifications).length) {
-        const doneMsg = document.createElement('div');
-        doneMsg.className = 'mt-3';
-        doneMsg.textContent = 'Has revisado todos los pasos. ¡Actividad completada!';
-        descriptionContainer.appendChild(doneMsg);
-        window.setActividadCompletada?.('slider10');
-        if (validateBtn) validateBtn.disabled = true;
-        if (validationMessage) {
-          validationMessage.textContent = 'Actividad completada.';
-          validationMessage.classList.add('select-correct');
+        // Verificar si ya existe el mensaje para no duplicarlo
+        if (!descriptionContainer.querySelector('.completion-message')) {
+          const doneMsg = document.createElement('div');
+          doneMsg.className = 'mt-3 completion-message';
+          doneMsg.textContent = 'Has revisado todos los pasos.';
+          descriptionContainer.appendChild(doneMsg);
         }
       }
     });
@@ -145,16 +142,14 @@ export function init() {
       const count = visited.size;
       if (count < total) {
         if (validationMessage) {
-          validationMessage.textContent = `Te faltan ${total - count} paso(s) por revisar antes de validar.`;
+          validationMessage.textContent = `Te faltan ${total - count} paso(s) por revisar.`;
           validationMessage.classList.remove('select-correct');
           validationMessage.classList.add('select-incorrect');
         }
         return;
       }
-      window.setActividadCompletada?.('slider10');
-      validateBtn.disabled = true;
       if (validationMessage) {
-        validationMessage.textContent = 'Validación exitosa. Actividad completada.';
+        validationMessage.textContent = 'Has revisado todos los pasos.';
         validationMessage.classList.remove('select-incorrect');
         validationMessage.classList.add('select-correct');
       }

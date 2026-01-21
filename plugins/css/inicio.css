@@ -302,12 +302,23 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .parallax-bg.bg {
+    background-image: url(../../assets/img/fondos/fondo_mobile_home.png);
+  }
+
+
   .parallax-bg video {
     object-fit: cover;
   }
 
   .parallax-content {
+    position: relative;
+    z-index: 10;
+    /* text-align: center; */
+    color: white;
+    max-width: 65rem;
     padding: 0 15px;
+    left: 1.5rem;
   }
 
   .parallax-logo {
