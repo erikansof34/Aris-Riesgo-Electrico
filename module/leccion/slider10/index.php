@@ -36,7 +36,7 @@
       <button class="verification-btn" data-verification="inmovilizadas">
         Inmovilizadas
       </button>
-      <button class="verification-btn" data-verification="bloqueadas">
+      <button class="verification-btn track-element" id="btn-bloqueadas" data-verification="bloqueadas">
         Bloqueadas
       </button>
       <button class="verification-btn" data-verification="obstruidas">

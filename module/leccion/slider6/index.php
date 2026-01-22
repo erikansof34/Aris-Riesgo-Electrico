@@ -92,7 +92,7 @@
   <div class="animate__animated animate__fadeInRightBig col-lg-5 col-md-12 sf-center-col">
     <img src="./slider6/img/vias_ingresos_sustancias.webp" alt="avatar"
       class="sf-img-100 sf-img-sm-60 sf-img-md-50 sf-img-lg-80 sf-img-xl-70 mx-auto mb-2">
-    <button class="sf-btn sf-btn-success" data-bs-toggle="modal" data-bs-target="#sld6_modalB">
+    <button class="sf-btn sf-btn-success track-element" data-bs-toggle="modal" data-bs-target="#sld6_modalB" id="btn-recuerda">
       <i class="fa-solid fa-book"></i> Recuerda
     </button>
   </div>

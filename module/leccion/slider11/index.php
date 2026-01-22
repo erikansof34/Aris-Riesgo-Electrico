@@ -11,7 +11,7 @@
     </p>
 
     <div class="text-center" style="gap: 2px; display: flex; flex-wrap: wrap; justify-content: center;">
-      <a href="./slider11/doc/PRO_QHS_011_Control_de_energías_peligrosas.pdf" download="Control_de_Energías_Peligrosas.pdf" class="btn sf-btn sf-btn-success">
+      <a href="./slider11/doc/PRO_QHS_011_Control_de_energías_peligrosas.pdf" download="Control_de_Energías_Peligrosas.pdf" class="btn sf-btn sf-btn-success track-element" id="btn-descarga-pdf">
         <i class="fas fa-file"></i> Control de Energías Peligrosas
       </a>
 

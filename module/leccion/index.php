@@ -1,20 +1,17 @@
-<!-- <?php
+<?php
     require('../../../../../functions_helpers.php'); /*load helper*/
-    check_session(); /* Comprobar la sesión activa*/
-    $course_code        = $_GET['course_code'];  /* recibir el código del curso */
-
-    $CI->load->model('training/evaluation_model');
-    $fullname       = $CI->session->userdata('employee_data')['fullname'];
-    $user_id        = $CI->session->userdata('employee_data')['user_id'];
-    $emp_unique_id  = $CI->session->userdata('employee_data')['emp_unique_id'];
-
-    $unique_course_id   = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
-    $modules_user  = $CI->evaluation_model->get_read_progress_user($unique_course_id, [], [$user_id])[0];
-    $module        = get_course_modules($course_code)[0];
-    $module_id = $module['id'];
-
-    $progress = progress_courses($course_code, $module_id)[0];
-?> -->
+    check_session(); /*check session by employee */
+    $course_code = $_GET['course_code']; /* recibir el cÃ³digo del curso */
+    //$module_id        = __my_simple_crypt__($_GET['module'], 'd');
+    $module_id = 60;
+    $unique_course_id = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
+    $extension_url = "?course_code=" . $course_code; /* variable url para pasar el cÃ³digo del curso*/
+    
+    
+    $progress = progress_courses($course_code,$module_id);
+    $firma =  image_profile($course_code);
+   
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -62,10 +59,10 @@
 </head>
 
 <body class="sf-scroll-y-hidden body-style" id="darkStyleImgSeccion">
-    <input id='course_code' value="<?= $course_code;?>" hidden>
-    <input id='module_id' value="<?= $module_id;?>" hidden>
-    <input id='unique_course_id' value="<?= $unique_course_id ;?>" hidden>
-    <input id='emp_unique_id' value="<?= $emp_unique_id ;?>" hidden>
+    <input id='course_code' value="<?php echo $course_code;?>" hidden>
+    <input id='module_id' value="<?php echo $module_id;?>" hidden>
+    <input id='unique_course_id' value="<?php echo $unique_course_id ;?>" hidden>
+    <input id='emp_unique_id' value="<?php echo $_SESSION['employee_data']['emp_unique_id'] ;?>" hidden>
     <!-- Header con el logo -->
     <header class="header">
         <div class="contentHeader bg-header-r">
@@ -144,30 +141,26 @@
         <i class="fas fa-times"></i>
         <br>
         <h1>Hola!<b>
-                <!-- <?= $fullname ?> -->
+                <?= ucwords($CI->session->userdata('employee_data')['fullname']); ?>
             </b></h1>
         <!-- <h1>Hola! <b>Nombre user</b></h1> -->
         <h5>Bienvenido a su Ruta de Aprendizaje!</h5>
         <div class="headerProg">
-            <p>
-                <b>Progreso: </b>
-                <span id="course-progress"></span><strong>
-                    <?= $progress['course_progress'];?>%
-                </strong>
-            </p>
+            <p><b>Progreso: </b><span id="course-progress"><strong>
+                        <?= $progress[0]['course_progress'];?>%</span></strong></p>
         </div>
         <hr>
         <ul>
-            <a href="../../index.html">
-                <!-- <a href="./../index.php?course_code=<?= $course_code; ?>"> -->
+            <!-- <a href="../../index.html"> -->
+                <a href="./../../index.php?course_code=<?= $course_code; ?>">
                 <li><i class="fas fa-caret-right"></i> Presentación</li>
             </a>
-            <a href="./index.html" class="act">
-                <!-- <a href="./index.php?course_code=<?= $course_code; ?>"> -->
+            <!-- <a href="./index.html" class="act"> -->
+                <a href="./index.php?course_code=<?= $course_code; ?>">
                 <li><i class="fas fa-caret-right"></i> Contenido</li>
             </a>
-            <a href="../evaluacion/quiz.html">
-                <!-- <a href="../evaluacion/quiz.php?course_code=<?= $course_code; ?>"> -->
+            <!-- <a href="../evaluacion/quiz.html"> -->
+                <a href="../evaluacion/quiz.php?course_code=<?= $course_code; ?>">
                 <li><i class="fas fa-caret-right"></i> Evaluación</li>
             </a>
         </ul>
@@ -195,18 +188,51 @@
 
         <script src="../../plugins/js/getProgressActivity.js"></script>
         <script src="../../plugins/js/modal-bg.js"></script>
-        <script src="../../plugins/js/trackingmanagern.js"></script>
+        <script src="../../plugins/js/trackingmanagern3.js"></script>
         <script src="../../plugins/js/touch-dnd.js"></script>
-        <!-- <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
         <!-- Script del Widget -->
 
         <script src="../../plugins/libs/assetsWidget/js/widget.js"></script>
-        <!-- <script src="../../plugins/libs/sessvars.js"> </script> -->
+        <script src="../../plugins/libs/sessvars.js"> </script>
     </footer>
 
-    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // AOS.init();
+        AOS.init();
+
+        // Guardar en localStorage
+        localStorage.setItem('COURSE_CODE', "<?php echo $course_code; ?>");
+
+        // track 
+        const trackIds = [
+            // "prueba1",
+            "sld1_btn_modal",
+            "track-atrapamiento",
+            "btn-recuerda",
+            "btn-bloqueadas",
+            "btn-descarga-pdf",
+            "track-pestana-etiquetas"
+            // ...
+        ];
+
+        trackIds.forEach(id => {
+            $(document).on("click", `#${id}`, function () {
+                trackingManager.startTracking(id);
+                trackingManager.stopTracking(id);
+            });
+        });
+
+        trackingManager.init({
+            'trackClass': '.track-element',
+            'progressEl': '#progreso_01',
+        },
+        '<?= $CI->session->userdata('employee_data')['user_id']; ?>', '<?= $unique_course_id; ?>', '<?= $module_id; ?>', trackIds);
+
+        sessvars.fullname     = "<?= $CI->session->userdata('employee_data')['fullname'];  ?>";
+        sessvars.id_empleado  = "<?= $CI->session->userdata('employee_data')['user_id'];  ?>";
+
+        document.addEventListener('visibilitychange', handleVisibilityChange, false);
 
         //function bar menu
         $(".fa-bars").on("click", function () {

@@ -57,7 +57,7 @@
             <i class="fa-solid fa-lock me-2"></i>
             <span class="tab-label">CANDADOS</span>
           </button>
-          <button class="tab-button" data-tab="etiquetas">
+          <button class="tab-button track-element" id="track-pestana-etiquetas" data-tab="etiquetas">
             <i class="fa-solid fa-bookmark me-2"></i>
             <span class="tab-label">ETIQUETAS</span>
           </button>

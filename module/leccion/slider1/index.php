@@ -43,7 +43,7 @@
       Descubre nuestro enfoque acerca de la energía electrica:
       <i class="icon-inline icon-inline--start fa-solid fa-arrow-turn-down"></i>
     </i>
-    <button class="sf-btn sf-btn-success" data-bs-toggle="modal" data-bs-target="#sld1_modal">
+    <button class="sf-btn sf-btn-success track-element" data-bs-toggle="modal" data-bs-target="#sld1_modal" id="sld1_btn_modal">
       <i class="fa-solid fa-book"></i> Es clave reconocer
     </button>
   </div>

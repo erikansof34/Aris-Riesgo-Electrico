@@ -1,18 +1,25 @@
-<!-- <?php 
+<?php 
   // $CI = require('../../ci_instance.php');
-    require('../../../functions_helpers.php'); /*load helper*/
-    check_session(); /* Comprobar la sesión activa*/
-    $course_code        = $_GET['course_code'];  /* recibir el código del curso */
-
-    $CI->load->model('training/evaluation_model');
-    $fullname = $CI->session->userdata('employee_data')['fullname'];
-    $user_id = $CI->session->userdata('employee_data')['user_id'];
-
-    $unique_course_id   = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
-    $modules_user  = $CI->evaluation_model->get_read_progress_user($unique_course_id, [], [$user_id])[0];
-    $module        = get_course_modules($course_code)[0];
-    $module_id = $module['id'];
-?> -->
+  require('../../../functions_helpers.php'); /*load helper*/
+  check_session(); /* Comprobar la sesión activa*/
+  $course_code        = $_GET['course_code'];  /* recibir el código del curso */
+  $unique_course_id   = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
+  $CI->load->model('training/evaluation_model');
+  $modules            = $CI->evaluation_model->get_read_progress_user($unique_course_id, [], [$CI->session->userdata('employee_data')['user_id']]);
+  //$modules            = get_course_modules($course_code);
+	$extension_url      = "?course_code=".$course_code;
+  
+  foreach ($modules as $key => $module) {
+		# code...
+		$module_info = get_module_image_description($key + 1);
+		//echo $key + 1;
+		switch($key + 1) {
+			case 1: $url = "inicio.php?course_code=".$course_code; break;
+		}
+   }  
+	$url .= $extension_url . "&module=".__my_simple_crypt__($module['module_id'], 'e');
+  $extension_url = "?course_code=".$course_code; /* variable url para pasar el código del curso*/
+?>
 <!DOCTYPE html>
 <html dir="ltr" lang="es">
 
@@ -176,7 +183,7 @@
             </div>
 
             <div class="flex-container">
-                <a href="module/leccion/index.html"
+                <a href="module/leccion/index.php?course_code=<?= $course_code; ?>"
                     class="parallax-btn inicio-btn mt-4 button-icon-effect button-icon-flip-x">
                     <i class="fas fa-arrow-right"></i>
                     Siguiente

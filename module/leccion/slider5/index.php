@@ -58,7 +58,7 @@
         <p>CHOQUE ELÉCTRICO</p>
       </div>
 
-      <div class="opcion-cuadrado" data-src="./slider5/img/atrapamiento.png" data-title="ATRAPAMIENTO ENTRE PIÑONES"
+      <div class="opcion-cuadrado track-element" id="track-atrapamiento" data-src="./slider5/img/atrapamiento.png" data-title="ATRAPAMIENTO ENTRE PIÑONES"
         tabindex="0">
         <img src="./slider5/img/signo_interrogacion.webp" alt="Atrapamiento">
         <p>ATRAPAMIENTO ENTRE PIÑONES</p>

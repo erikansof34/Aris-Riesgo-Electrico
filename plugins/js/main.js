@@ -103,20 +103,20 @@ window.setActividadCompletada = setActividadCompletada;
 window.getEstadoActividades = getEstadoActividades;
 window.actividadPendienteEnRouter = actividadPendienteEnRouter;
 
-// const course_code = localStorage.getItem('COURSE_CODE');
-// // Configuración de navegación entre páginas
-// const configuracionNavegacion = {
-//   paginaAnterior: '../../index.php?course_code=' + course_code,  // Página anterior
-//   paginaSiguiente: '../evaluacion/quiz.php?course_code=' + course_code,         // Página siguiente
-//   mostrarConfirmacion: false                      // Mostrar confirmación antes de navegar
-// };
+// Configuración de navegación entre páginas
+const course_code = localStorage.getItem('COURSE_CODE');
+const configuracionNavegacion = {
+  paginaAnterior: '../../index.php?course_code=' + course_code, // Página anterior
+  paginaSiguiente: '../evaluacion/quiz.php?course_code=' + course_code, // Página siguiente
+  mostrarConfirmacion: false // Mostrar confirmación antes de navegar
+};
 
 // Configuración de navegación entre páginas
-const configuracionNavegacion = {
-  paginaAnterior: '../../index.html',  // Página anterior
-  paginaSiguiente: '../evaluacion/quiz.html',         // Página siguiente
-  mostrarConfirmacion: false                      // Mostrar confirmación antes de navegar
-};
+// const configuracionNavegacion = {
+// paginaAnterior: '../../index.html',  // Página anterior
+// paginaSiguiente: '../evaluacion/quiz.html',         // Página siguiente
+// mostrarConfirmacion: false                      // Mostrar confirmación antes de navegar
+// };
 
 function obtenerNombreMomento(momentoId) {
   const nombre = momentosCurso[momentoId]; // versión escritorio
@@ -265,7 +265,7 @@ async function loadSlider(index) {
     // Limpiar CSS y JS anteriores
     limpiarRecursosAnteriores();
 
-    const html = await fetch(`../../module/leccion/${router}/index.html`).then(res => res.text());
+    const html = await fetch(`../../module/leccion/${router}/index.php`).then(res => res.text());
     container.innerHTML = html;
 
     // Sincronizar idioma de audios y transcripciones después de cargar el slider

@@ -1,19 +1,16 @@
-<!-- <?php 
+<?php 
 	require('../../../../../functions_helpers.php'); /*load helper*/
-    check_session(); /*check session by employee */
-    $course_code = $_GET['course_code']; /* recibir el código del curso */
-
-    $unique_course_id = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
-    $module        = get_course_modules($course_code)[0];
-    $module_id = $module['id'];
-
-    $progress = progress_courses($course_code, $module_id)[0];
-    $valor_minimo_progreso = get_porcentage($course_code);
-    $CI->session->set_userdata('category_es', $progress['category_es']);
-    $CI->session->set_userdata('porcentaje_min_eva', $progress['porcentaje_min_eva']);
-
-    $fullname = $CI->session->userdata('employee_data')['fullname'];
-?> -->
+	check_session(); /*check session by employee */
+	$course_code = $_GET['course_code']; /* recibir el código del curso */
+	//$module_id        = __my_simple_crypt__($_GET['module'], 'd');
+	$module_id = 60;
+	$unique_course_id = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
+	$extension_url = "?course_code=" . $course_code; /* variable url para pasar el código del curso*/
+	$progress = progress_courses($course_code,$module_id);
+	$valor_minimo_progreso = get_porcentage($course_code);
+	$CI->session->set_userdata('category_es',$progress[0]['category_es']);
+	$CI->session->set_userdata('porcentaje_min_eva',$progress[0]['porcentaje_min_eva']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -83,38 +80,38 @@
             <div class="headerOpc">
                 <i class="fas fa-times"></i>
                 <br>
-                <!-- <h1>Hola! <b><?= $fullname; ?></b></h1> -->
-                <h1>Hola! <b>Nombre user</b></h1>
+                <h1 style="color: var(--secondary) !important"></h1>Hola! <b>
+					<?= ucwords($CI->session->userdata('employee_data')['fullname']); ?>
+				</b></h1>
+                <!-- <h1>Hola! <b>Nombre user</b></h1> -->
                 <h5>Bienvenido a su Ruta de Aprendizaje!</h5>
                 <div class="headerProg">
-                    <p>
-                        <b>Progreso: </b><span id="course-progress">
-                            <!-- <strong><?= $progress['course_progress'];?>%</span></strong> -->
-                    </p>
+                    <p><b>Progreso: </b><span id="course-progress"><strong>
+								<?= $progress[0]['course_progress'];?>%</span></strong></p>
                 </div>
                 <hr>
                 <ul>
-                    <a href="../../index.html">
-                        <!-- <a href="../../index.php?course_code=<?= $course_code; ?>"> -->
+                    <!-- <a href="../../index.html"> -->
+                        <a href="../../../aris_riesgo_electrico/index.php?course_code=<?= $course_code; ?>">
                         <li><i class="fas fa-caret-right"></i> Presentación</li>
                     </a>
-                    <a href="../leccion/index.html">
-                        <!-- <a href="../leccion/index.php?course_code=<?= $course_code; ?>"> -->
+                    <!-- <a href="../leccion/index.html"> -->
+                        <a href="../leccion/index.php?course_code=<?= $course_code; ?>">
                         <li><i class="fas fa-caret-right"></i> Contenido</li>
                     </a>
-                    <a href="../evaluacion/quiz.html" class="act">
-                        <!-- <a href="../evaluacion/quiz.php?course_code=<?= $course_code; ?>" class="act"> -->
+                    <!-- <a href="../evaluacion/quiz.html" class="act"> -->
+                        <a href="../evaluacion/quiz.php?course_code=<?= $course_code; ?>" class="act">
                         <li><i class="fas fa-caret-right"></i> Evaluación</li>
                     </a>
                 </ul>
                 <hr>
                 <ul>
-                    <a href="../../../../../login..html">
-                        <!-- <a href="../../../../../login.php"> -->
+                    <!-- <a href="../../../../../login..html"> -->
+                        <a href="../../../../../login.php">
                         <li><i class="fas fa-caret-right"></i> Mis cursos</li>
                     </a>
-                    <a href="../../../../../logout.html">
-                        <!-- <a href="../../../../../logout.php"> -->
+                    <!-- <a href="../../../../../logout.html"> -->
+                        <a href="../../../../../logout.php">
                         <li><i class="fas fa-caret-right"></i> Cerrar sesión</li>
                     </a>
                 </ul>
@@ -136,24 +133,24 @@
             <div class="col-lg-6 col-md-12 px-0">
                 <img src="../../assets/img/avatars/fondo_blanco_borde_verde/avatar16_circulo_verde_fondo_blanco.webp" class="sf-img-100 mx-auto">
             </div>
-            <!-- <div class="col-lg-8 col-md-12 px-0 top-quiz text-center ">
+            <div class="col-lg-8 col-md-12 px-0 top-quiz text-center ">
 				<div class="mx-xl-4 sf-lh-xs">
 					<?php
-						if(!empty($progress['course_progress']) && $progress['course_progress'] >=  $valor_minimo_progreso){
+						if(!empty($progress[0]['course_progress']) && $progress[0]['course_progress'] >=  $valor_minimo_progreso){
 					?>
 					
 				
 					<p class="sf-text-white">Por favor haz clic en el botón para comenzar la evaluación del
 						módulo. </p>
-					<a href="#" target="_blank" class="sf-btn sf-btn-blue">
+					<a href="https://arissegovia.sofactia.pro/amatia/audit/1769036562/WVMdImXhUvS3NTY3479qjOCGN5Ar1RLB650gKHrmhbjdYFqkzeAGx7Qk9wK21UsQ" target="_blank" class="btn sf-btn sf-btn-success">
 						<i class="fas fa-clipboard-check"></i> Iniciar Evaluación
 					</a>
 					<?php } else { ?>
-							<h1 class="sf-txt-1xl-700 text-center sf-text-white">RECUERDA</h1>
+							<h1 class="sf-text-white">RECUERDA</h1>
 							<h6 class="sf-text-white">Debes superar el <?=$valor_minimo_progreso;?>% de la valoración para aprobar el módulo. </h6>
 					<?php } ?>
 				</div>
-			</div> -->
+			</div>
         </div>
     </div>
     <!-- Botones de navegaciÃ³n -->
@@ -164,13 +161,14 @@
     </div>
 
     <script src="../../plugins/libs/jquery-3.3.1.js"></script>
-    <script src="../../plugins/js/trackingmanagern.js"></script>
+    <script src="../../plugins/js/trackingmanagern3.js"></script>
     <script src="../../plugins/libs/sessvars.js"> </script>
     <script>
         function btnPrev() {
             const path = location.pathname.split("/").slice(0, -1).join("/");
             // window.location.href = "../leccion/index.php?course_code=<?= $course_code; ?>";
-            window.location.href = "../leccion/index.html";
+            // window.location.href = "../leccion/index.html";
+            window.location.href = "../leccion/index.php?course_code=<?= $course_code; ?>";
         };
 
         //function bar menu
