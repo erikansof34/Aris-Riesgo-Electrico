@@ -42,6 +42,13 @@ function initLotoActivity() {
   }
 
   function handleDragStart(e) {
+    // Verificar si el elemento ya está en un drop zone
+    const isInDropZone = e.target.closest('.loto-drop-zone');
+    if (isInDropZone) {
+      e.preventDefault();
+      return;
+    }
+
     e.dataTransfer.setData('text/plain', e.target.dataset.value);
     e.dataTransfer.setData('element-id', e.target.src);
     e.target.classList.add('dragging');
@@ -110,6 +117,7 @@ function initLotoActivity() {
     img.style.objectFit = 'contain';
     img.dataset.value = value;
     img.dataset.originalSrc = elementSrc;
+    img.draggable = false; // Evitar que sea arrastrable
 
     // Limpiar placeholder y agregar imagen
     dropZone.innerHTML = '';
