@@ -104,12 +104,14 @@ window.getEstadoActividades = getEstadoActividades;
 window.actividadPendienteEnRouter = actividadPendienteEnRouter;
 
 // Configuración de navegación entre páginas
-const course_code = localStorage.getItem('COURSE_CODE');
-const configuracionNavegacion = {
-  paginaAnterior: '../../index.php?course_code=' + course_code, // Página anterior
-  paginaSiguiente: '../evaluacion/quiz.php?course_code=' + course_code, // Página siguiente
-  mostrarConfirmacion: false // Mostrar confirmación antes de navegar
-};
+function getConfiguracionNavegacion() {
+  const course_code = localStorage.getItem('COURSE_CODE') || document.getElementById('course_code')?.value || '';
+  return {
+    paginaAnterior: '../../index.php?course_code=' + course_code, // Página anterior
+    paginaSiguiente: '../evaluacion/quiz.php?course_code=' + course_code, // Página siguiente
+    mostrarConfirmacion: false // Mostrar confirmación antes de navegar
+  };
+}
 
 // Configuración de navegación entre páginas
 // const configuracionNavegacion = {
@@ -546,6 +548,7 @@ if (document.readyState === 'loading') {
 
 // Función para navegar a página anterior
 function navegarAPaginaAnterior() {
+  const configuracionNavegacion = getConfiguracionNavegacion();
   if (configuracionNavegacion.mostrarConfirmacion) {
     const confirmar = confirm('Has llegado al inicio del contenido. ¿Deseas ir a la página anterior?');
     if (confirmar) {
@@ -558,6 +561,7 @@ function navegarAPaginaAnterior() {
 
 // Función para navegar a página siguiente
 function navegarAPaginaSiguiente() {
+  const configuracionNavegacion = getConfiguracionNavegacion();
   if (configuracionNavegacion.mostrarConfirmacion) {
     const confirmar = confirm('¡Has completado todo el contenido! ¿Deseas continuar a la siguiente sección?');
     if (confirmar) {
