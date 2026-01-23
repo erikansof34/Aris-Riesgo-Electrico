@@ -129,12 +129,7 @@
 						presentando esta evaluación.
 						<br>¡MUCHO ÉXITO!
 					</p>
-            </div>
-            <div class="col-lg-6 col-md-12 px-0">
-                <img src="../../assets/img/avatars/fondo_blanco_borde_verde/avatar16_circulo_verde_fondo_blanco.webp" class="sf-img-100 mx-auto">
-            </div>
-            <div class="col-lg-8 col-md-12 px-0 top-quiz text-center ">
-				<div class="mx-xl-4 sf-lh-xs">
+                    <br>
 					<?php
 						if(!empty($progress[0]['course_progress']) && $progress[0]['course_progress'] >=  $valor_minimo_progreso){
 					?>
@@ -149,7 +144,12 @@
 							<h1 class="sf-text-white">RECUERDA</h1>
 							<h6 class="sf-text-white">Debes superar el <?=$valor_minimo_progreso;?>% de la valoración para aprobar el módulo. </h6>
 					<?php } ?>
-				</div>
+            </div>
+            <div class="col-lg-6 col-md-12 px-0">
+                <img src="../../assets/img/avatars/fondo_blanco_borde_verde/avatar16_circulo_verde_fondo_blanco.webp" class="sf-img-100 mx-auto">
+            </div>
+            <div class="col-lg-8 col-md-12 px-0 top-quiz text-center ">
+				
 			</div>
         </div>
     </div>
