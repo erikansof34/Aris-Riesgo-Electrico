@@ -26,7 +26,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ARIS RIESGO ELÉCTRICO</title>
+    <title>ARIS ENERGÍAS PELIGROSAS</title>
     <!-- <title><?= $module['category_name'] ?></title> -->
     <link rel="icon" type="image/x-icon" href="./assets/img/aris-favicon.ico">
 
@@ -59,10 +59,10 @@
                 <img src="./assets/img/logo/logo_aris_horizontal_blanco.webp" alt="Logo Sofactia" class="parallax-logo">
             </div>
 
-            <h1 class="parallax-title">Riesgo Eléctrico<br> <strong></strong></h1>
+            <h1 class="parallax-title">Energías Peligrosas<br> <strong></strong></h1>
 
             <h1 class="parallax-subtitle">
-                (Aislamiento Seguro de Bloqueo y Etiquetado)
+                (Bloqueo y Etiquetado)
             </h1>
 
             <div class="parallax-buttons">
