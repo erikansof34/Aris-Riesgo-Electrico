@@ -8,7 +8,7 @@
     <h1></h1>
     <div class="mt-2">
       <p class="mb-1 text-justify">Bienvenid@s a este módulo virtual, donde aprenderemos a identificar y controlar las
-        energías peligrosas mediante la correcta aplicación del aislamiento seguro de bloqueo y etiquetado, para
+        energías peligrosas mediante la correcta aplicación del bloqueo y etiquetado, para
         prevenir
         accidentes y proteger la vida.</p>
     </div>
@@ -19,10 +19,10 @@
     </i>
     <div class="audio-center py-3">
       <audio class="audio-con-transcripcion" controls data-transcripcion='[
-        {"end":5,"start":0,"text":"Bienvenidos al Modulo Energías Peligrosas, Aislamiento seguro de bloqueo y etiquetado."},
-        {"end":10.6,"start":5.68,"text":"Donde aprenderemos a identificar y controlar las energías peligrosas mediante la correcta aplicación"},
-        {"end":15.8,"start":10.6,"text":"del aislamiento seguro de bloqueo y etiquetado para prevenir accidentes y proteger"},
-        {"end":16.24,"start":15.8,"text":"la vida."}
+        {"end":4,"start":0,"text":"Bienvenidos al Modulo Energías Peligrosas, Bloqueo y etiquetado."},
+        {"end":10,"start":4.68,"text":"Donde aprenderemos a identificar y controlar las energías peligrosas mediante la correcta aplicación"},
+        {"end":13.8,"start":10,"text":"del bloqueo y etiquetado para prevenir accidentes y proteger"},
+        {"end":15.24,"start":13.8,"text":"la vida."}
         ]'>
         <source src="./slider2/audio/sld2_bienvenidos.mp3" type="audio/mp3">
       </audio>
