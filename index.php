@@ -140,8 +140,7 @@
                             <div class="content_inst">
                                 <p><i class="fas fa-hand-point-right"></i> Identificar los diferentes tipos de riesgos
                                     eléctricos presentes en el lugar de trabajo.</p>
-                                <p><i class="fas fa-hand-point-right"></i> Aplicar correctamente los procedimientos de
-                                    aislamiento seguro de bloqueo y etiquetado (LOTO).</p>
+                                <p><i class="fas fa-hand-point-right"></i> Aplicar correctamente los procedimientos de bloqueo y etiquetado (LOTO).</p>
                                 <p><i class="fas fa-hand-point-right"></i> Implementar prácticas seguras para prevenir
                                     choques eléctricos, arcos eléctricos y fallas de energía.</p>
                                 <p><i class="fas fa-hand-point-right"></i> Verificar y garantizar condiciones seguras
