@@ -22,11 +22,17 @@ var trackingManager = (function IIFE($, global) {
       'asistencia_id': userId
     };
 
-    sendRequest("../../../../../progreso.php", data)
+    sendRequest("../../../../../progreso.php?v=" + new Date().getTime(), data)
       .then(response => {
         if (response) {
           var progressObject = JSON.parse(response.progress_object);
-          $(`#progress_${uniqueCourseId}_${moduleId}`).html(response.progress + "%");
+          const progressValue = response.progress;
+          $("#porcentajeProgreso").text(progressValue);
+          $("#course-progress").html("<strong>" + progressValue + "%</strong>");
+          // Force update for any duplicate IDs or shadow DOM issues
+          $('[id="course-progress"]').html("<strong>" + progressValue + "%</strong>");
+          $(".course-progress-text").html("<strong>" + progressValue + "%</strong>");
+
           for (let prop in trackingObject) {
             if (progressObject[prop] && progressObject[prop]['clicked']) {
               trackingObject[prop] = { ...progressObject[prop] };
@@ -34,7 +40,9 @@ var trackingManager = (function IIFE($, global) {
             }
           }
         } else {
-          $(`#progress_${uniqueCourseId}_${moduleId}`).html(0 + "%");
+          $("#porcentajeProgreso").text(0);
+          $("#course-progress").html("<strong>0%</strong>");
+          $('[id="course-progress"]').html("<strong>0%</strong>");
         }
       })
       .fail(err => { });
@@ -63,6 +71,11 @@ var trackingManager = (function IIFE($, global) {
         ...trackingObject[`${elementId}`],
         totalTimeSpent: trackingObject[`${elementId}`].totalTimeSpent + parseInt((performance.now() - timer) / 1000)
       };
+
+      // OPTIMISTIC UI UPDATE: Update UI immediately before server request
+      // This calculates progress locally if possible or just marks as read
+      $(`#${elementId}`).removeClass('read').addClass('read');
+
       sendRequest("../../../../../update_progress.php", {
         'unique_course_id': uniqueCourseId,
         'module_id': moduleId,
@@ -70,8 +83,17 @@ var trackingManager = (function IIFE($, global) {
         'asistencia_id': userId
       })
         .then(response => {
-          $(`#progress_${uniqueCourseId}_${moduleId}`).html(response.progress + "%");
-          $(`#${elementId}`).removeClass('read').addClass('read');
+          if (response && (response.progress !== undefined)) {
+            const progressValue = response.progress;
+            // Update all progress indicators immediately
+            $("#porcentajeProgreso").text(progressValue);
+            $("#course-progress").html("<strong>" + progressValue + "%</strong>");
+            $('[id="course-progress"]').html("<strong>" + progressValue + "%</strong>");
+            $(".course-progress-text").html("<strong>" + progressValue + "%</strong>");
+          }
+          // Multiple retries to ensure DB update is caught
+          setTimeout(function () { fetchAndCompareProgress(); }, 200);
+          setTimeout(function () { fetchAndCompareProgress(); }, 1000);
         })
         .fail(err => { });
     }
@@ -81,8 +103,25 @@ var trackingManager = (function IIFE($, global) {
     return $.ajax({
       url: url,
       type: 'POST',
-      dataType: "json",
       data: data
+    }).then(function (resp) {
+      var parsed = resp;
+      if (typeof resp === 'string') {
+        try {
+          parsed = JSON.parse(resp);
+        } catch (e) {
+          var m = resp.match(/(\{[\s\S]*\})/);
+          if (m && m[1]) {
+            try { parsed = JSON.parse(m[1]); } catch (e2) { parsed = resp; }
+          }
+        }
+      }
+      if (parsed && parsed.progress_object && typeof parsed.progress_object === 'string') {
+        try { parsed.progress_object = JSON.parse(parsed.progress_object); } catch (e) { }
+      }
+      return parsed;
+    }, function (jqXHR, textStatus, errorThrown) {
+      return $.Deferred().reject(jqXHR, textStatus, errorThrown);
     });
   }
 
@@ -101,7 +140,8 @@ var trackingManager = (function IIFE($, global) {
   var publicAPI = {
     init: init,
     startTracking: startTracking,
-    stopTracking: stopTracking
+    stopTracking: stopTracking,
+    updateProgress: fetchAndCompareProgress
   };
 
   return publicAPI;

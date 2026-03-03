@@ -146,8 +146,7 @@
         <!-- <h1>Hola! <b>Nombre user</b></h1> -->
         <h5>Bienvenido a su Ruta de Aprendizaje!</h5>
         <div class="headerProg">
-            <p><b>Progreso: </b><span id="course-progress"><strong>
-                        <?= $progress[0]['course_progress'];?>%</span></strong></p>
+            <p><b>Progreso: </b><span id="course-progress" class="course-progress-text"><strong><?= $progress[0]['course_progress']; ?>%</strong></span></p>
         </div>
         <hr>
         <ul>
@@ -243,6 +242,17 @@
         $(".fa-bars").on("click", function () {
             event.stopPropagation();
             $(".headerOpc").addClass('act');
+            // Forzar actualizaciÃ³n del progreso al abrir el menÃº
+            if (typeof trackingManager !== 'undefined' && trackingManager.updateProgress) {
+                trackingManager.updateProgress();
+            }
+            
+            // Fallback: Si trackingManager falla, intentar actualizar directamente el DOM si tenemos el valor guardado
+            var currentProgress = $("#porcentajeProgreso").text();
+            if(currentProgress) {
+                 $("#course-progress").html("<strong>" + currentProgress + "%</strong>");
+                 $(".course-progress-text").html("<strong>" + currentProgress + "%</strong>");
+            }
         });
 
         $('html, .fa-times').click(function () {
