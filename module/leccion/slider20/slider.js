@@ -66,7 +66,7 @@ export function init() {
 
                 $.ajax({
                     type: "POST",
-                    url: "../../save_signature.php",
+                    url: "../../../../../save_signature.php",
                     data: {
                         unique_course_id: unique_course_id,
                         signature_data: dataUrl

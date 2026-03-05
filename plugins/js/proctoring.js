@@ -335,7 +335,7 @@ class PhotoProctoring {
     }
 
     uploadPhoto(formData) {
-        fetch('../../upload_simple.php', {
+        fetch('../../../upload_simple.php', {
             method: 'POST',
             body: formData
         })
