@@ -27,13 +27,14 @@ const sliders = [
   { router: 'slider19', momento: 3 },
   { router: 'slider17a', momento: 3 },
   { router: 'slider17', momento: 3 },
+  { router: 'slider20', momento: 3 },
 ];
 
 // ================== PARÁMETRO GLOBAL DE RESTRICCIONES ==================
 const RESTRICCIONES = true;
 
 // ================== ACTIVIDADES REQUERIDAS ==================
-const actividadesRequeridas = new Set(['slider6', 'slider12', 'slider14', 'slider17']);
+const actividadesRequeridas = new Set(['slider6', 'slider12', 'slider14', 'slider17', 'slider20']);
 
 function getEstadoActividades() {
   try {

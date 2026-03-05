@@ -1,8 +1,21 @@
 <?php 
   // $CI = require('../../ci_instance.php');
   require('../../../functions_helpers.php'); /*load helper*/
+  require('../../../proctoring_helpers.php'); /* sistema de proctoring */
   check_session(); /* Comprobar la sesión activa*/
+  
+  // Si no hay foto de proctoring redirigimos a la página de captura
   $course_code        = $_GET['course_code'];  /* recibir el código del curso */
+  if (!empty($course_code)) {
+      $unique_course_id = check_permission_employee_course($course_code);
+      $CI =& get_instance();
+      $emp_unique_id = $CI->session->userdata('employee_data')['user_id'];
+      if (!check_proctoring_photo($emp_unique_id, $unique_course_id)) {
+          header("Location: foto.php?course_code=" . $course_code);
+          exit();
+      }
+  }
+
   $unique_course_id   = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
   $CI->load->model('training/evaluation_model');
   $modules            = $CI->evaluation_model->get_read_progress_user($unique_course_id, [], [$CI->session->userdata('employee_data')['user_id']]);
