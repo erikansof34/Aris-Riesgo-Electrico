@@ -1,7 +1,19 @@
 <?php
     require('../../../../../functions_helpers.php'); /*load helper*/
+    require('../../../../../proctoring_helpers.php'); /* helper de proctoring */
     check_session(); /*check session by employee */
-    $course_code = $_GET['course_code']; /* recibir el cÃ³digo del curso */
+    $course_code = $_GET['course_code']; /* recibir el código del curso */
+
+    // validación proctoring en caso de que el usuario intente entrar directamente a la lección
+    if (!empty($course_code)) {
+        $unique_course_id = check_permission_employee_course($course_code);
+        $CI =& get_instance();
+        $emp_unique_id = $CI->session->userdata('employee_data')['user_id'];
+        if (!check_proctoring_photo($emp_unique_id, $unique_course_id)) {
+            header("Location: ../../foto.php?course_code=" . $course_code);
+            exit();
+        }
+    }
     //$module_id        = __my_simple_crypt__($_GET['module'], 'd');
     $module_id = 60;
     $unique_course_id = check_permission_employee_course($course_code); /* Comprobar si el empleado tiene acceso al curso*/
